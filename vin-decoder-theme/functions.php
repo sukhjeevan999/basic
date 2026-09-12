@@ -274,6 +274,62 @@ function vindecoder_register_rest_routes() {
 }
 add_action( 'rest_api_init', 'vindecoder_register_rest_routes' );
 
+/**
+ * TEMPORARY DIAGNOSTIC ROUTE: tests outbound DNS resolution + connectivity
+ * against several well-known hosts to determine whether the server's DNS
+ * resolver is broken universally, or the failure is specific to NHTSA's
+ * host. Visit /wp-json/vindecoder/v1/debug-dns directly in a browser.
+ * Remove this route once the root cause is confirmed and fixed.
+ */
+function vindecoder_register_debug_route() {
+	register_rest_route(
+		'vindecoder/v1',
+		'/debug-dns',
+		array(
+			'methods'             => 'GET',
+			'callback'            => 'vindecoder_handle_debug_dns',
+			'permission_callback' => '__return_true',
+		)
+	);
+}
+add_action( 'rest_api_init', 'vindecoder_register_debug_route' );
+
+function vindecoder_handle_debug_dns() {
+	$hosts = array(
+		'google.com',
+		'api.github.com',
+		'fonts.googleapis.com',
+		'vpic.nhtsa.gov',
+	);
+
+	$results = array();
+	foreach ( $hosts as $host ) {
+		$ip = gethostbyname( $host );
+		// gethostbyname() returns the input unchanged (not an IP) on failure.
+		$resolved = ( $ip !== $host );
+
+		$http_result = wp_remote_get(
+			'https://' . $host,
+			array( 'timeout' => 8 )
+		);
+
+		$results[ $host ] = array(
+			'dns_resolved'   => $resolved,
+			'resolved_ip'    => $resolved ? $ip : null,
+			'http_success'   => ! is_wp_error( $http_result ),
+			'http_error'     => is_wp_error( $http_result ) ? $http_result->get_error_message() : null,
+			'http_status'    => ! is_wp_error( $http_result ) ? wp_remote_retrieve_response_code( $http_result ) : null,
+		);
+	}
+
+	return rest_ensure_response(
+		array(
+			'server_time' => gmdate( 'c' ),
+			'results'     => $results,
+		)
+	);
+}
+
 function vindecoder_handle_decode_request( $request ) {
 	$vin = strtoupper( trim( (string) $request->get_param( 'vin' ) ) );
 
