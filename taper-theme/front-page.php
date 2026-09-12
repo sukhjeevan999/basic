@@ -128,6 +128,32 @@ get_header();
 
 <div class="tt-toast" id="tt-toast" role="status"></div>
 
+<?php $tt_affiliate_links = tapertheme_get_active_affiliate_links(); ?>
+<?php if ( $tt_affiliate_links ) : ?>
+<section class="tt-content-section" style="padding-top: 0;">
+	<div class="tt-container">
+		<div class="tt-prose">
+			<div class="tt-affiliate-box">
+				<h2><?php esc_html_e( 'Helpful Resources', 'tapertheme' ); ?></h2>
+				<p class="tt-affiliate-disclosure"><?php echo esc_html( get_theme_mod( 'tapertheme_affiliate_disclosure', '' ) ); ?></p>
+				<div class="tt-affiliate-links">
+					<?php foreach ( $tt_affiliate_links as $tt_aff_link ) : ?>
+						<a
+							href="<?php echo esc_url( $tt_aff_link['url'] ); ?>"
+							class="tt-btn tt-btn-secondary"
+							target="_blank"
+							rel="nofollow sponsored noopener"
+						>
+							<?php echo esc_html( $tt_aff_link['label'] ); ?>
+						</a>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<?php endif; ?>
+
 <section class="tt-content-section">
 	<div class="tt-container">
 		<div class="tt-prose">

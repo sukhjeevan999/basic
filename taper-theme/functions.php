@@ -687,3 +687,126 @@ function tapertheme_get_active_social_links() {
 
 	return $links;
 }
+
+/**
+ * ==========================================================================
+ * 9. AFFILIATE / RESOURCE LINKS
+ * ==========================================================================
+ * Optional, site-owner-controlled affiliate or partner links (e.g. an
+ * Amazon Associates NRT product link, a quit-support app referral, a
+ * recovery book). Nothing is hardcoded and nothing renders until the site
+ * owner fills in a URL under Appearance > Customize > Affiliate & Resource
+ * Links — so a fresh install never ships with placeholder or dead links.
+ *
+ * Compliance note: whenever any of these render, the theme also prints an
+ * FTC-style affiliate disclosure (editable from the same Customizer
+ * section) directly above them, as required by the FTC Endorsement Guides
+ * and the Amazon Associates Operating Agreement. Do not remove the
+ * disclosure output in front-page.php without adding an equivalent.
+ */
+function tapertheme_get_affiliate_slots() {
+	return array(
+		'nrt'        => array(
+			'label'       => __( 'Nicotine Replacement Product', 'tapertheme' ),
+			'description' => __( 'e.g. your Amazon Associates link for patches, gum, or lozenges.', 'tapertheme' ),
+		),
+		'quit_app'   => array(
+			'label'       => __( 'Quit-Support App or Coaching Service', 'tapertheme' ),
+			'description' => __( 'A referral link for an app, telehealth service, or coaching program.', 'tapertheme' ),
+		),
+		'book'       => array(
+			'label'       => __( 'Recovery / Habit-Change Book', 'tapertheme' ),
+			'description' => __( 'e.g. an Amazon or Bookshop.org affiliate link.', 'tapertheme' ),
+		),
+	);
+}
+
+function tapertheme_customize_register_affiliate( $wp_customize ) {
+	$wp_customize->add_section(
+		'tapertheme_affiliate',
+		array(
+			'title'       => __( 'Affiliate & Resource Links', 'tapertheme' ),
+			'description' => __( 'Optional. Leave any field blank to hide it. A disclosure is shown automatically whenever at least one link is set — required by FTC guidelines and most affiliate program terms. Never use a per-referral fee arrangement with an addiction treatment provider; US federal law (EKRA) prohibits paying for patient referrals in substance-use-disorder treatment.', 'tapertheme' ),
+			'priority'    => 131,
+		)
+	);
+
+	foreach ( tapertheme_get_affiliate_slots() as $key => $slot ) {
+		$url_id   = 'tapertheme_affiliate_' . $key . '_url';
+		$label_id = 'tapertheme_affiliate_' . $key . '_label';
+
+		$wp_customize->add_setting(
+			$label_id,
+			array(
+				'default'           => $slot['label'],
+				'sanitize_callback' => 'sanitize_text_field',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			$label_id,
+			array(
+				'label'   => $slot['label'] . ' — ' . __( 'Button Text', 'tapertheme' ),
+				'section' => 'tapertheme_affiliate',
+				'type'    => 'text',
+			)
+		);
+
+		$wp_customize->add_setting(
+			$url_id,
+			array(
+				'default'           => '',
+				'sanitize_callback' => 'esc_url_raw',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			$url_id,
+			array(
+				'label'       => $slot['label'] . ' — ' . __( 'Link URL', 'tapertheme' ),
+				'description' => $slot['description'],
+				'section'     => 'tapertheme_affiliate',
+				'type'        => 'url',
+			)
+		);
+	}
+
+	$wp_customize->add_setting(
+		'tapertheme_affiliate_disclosure',
+		array(
+			'default'           => __( 'This section may contain affiliate links. If you buy something after clicking one, we may earn a small commission at no extra cost to you. We only link to products or services related to what this page is about.', 'tapertheme' ),
+			'sanitize_callback' => 'sanitize_textarea_field',
+			'transport'         => 'refresh',
+		)
+	);
+	$wp_customize->add_control(
+		'tapertheme_affiliate_disclosure',
+		array(
+			'label'   => __( 'Disclosure Text', 'tapertheme' ),
+			'section' => 'tapertheme_affiliate',
+			'type'    => 'textarea',
+		)
+	);
+}
+add_action( 'customize_register', 'tapertheme_customize_register_affiliate' );
+
+/**
+ * Returns only the affiliate slots the site owner has actually filled in.
+ */
+function tapertheme_get_active_affiliate_links() {
+	$links = array();
+
+	foreach ( tapertheme_get_affiliate_slots() as $key => $slot ) {
+		$url = get_theme_mod( 'tapertheme_affiliate_' . $key . '_url', '' );
+		if ( empty( $url ) ) {
+			continue;
+		}
+		$links[] = array(
+			'key'   => $key,
+			'label' => get_theme_mod( 'tapertheme_affiliate_' . $key . '_label', $slot['label'] ),
+			'url'   => $url,
+		);
+	}
+
+	return $links;
+}

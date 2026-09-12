@@ -534,6 +534,21 @@ button { cursor: pointer; }
 .tt-disclaimer p:last-child { margin-bottom: 0; }
 .tt-disclaimer a { color: var(--tt-color-danger); font-weight: 700; text-decoration: underline; }
 
+.tt-affiliate-box {
+  background: var(--tt-color-surface-alt);
+  border: 1px solid var(--tt-color-border);
+  border-radius: var(--tt-radius-lg);
+  padding: var(--tt-space-6);
+}
+.tt-affiliate-box h2 { margin-bottom: var(--tt-space-2); }
+.tt-affiliate-disclosure {
+  font-size: 0.85rem;
+  color: var(--tt-color-text-muted);
+  font-style: italic;
+  margin-bottom: var(--tt-space-4);
+}
+.tt-affiliate-links { display: flex; flex-wrap: wrap; gap: var(--tt-space-3); }
+
 /* FAQ accordion (native <details>) */
 .tt-faq { margin-top: var(--tt-space-4); }
 .tt-faq-item {
