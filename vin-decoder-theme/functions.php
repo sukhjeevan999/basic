@@ -429,6 +429,48 @@ function vindecoder_brand_schema() {
 	);
 
 	echo '<script type="application/ld+json">' . wp_json_encode( $schema ) . '</script>' . "\n";
+
+	// FAQPage schema — must mirror the on-page FAQ in
+	// template-vin-decoder.php word-for-word (Google/AI answer engines
+	// penalize or ignore schema that doesn't match visible page content).
+	$faq_items = array(
+		array(
+			'question' => sprintf( __( 'Is this %s VIN decoder really free?', 'vindecodertheme' ), $brand['label'] ),
+			'answer'   => __( 'Yes — no sign-up, no payment, no daily limit. It runs on the free public NHTSA vPIC database.', 'vindecodertheme' ),
+		),
+		array(
+			'question' => __( 'Why does it say my VIN doesn\'t match this brand?', 'vindecodertheme' ),
+			'answer'   => __( 'We still show you the decode — the NHTSA database identifies the actual manufacturer encoded in the VIN, and we flag it if it doesn\'t match the brand of this page, in case you copied the VIN from the wrong vehicle or listing.', 'vindecodertheme' ),
+		),
+		array(
+			'question' => __( 'Can I decode more than one VIN?', 'vindecodertheme' ),
+			'answer'   => __( 'Yes, as many as you like — click "Decode Another VIN" after each result.', 'vindecodertheme' ),
+		),
+		array(
+			'question' => __( 'Does this check for recalls, accidents, or title issues?', 'vindecodertheme' ),
+			'answer'   => __( 'No — this decodes factory build data only. For recalls, check NHTSA\'s separate recall lookup; for accident and title history, use a dedicated vehicle history report service.', 'vindecodertheme' ),
+		),
+	);
+
+	$faq_entities = array();
+	foreach ( $faq_items as $item ) {
+		$faq_entities[] = array(
+			'@type'          => 'Question',
+			'name'           => $item['question'],
+			'acceptedAnswer' => array(
+				'@type' => 'Answer',
+				'text'  => $item['answer'],
+			),
+		);
+	}
+
+	$faq_schema = array(
+		'@context'   => 'https://schema.org',
+		'@type'      => 'FAQPage',
+		'mainEntity' => $faq_entities,
+	);
+
+	echo '<script type="application/ld+json">' . wp_json_encode( $faq_schema ) . '</script>' . "\n";
 }
 add_action( 'wp_head', 'vindecoder_brand_schema' );
 

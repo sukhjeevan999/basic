@@ -1,0 +1,33 @@
+# VinSnapshot
+
+> Free, no-signup VIN decoder tools. Each tool decodes a 17-character
+> Vehicle Identification Number (VIN) using the U.S. National Highway
+> Traffic Safety Administration's public vPIC database and returns
+> factory-build data: make, model, model year, body style, engine,
+> fuel type, drive type, transmission, and assembly plant location.
+
+VinSnapshot provides brand-specific VIN decoder pages. Each page is a
+free browser-based tool — no account, no payment, no API key, no daily
+limit. Results come directly from NHTSA's public vPIC dataset and
+reflect original factory specifications only.
+
+## Tools
+
+- [BMW VIN Decoder](https://vinsnapshot.com/bmw/): decode any BMW VIN to see model, year, engine, and factory build data.
+- [Audi VIN Decoder](https://vinsnapshot.com/audi/): decode any Audi VIN to see model, year, engine, and factory build data.
+- [Porsche VIN Decoder](https://vinsnapshot.com/porsche/): decode any Porsche VIN to see model, year, engine, and factory build data.
+- [Lexus VIN Decoder](https://vinsnapshot.com/lexus/): decode any Lexus VIN to see model, year, engine, and factory build data.
+- [Range Rover VIN Decoder](https://vinsnapshot.com/range-rover/): decode any Range Rover / Land Rover VIN to see model, year, engine, and factory build data.
+
+## Scope and limitations
+
+These tools decode factory build data only. They do NOT provide vehicle
+history, accident records, title status, ownership history, or recall
+notices. For recalls, use NHTSA's official recall lookup. For accident
+and title history, use a dedicated vehicle history report service.
+
+## About
+
+VinSnapshot is an independent tool and is not affiliated with, endorsed
+by, or sponsored by BMW, Audi, Porsche, Lexus, Land Rover, or the
+National Highway Traffic Safety Administration.
