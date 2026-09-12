@@ -20,6 +20,12 @@ get_header();
 			<span class="tt-eyebrow"><?php esc_html_e( 'Free Planning Tool', 'tapertheme' ); ?></span>
 			<h1><?php esc_html_e( 'Personalized Taper-Down Reduction Schedule & Daily Tracker', 'tapertheme' ); ?></h1>
 			<p><?php esc_html_e( 'Answer four quick questions and get a day-by-day plan that steps your consumption down gradually to zero — plus a live savings tracker and a printable PDF schedule.', 'tapertheme' ); ?></p>
+
+			<ul class="tt-trust-strip">
+				<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l4.5 4.5L20 6"/></svg> <?php esc_html_e( '100% Free', 'tapertheme' ); ?></li>
+				<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg> <?php esc_html_e( 'Runs Only in Your Browser', 'tapertheme' ); ?></li>
+				<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l4.5 4.5L20 6"/></svg> <?php esc_html_e( 'No Sign-Up Required', 'tapertheme' ); ?></li>
+			</ul>
 		</div>
 
 		<div class="tt-card tt-tool-card" id="tt-taper-form-card">
@@ -77,18 +83,22 @@ get_header();
 
 			<div class="tt-summary-grid">
 				<div class="tt-stat">
+					<span class="tt-stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="16" rx="3"/><path d="M3.5 9.5h17M8 3v3M16 3v3"/></svg></span>
 					<span class="tt-stat-value" id="tt-stat-days">—</span>
 					<span class="tt-stat-label"><?php esc_html_e( 'Days to Zero', 'tapertheme' ); ?></span>
 				</div>
 				<div class="tt-stat">
+					<span class="tt-stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M16.5 6.5c0-1.4-1.6-2.5-4.5-2.5S7.5 5.1 7.5 6.8c0 3.4 9 1.6 9 5.4 0 1.8-2 3-4.5 3s-4.5-1.1-4.5-2.6"/></svg></span>
 					<span class="tt-stat-value" id="tt-stat-saved">—</span>
 					<span class="tt-stat-label"><?php esc_html_e( 'Estimated Total Saved', 'tapertheme' ); ?></span>
 				</div>
 				<div class="tt-stat">
+					<span class="tt-stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="0.8" fill="currentColor"/></svg></span>
 					<span class="tt-stat-value" id="tt-stat-start-quota">—</span>
 					<span class="tt-stat-label"><?php esc_html_e( "Day 1 Quota", 'tapertheme' ); ?></span>
 				</div>
 				<div class="tt-stat">
+					<span class="tt-stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l4.5 4.5L20 6"/></svg></span>
 					<span class="tt-stat-value" id="tt-stat-avoided">—</span>
 					<span class="tt-stat-label"><?php esc_html_e( 'Units Avoided (Total)', 'tapertheme' ); ?></span>
 				</div>
@@ -162,7 +172,7 @@ get_header();
 			</ol>
 
 			<div class="tt-disclaimer" id="medical-disclaimer">
-				<h3>&#9888; <?php esc_html_e( 'Medical Disclaimer', 'tapertheme' ); ?></h3>
+				<h3><span class="tt-disclaimer-badge" aria-hidden="true">&#9888;</span> <?php esc_html_e( 'Medical Disclaimer', 'tapertheme' ); ?></h3>
 				<p>
 					<?php esc_html_e( 'This tool provides general educational and self-organizational planning information only. It is not medical advice, and it is not a substitute for evaluation, diagnosis, or treatment by a qualified healthcare professional.', 'tapertheme' ); ?>
 				</p>

@@ -25,6 +25,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 					);
 					?>
 				</p>
+
+				<?php $tt_social_links = tapertheme_get_active_social_links(); ?>
+				<?php if ( $tt_social_links ) : ?>
+					<ul class="tt-social-links">
+						<?php foreach ( $tt_social_links as $tt_link ) : ?>
+							<li>
+								<a
+									href="<?php echo esc_url( $tt_link['url'] ); ?>"
+									class="tt-social-icon"
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label="<?php echo esc_attr( $tt_link['label'] ); ?>"
+								>
+									<?php echo $tt_link['icon']; // phpcs:ignore WordPress.Security.EscapeOutput -- fixed, theme-defined SVG markup, not user input. ?>
+								</a>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
 			</div>
 
 			<div>
@@ -44,6 +63,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<ul class="tt-footer-links">
 						<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Reduction Schedule Tool', 'tapertheme' ); ?></a></li>
 						<li><a href="<?php echo esc_url( home_url( '/#faq' ) ); ?>"><?php esc_html_e( 'FAQ', 'tapertheme' ); ?></a></li>
+						<li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>"><?php esc_html_e( 'About', 'tapertheme' ); ?></a></li>
 						<li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'Contact Us', 'tapertheme' ); ?></a></li>
 					</ul>
 				<?php endif; ?>

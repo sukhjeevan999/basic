@@ -81,8 +81,11 @@ add_action( 'after_setup_theme', 'tapertheme_content_width', 0 );
  * ==========================================================================
  */
 function tapertheme_scripts() {
+	// Display typeface used for headings site-wide (see style.css --tt-font-heading).
+	wp_enqueue_style( 'tapertheme-google-fonts', 'https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&display=swap', array(), null );
+
 	// Main stylesheet (contains the entire design system — no build step required).
-	wp_enqueue_style( 'tapertheme-style', get_stylesheet_uri(), array(), TAPERTHEME_VERSION );
+	wp_enqueue_style( 'tapertheme-style', get_stylesheet_uri(), array( 'tapertheme-google-fonts' ), TAPERTHEME_VERSION );
 
 	// Lightweight mobile nav toggle script (footer-loaded, no dependencies).
 	wp_enqueue_script( 'tapertheme-nav', get_template_directory_uri() . '/assets/js/nav.js', array(), TAPERTHEME_VERSION, true );
@@ -166,11 +169,15 @@ add_filter( 'style_loader_src', 'tapertheme_remove_script_style_version', 15, 1 
  * when the homepage tool is used.
  */
 function tapertheme_resource_hints( $hints, $relation_type ) {
-	if ( 'preconnect' === $relation_type && is_front_page() ) {
-		$hints[] = array(
-			'href' => 'https://cdnjs.cloudflare.com',
-			'crossorigin',
-		);
+	if ( 'preconnect' === $relation_type ) {
+		// Google Fonts (headings) load on every page.
+		$hints[] = array( 'href' => 'https://fonts.googleapis.com' );
+		$hints[] = array( 'href' => 'https://fonts.gstatic.com', 'crossorigin' );
+
+		// PDF export libraries load only on the homepage tool.
+		if ( is_front_page() ) {
+			$hints[] = array( 'href' => 'https://cdnjs.cloudflare.com', 'crossorigin' );
+		}
 	}
 	return $hints;
 }
@@ -209,6 +216,11 @@ add_action( 'widgets_init', 'tapertheme_widgets_init' );
 function tapertheme_fallback_primary_menu() {
 	echo '<ul id="primary-menu">';
 	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Home', 'tapertheme' ) . '</a></li>';
+
+	$about = get_page_by_path( 'about' );
+	if ( $about instanceof WP_Post ) {
+		echo '<li><a href="' . esc_url( get_permalink( $about ) ) . '">' . esc_html__( 'About', 'tapertheme' ) . '</a></li>';
+	}
 
 	$privacy_id = (int) get_option( 'wp_page_for_privacy_policy' );
 	if ( $privacy_id ) {
@@ -382,6 +394,24 @@ function tapertheme_get_default_pages() {
 <h2>Contact</h2>
 <p>Questions about this Privacy Policy can be sent via our <a href=\"" . esc_url( home_url( '/contact/' ) ) . "\">Contact page</a>.</p>",
 		),
+		'about'              => array(
+			'title'   => __( 'About', 'tapertheme' ),
+			'content' => '<p>' . esc_html__( "We built this site around one belief: the hardest part of cutting back isn't willpower, it's not knowing what today's target should be. So instead of another article telling you to \"cut down gradually,\" we built a tool that does the arithmetic for you and hands you an actual day-by-day number.", 'tapertheme' ) . '</p>
+
+<h2>' . esc_html__( 'Why a Schedule Instead of Just Advice', 'tapertheme' ) . '</h2>
+<p>' . esc_html__( "Most people already know they should reduce. What's missing is a concrete plan: how much today, how much tomorrow, and how that adds up to zero by a specific date. Our calculator turns your current baseline and a pace you choose into exactly that — a day-by-day quota with suggested time windows, so \"cut back\" becomes \"12 today, 11 tomorrow.\"", 'tapertheme' ) . '</p>
+
+<h2>' . esc_html__( 'Built to Respect Your Privacy', 'tapertheme' ) . '</h2>
+<p>' . esc_html__( 'Every calculation runs in your own browser. We never see your substance type, your baseline, your cost inputs, or your daily check-ins — they are saved only in your browser\'s local storage, on your own device. Nothing is transmitted to, or stored on, our servers. You can read the full details in our Privacy Policy.', 'tapertheme' ) . '</p>
+
+<h2>' . esc_html__( 'Free, and Always Will Be', 'tapertheme' ) . '</h2>
+<p>' . esc_html__( 'The core reduction-schedule tool is free to use, with no account, sign-up, or payment required. We keep the site running through advertising, never through selling your data — because there is no data of yours for us to sell in the first place.', 'tapertheme' ) . '</p>
+
+<h2>' . esc_html__( 'What This Site Is Not', 'tapertheme' ) . '</h2>
+<p>' . esc_html__( "We are not doctors, and this is not a medical service. It's a planning and tracking tool, built for people who want structure around a reduction goal they've already decided on. If you have a heavy or long-term dependency — especially on alcohol or another chemical substance — please read our Medical Disclaimer before using the schedule, and talk to a healthcare professional first.", 'tapertheme' ) . '</p>
+
+<p>' . esc_html__( 'Questions, feedback, or found something that doesn\'t work as expected? We\'d genuinely like to hear from you — visit our Contact page.', 'tapertheme' ) . '</p>',
+		),
 		'contact'            => array(
 			'title'   => __( 'Contact', 'tapertheme' ),
 			'content' => '<p>' . esc_html__( "Have a question about the reduction schedule tool, found a bug, or need to reach us about this website? We'd like to hear from you.", 'tapertheme' ) . '</p>
@@ -458,6 +488,19 @@ function tapertheme_provision_menus( $page_ids ) {
 				)
 			);
 
+			if ( ! empty( $page_ids['about'] ) ) {
+				wp_update_nav_menu_item(
+					$menu_id,
+					0,
+					array(
+						'menu-item-object-id' => $page_ids['about'],
+						'menu-item-object'    => 'page',
+						'menu-item-type'      => 'post_type',
+						'menu-item-status'    => 'publish',
+					)
+				);
+			}
+
 			if ( ! empty( $page_ids['contact'] ) ) {
 				wp_update_nav_menu_item(
 					$menu_id,
@@ -500,4 +543,103 @@ function tapertheme_provision_menus( $page_ids ) {
 	}
 
 	set_theme_mod( 'nav_menu_locations', $locations );
+}
+
+/**
+ * ==========================================================================
+ * 8. SOCIAL MEDIA ICONS
+ * ==========================================================================
+ * Registers URL fields under Appearance > Customize > Social Media Links.
+ * Any field left blank is simply omitted from the footer — no placeholder
+ * icons are shown for networks the site owner hasn't filled in.
+ */
+function tapertheme_get_social_networks() {
+	return array(
+		'facebook'  => array(
+			'label' => __( 'Facebook', 'tapertheme' ),
+			'icon'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.25"/><path d="M15 8.25h-1.6c-1 0-1.65.7-1.65 1.75V11.5H9v3h2.75V19h3v-4.5H17l.4-3h-2.65V10.4c0-.55.3-.9.85-.9H15V8.25Z"/></svg>',
+		),
+		'twitter'   => array(
+			'label' => __( 'X (Twitter)', 'tapertheme' ),
+			'icon'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.25"/><path d="M8.2 8.2l7.6 7.6M15.8 8.2l-7.6 7.6"/></svg>',
+		),
+		'instagram' => array(
+			'label' => __( 'Instagram', 'tapertheme' ),
+			'icon'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.1" cy="6.9" r="0.6" fill="currentColor" stroke="none"/></svg>',
+		),
+		'youtube'   => array(
+			'label' => __( 'YouTube', 'tapertheme' ),
+			'icon'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.75" y="6" width="18.5" height="12" rx="4"/><path d="M10.4 9.5l5 2.5-5 2.5v-5Z" fill="currentColor" stroke="none"/></svg>',
+		),
+		'linkedin'  => array(
+			'label' => __( 'LinkedIn', 'tapertheme' ),
+			'icon'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M8 10.7v5.8"/><circle cx="8" cy="7.9" r="0.15" fill="currentColor" stroke="currentColor" stroke-width="1.5"/><path d="M12 16.5v-3.8c0-1.2 1-2 2-2 1.1 0 1.9.8 1.9 2.1v3.7"/></svg>',
+		),
+		'pinterest' => array(
+			'label' => __( 'Pinterest', 'tapertheme' ),
+			'icon'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.25"/><path d="M9.6 17c1-3 1.15-5.3 1.15-6.7 0-1.7.95-3 2.55-3 1.4 0 2.3 1 2.3 2.6 0 1.9-1.1 4.4-2.6 4.4-.8 0-1.4-.6-1.2-1.4"/></svg>',
+		),
+		'tiktok'    => array(
+			'label' => __( 'TikTok', 'tapertheme' ),
+			'icon'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 4v10.6a3 3 0 1 1-2-2.83"/><path d="M13 4c.4 2.1 2.1 3.7 4.1 4"/></svg>',
+		),
+	);
+}
+
+function tapertheme_customize_register_social( $wp_customize ) {
+	$wp_customize->add_section(
+		'tapertheme_social',
+		array(
+			'title'    => __( 'Social Media Links', 'tapertheme' ),
+			'priority' => 130,
+		)
+	);
+
+	foreach ( tapertheme_get_social_networks() as $key => $network ) {
+		$setting_id = 'tapertheme_social_' . $key;
+
+		$wp_customize->add_setting(
+			$setting_id,
+			array(
+				'default'           => '',
+				'sanitize_callback' => 'esc_url_raw',
+				'transport'         => 'refresh',
+			)
+		);
+
+		$wp_customize->add_control(
+			$setting_id,
+			array(
+				'label'       => $network['label'],
+				/* translators: %s: social network name, e.g. Facebook. */
+				'description' => sprintf( __( 'Full profile/page URL. Leave blank to hide the %s icon.', 'tapertheme' ), $network['label'] ),
+				'section'     => 'tapertheme_social',
+				'type'        => 'url',
+			)
+		);
+	}
+}
+add_action( 'customize_register', 'tapertheme_customize_register_social' );
+
+/**
+ * Returns only the social networks the site owner has actually filled in,
+ * each with its label, URL, and inline SVG icon markup.
+ */
+function tapertheme_get_active_social_links() {
+	$links = array();
+
+	foreach ( tapertheme_get_social_networks() as $key => $network ) {
+		$url = get_theme_mod( 'tapertheme_social_' . $key, '' );
+		if ( empty( $url ) ) {
+			continue;
+		}
+		$links[] = array(
+			'key'   => $key,
+			'label' => $network['label'],
+			'url'   => $url,
+			'icon'  => $network['icon'],
+		);
+	}
+
+	return $links;
 }
