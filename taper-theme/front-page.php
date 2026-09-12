@@ -17,9 +17,9 @@ get_header();
 	<div class="tt-container">
 
 		<div class="tt-hero-head">
-			<span class="tt-eyebrow"><?php esc_html_e( 'Free Planning Tool', 'tapertheme' ); ?></span>
-			<h1><?php esc_html_e( 'Personalized Taper-Down Reduction Schedule & Daily Tracker', 'tapertheme' ); ?></h1>
-			<p><?php esc_html_e( 'Answer four quick questions and get a day-by-day plan that steps your consumption down gradually to zero — plus a live savings tracker and a printable PDF schedule.', 'tapertheme' ); ?></p>
+			<span class="tt-eyebrow"><?php esc_html_e( 'Free Printable Template Tool', 'tapertheme' ); ?></span>
+			<h1><?php esc_html_e( 'Free Quit Smoking Schedule Template & Reduction Calendar', 'tapertheme' ); ?></h1>
+			<p><?php esc_html_e( 'Skip the static PDF chart. Answer four quick questions and get a personalized, printable reduction schedule template — for cigarettes, alcohol, vaping, or anything else — that steps your daily amount down to zero, plus a live savings tracker.', 'tapertheme' ); ?></p>
 
 			<ul class="tt-trust-strip">
 				<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l4.5 4.5L20 6"/></svg> <?php esc_html_e( '100% Free', 'tapertheme' ); ?></li>
@@ -132,6 +132,63 @@ get_header();
 	<div class="tt-container">
 		<div class="tt-prose">
 
+			<h2><?php esc_html_e( 'A Printable Schedule Template That Fills Itself In', 'tapertheme' ); ?></h2>
+			<p>
+				<?php esc_html_e( 'Search for a "quit smoking schedule template" or a "smoking reduction chart" and you will mostly find static PDFs and spreadsheets: a blank grid you print out and fill in by hand, using someone else\'s guess at how fast you should cut down. They are better than nothing, but every number on them is generic — the same chart handed to someone who smokes 10 a day and someone who smokes 40.', 'tapertheme' ); ?>
+			</p>
+			<p>
+				<?php esc_html_e( 'The tool above is that template, except it already knows your numbers. Enter your actual baseline and a pace that fits your history, and it generates the exact day-by-day reduction calendar for you — no printing a blank chart and doing the subtraction yourself, no guessing whether a generic 30-day plan actually matches how much you use today.', 'tapertheme' ); ?>
+			</p>
+
+			<div class="tt-table-wrap">
+				<table>
+					<thead>
+						<tr>
+							<th><?php esc_html_e( 'What You Need', 'tapertheme' ); ?></th>
+							<th><?php esc_html_e( 'Static PDF / Printable Chart', 'tapertheme' ); ?></th>
+							<th><?php esc_html_e( 'This Generator', 'tapertheme' ); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><?php esc_html_e( 'Matches your actual baseline', 'tapertheme' ); ?></td>
+							<td><?php esc_html_e( 'No — one generic chart for everyone', 'tapertheme' ); ?></td>
+							<td><?php esc_html_e( 'Yes — calculated from your number', 'tapertheme' ); ?></td>
+						</tr>
+						<tr>
+							<td><?php esc_html_e( 'Daily quota math', 'tapertheme' ); ?></td>
+							<td><?php esc_html_e( 'You do it by hand', 'tapertheme' ); ?></td>
+							<td><?php esc_html_e( 'Generated instantly', 'tapertheme' ); ?></td>
+						</tr>
+						<tr>
+							<td><?php esc_html_e( 'Suggested time windows', 'tapertheme' ); ?></td>
+							<td><?php esc_html_e( 'Rarely included', 'tapertheme' ); ?></td>
+							<td><?php esc_html_e( 'Built into every day', 'tapertheme' ); ?></td>
+						</tr>
+						<tr>
+							<td><?php esc_html_e( 'Money-saved tracker', 'tapertheme' ); ?></td>
+							<td><?php esc_html_e( 'Not included', 'tapertheme' ); ?></td>
+							<td><?php esc_html_e( 'Calculated automatically', 'tapertheme' ); ?></td>
+						</tr>
+						<tr>
+							<td><?php esc_html_e( 'Adjusts if you change pace mid-plan', 'tapertheme' ); ?></td>
+							<td><?php esc_html_e( 'Start over on a new printout', 'tapertheme' ); ?></td>
+							<td><?php esc_html_e( 'Recalculate in one click', 'tapertheme' ); ?></td>
+						</tr>
+						<tr>
+							<td><?php esc_html_e( 'Printable / downloadable', 'tapertheme' ); ?></td>
+							<td><?php esc_html_e( 'Yes', 'tapertheme' ); ?></td>
+							<td><?php esc_html_e( 'Yes — as a PDF or image, after it\'s personalized', 'tapertheme' ); ?></td>
+						</tr>
+						<tr>
+							<td><?php esc_html_e( 'Cost', 'tapertheme' ); ?></td>
+							<td><?php esc_html_e( 'Free', 'tapertheme' ); ?></td>
+							<td><?php esc_html_e( 'Free', 'tapertheme' ); ?></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
 			<h2><?php esc_html_e( 'Understanding Gradual Tapering vs Cold Turkey', 'tapertheme' ); ?></h2>
 			<p>
 				<?php esc_html_e( 'When people decide to cut back on a habit — whether it\'s cigarettes, alcohol, vaping, or something else entirely — they usually consider two broad strategies: stopping all at once ("cold turkey") or reducing gradually over a set period ("tapering"). Both approaches can work, but they suit very different situations, risk profiles, and personalities.', 'tapertheme' ); ?>
@@ -188,6 +245,20 @@ get_header();
 
 			<h2 id="faq"><?php esc_html_e( 'Frequently Asked Questions', 'tapertheme' ); ?></h2>
 			<div class="tt-faq">
+
+				<details class="tt-faq-item">
+					<summary><?php esc_html_e( 'Is this a printable quit smoking schedule template I can download?', 'tapertheme' ); ?></summary>
+					<div class="tt-faq-answer">
+						<p><?php esc_html_e( 'Yes. Once you generate your schedule, use "Download Printable Schedule (PDF)" or "Download as Image" to save a copy you can print. The difference from a generic template is that every number on it is already calculated from your own baseline and pace, instead of a blank chart you fill in by hand.', 'tapertheme' ); ?></p>
+					</div>
+				</details>
+
+				<details class="tt-faq-item">
+					<summary><?php esc_html_e( 'How is this different from a static PDF reduction chart?', 'tapertheme' ); ?></summary>
+					<div class="tt-faq-answer">
+						<p><?php esc_html_e( 'A static chart applies the same generic numbers to everyone. This tool takes your actual daily amount and chosen pace and calculates a matching day-by-day quota, suggested time windows, and a savings estimate — then lets you export the result as a PDF or image, so you still end up with something printable, just personalized first.', 'tapertheme' ); ?></p>
+					</div>
+				</details>
 
 				<details class="tt-faq-item">
 					<summary><?php esc_html_e( 'Is this reduction schedule medically supervised?', 'tapertheme' ); ?></summary>

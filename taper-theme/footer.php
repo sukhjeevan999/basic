@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					echo esc_html(
 						get_bloginfo( 'description' )
 							? get_bloginfo( 'description' )
-							: __( 'A free planning tool to help you build a gradual, structured reduction schedule — and track your progress along the way.', 'tapertheme' )
+							: __( 'A free, printable quit smoking schedule template and reduction calendar generator — personalized to your baseline, with progress tracking built in.', 'tapertheme' )
 					);
 					?>
 				</p>

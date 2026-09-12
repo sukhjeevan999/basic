@@ -115,6 +115,50 @@ function tapertheme_scripts() {
 add_action( 'wp_enqueue_scripts', 'tapertheme_scripts' );
 
 /**
+ * Sets a keyword-targeted <title> for the homepage (Free Quit Smoking
+ * Schedule Template & Reduction Calendar) instead of relying only on the
+ * site title + tagline, which may be blank on a fresh install.
+ */
+function tapertheme_document_title_parts( $title_parts ) {
+	if ( is_front_page() && ! is_paged() ) {
+		$title_parts['title'] = __( 'Free Quit Smoking Schedule Template & Reduction Calendar', 'tapertheme' );
+	}
+	return $title_parts;
+}
+add_filter( 'document_title_parts', 'tapertheme_document_title_parts' );
+
+/**
+ * Outputs WebApplication structured data for the homepage tool so search
+ * engines and AI answer engines can identify it as a free, browser-based
+ * reduction-schedule generator (distinct from the static PDF templates it
+ * competes against in search results).
+ */
+function tapertheme_homepage_schema() {
+	if ( ! is_front_page() ) {
+		return;
+	}
+
+	$schema = array(
+		'@context'        => 'https://schema.org',
+		'@type'           => 'WebApplication',
+		'name'            => __( 'Quit Smoking Schedule Template & Reduction Calendar', 'tapertheme' ),
+		'applicationCategory' => 'HealthApplication',
+		'operatingSystem' => 'Any (runs in a web browser)',
+		'url'             => home_url( '/' ),
+		'description'     => __( 'A free, personalized, printable reduction-schedule template and daily tracker for cigarettes, alcohol, vaping, or any custom substance — generated instantly from your own baseline instead of a static PDF chart.', 'tapertheme' ),
+		'offers'          => array(
+			'@type'         => 'Offer',
+			'price'         => '0',
+			'priceCurrency' => 'USD',
+		),
+		'isAccessibleForFree' => true,
+	);
+
+	echo '<script type="application/ld+json">' . wp_json_encode( $schema ) . '</script>' . "\n";
+}
+add_action( 'wp_head', 'tapertheme_homepage_schema' );
+
+/**
  * ==========================================================================
  * 3. PERFORMANCE / HEAD CLEANUP
  * ==========================================================================

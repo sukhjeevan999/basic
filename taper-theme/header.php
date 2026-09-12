@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#0d7a5f">
 	<?php if ( is_front_page() ) : ?>
-	<meta name="description" content="<?php echo esc_attr( get_bloginfo( 'description' ) ? get_bloginfo( 'description' ) : __( 'Build a free, personalized taper-down reduction schedule and track your progress toward zero.', 'tapertheme' ) ); ?>">
+	<meta name="description" content="<?php echo esc_attr__( 'Free printable quit smoking schedule template & reduction calendar. Enter your baseline, get a personalized day-by-day taper plan instantly — no PDF needed.', 'tapertheme' ); ?>">
 	<?php endif; ?>
 	<?php wp_head(); ?>
 </head>
