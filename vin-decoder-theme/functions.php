@@ -303,9 +303,14 @@ function vindecoder_handle_decode_request( $request ) {
 	);
 
 	if ( is_wp_error( $response ) ) {
+		// TEMPORARY DIAGNOSTIC: surface the real cURL/WP_Error message so we
+		// can see exactly why the server-to-NHTSA request failed (timeout,
+		// SSL verification, DNS, connection refused, etc). Remove the
+		// "debug_detail" line once the root cause is fixed.
 		return new WP_Error(
 			'vindecoder_upstream_error',
-			__( 'The vehicle database could not be reached right now. Please try again in a moment.', 'vindecodertheme' ),
+			__( 'The vehicle database could not be reached right now. Please try again in a moment.', 'vindecodertheme' )
+				. ' [debug_detail: ' . $response->get_error_message() . ']',
 			array( 'status' => 502 )
 		);
 	}
