@@ -221,7 +221,7 @@ function vindecoder_resource_hints( $hints, $relation_type ) {
 		$hints[] = array( 'href' => 'https://fonts.gstatic.com', 'crossorigin' );
 		if ( is_page_template( 'template-vin-decoder.php' ) ) {
 			$hints[] = array( 'href' => 'https://cdnjs.cloudflare.com', 'crossorigin' );
-			$hints[] = array( 'href' => 'https://vpic.nhtsa.gov' );
+			$hints[] = array( 'href' => 'https://vpic.nhtsa.dot.gov' );
 		}
 	}
 	return $hints;
@@ -274,62 +274,6 @@ function vindecoder_register_rest_routes() {
 }
 add_action( 'rest_api_init', 'vindecoder_register_rest_routes' );
 
-/**
- * TEMPORARY DIAGNOSTIC ROUTE: tests outbound DNS resolution + connectivity
- * against several well-known hosts to determine whether the server's DNS
- * resolver is broken universally, or the failure is specific to NHTSA's
- * host. Visit /wp-json/vindecoder/v1/debug-dns directly in a browser.
- * Remove this route once the root cause is confirmed and fixed.
- */
-function vindecoder_register_debug_route() {
-	register_rest_route(
-		'vindecoder/v1',
-		'/debug-dns',
-		array(
-			'methods'             => 'GET',
-			'callback'            => 'vindecoder_handle_debug_dns',
-			'permission_callback' => '__return_true',
-		)
-	);
-}
-add_action( 'rest_api_init', 'vindecoder_register_debug_route' );
-
-function vindecoder_handle_debug_dns() {
-	$hosts = array(
-		'google.com',
-		'api.github.com',
-		'fonts.googleapis.com',
-		'vpic.nhtsa.gov',
-	);
-
-	$results = array();
-	foreach ( $hosts as $host ) {
-		$ip = gethostbyname( $host );
-		// gethostbyname() returns the input unchanged (not an IP) on failure.
-		$resolved = ( $ip !== $host );
-
-		$http_result = wp_remote_get(
-			'https://' . $host,
-			array( 'timeout' => 8 )
-		);
-
-		$results[ $host ] = array(
-			'dns_resolved'   => $resolved,
-			'resolved_ip'    => $resolved ? $ip : null,
-			'http_success'   => ! is_wp_error( $http_result ),
-			'http_error'     => is_wp_error( $http_result ) ? $http_result->get_error_message() : null,
-			'http_status'    => ! is_wp_error( $http_result ) ? wp_remote_retrieve_response_code( $http_result ) : null,
-		);
-	}
-
-	return rest_ensure_response(
-		array(
-			'server_time' => gmdate( 'c' ),
-			'results'     => $results,
-		)
-	);
-}
-
 function vindecoder_handle_decode_request( $request ) {
 	$vin = strtoupper( trim( (string) $request->get_param( 'vin' ) ) );
 
@@ -349,20 +293,10 @@ function vindecoder_handle_decode_request( $request ) {
 		return rest_ensure_response( $cached );
 	}
 
-	// Some shared-hosting servers have a broken/unreliable IPv6 DNS resolver
-	// while IPv4 resolution works fine, which surfaces as "cURL error 6:
-	// Could not resolve host" even though the host is genuinely reachable.
-	// Forcing IPv4 resolution for this specific request is a safe, common
-	// fix for that class of host. Only applies while this filter is active
-	// (added and removed around the single wp_remote_get call below).
-	$vindecoder_force_ipv4 = function ( $handle ) {
-		if ( defined( 'CURL_IPRESOLVE_V4' ) ) {
-			curl_setopt( $handle, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
-		}
-	};
-	add_action( 'http_api_curl', $vindecoder_force_ipv4 );
-
-	$api_url  = 'https://vpic.nhtsa.gov/api/vehicles/DecodeVinValuesExtended/' . rawurlencode( $vin ) . '?format=json';
+	// NOTE: the correct vPIC host is vpic.nhtsa.dot.gov — NOT vpic.nhtsa.gov,
+	// which has no valid DNS records. Using the wrong host was the root
+	// cause of every "Could not resolve host" failure seen during launch.
+	$api_url  = 'https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValuesExtended/' . rawurlencode( $vin ) . '?format=json';
 	$response = wp_remote_get(
 		$api_url,
 		array(
@@ -371,17 +305,10 @@ function vindecoder_handle_decode_request( $request ) {
 		)
 	);
 
-	remove_action( 'http_api_curl', $vindecoder_force_ipv4 );
-
 	if ( is_wp_error( $response ) ) {
-		// TEMPORARY DIAGNOSTIC: surface the real cURL/WP_Error message so we
-		// can see exactly why the server-to-NHTSA request failed (timeout,
-		// SSL verification, DNS, connection refused, etc). Remove the
-		// "debug_detail" line once the root cause is fixed.
 		return new WP_Error(
 			'vindecoder_upstream_error',
-			__( 'The vehicle database could not be reached right now. Please try again in a moment.', 'vindecodertheme' )
-				. ' [debug_detail: ' . $response->get_error_message() . ']',
+			__( 'The vehicle database could not be reached right now. Please try again in a moment.', 'vindecodertheme' ),
 			array( 'status' => 502 )
 		);
 	}
