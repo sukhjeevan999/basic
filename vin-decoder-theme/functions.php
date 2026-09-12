@@ -293,6 +293,19 @@ function vindecoder_handle_decode_request( $request ) {
 		return rest_ensure_response( $cached );
 	}
 
+	// Some shared-hosting servers have a broken/unreliable IPv6 DNS resolver
+	// while IPv4 resolution works fine, which surfaces as "cURL error 6:
+	// Could not resolve host" even though the host is genuinely reachable.
+	// Forcing IPv4 resolution for this specific request is a safe, common
+	// fix for that class of host. Only applies while this filter is active
+	// (added and removed around the single wp_remote_get call below).
+	$vindecoder_force_ipv4 = function ( $handle ) {
+		if ( defined( 'CURL_IPRESOLVE_V4' ) ) {
+			curl_setopt( $handle, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
+		}
+	};
+	add_action( 'http_api_curl', $vindecoder_force_ipv4 );
+
 	$api_url  = 'https://vpic.nhtsa.gov/api/vehicles/DecodeVinValuesExtended/' . rawurlencode( $vin ) . '?format=json';
 	$response = wp_remote_get(
 		$api_url,
@@ -301,6 +314,8 @@ function vindecoder_handle_decode_request( $request ) {
 			'headers' => array( 'Accept' => 'application/json' ),
 		)
 	);
+
+	remove_action( 'http_api_curl', $vindecoder_force_ipv4 );
 
 	if ( is_wp_error( $response ) ) {
 		// TEMPORARY DIAGNOSTIC: surface the real cURL/WP_Error message so we
