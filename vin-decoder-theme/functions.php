@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * same URL. Forgetting to bump this is why a real, correct code change
  * can still show up broken/unstyled on the live site.
  */
-define( 'VINDECODER_VERSION', '1.5.0' );
+define( 'VINDECODER_VERSION', '1.6.0' );
 
 /**
  * ==========================================================================
@@ -626,6 +626,11 @@ function vindecoder_fallback_primary_menu() {
 	echo '<ul id="primary-menu">';
 	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Home', 'vindecodertheme' ) . '</a></li>';
 
+	$about_page = get_page_by_path( 'about' );
+	if ( $about_page instanceof WP_Post ) {
+		echo '<li><a href="' . esc_url( get_permalink( $about_page ) ) . '">' . esc_html__( 'About', 'vindecodertheme' ) . '</a></li>';
+	}
+
 	foreach ( vindecoder_get_nav_category_groups() as $category => $group ) {
 		$brand_slugs = vindecoder_get_brand_slugs_by_category( $category );
 		if ( empty( $brand_slugs ) ) {
@@ -881,6 +886,34 @@ function vindecoder_get_default_pages() {
 <p>' . esc_html__( 'Email us at:', 'vindecodertheme' ) . ' <a href="mailto:support@example.com">support@example.com</a></p>
 <p><em>' . esc_html__( 'Please replace this placeholder address with your own support email before launching your site.', 'vindecodertheme' ) . '</em></p>',
 		),
+		'about' => array(
+			'title'   => __( 'About', 'vindecodertheme' ),
+			// Edit the "[Your Name]" bits below (and swap the placeholder
+			// avatar for a real photo, right in the WordPress editor) once
+			// you're ready — the rest of the story is written to be true
+			// for whoever actually built and runs the site.
+			'content' => '<p><em>' . esc_html__( 'A personal note from the person who built this site.', 'vindecodertheme' ) . '</em></p>
+
+<h2>' . esc_html__( 'Why I Built This', 'vindecodertheme' ) . '</h2>
+<p>' . esc_html__( 'A while back I was looking at a used BMW and wanted to check the VIN before I put down a deposit on it. I typed "BMW VIN check" into Google and got a mess of results — half of them wanted a credit card before showing me anything, and the free ones either timed out, buried the result under five popups, or gave me a decode that didn\'t line up with what the seller was telling me.', 'vindecodertheme' ) . '</p>
+<p>' . esc_html__( 'All I wanted was a straight answer: is this a real VIN, and what does it actually say about the car — model, year, engine, where it was built. The boring factual stuff that doesn\'t lie to you.', 'vindecodertheme' ) . '</p>
+<p>' . esc_html__( 'So I built it myself. This site pulls straight from NHTSA\'s own public vehicle database — the same records insurers and DMVs use — and shows you exactly what comes back, with nothing hidden behind a paywall. No account, no credit card, no "one free search then pay up." I started with the BMW decoder because that\'s the car I was actually checking that day, then kept adding brands as people asked for their own.', 'vindecodertheme' ) . '</p>
+<p>' . esc_html__( 'It\'s still 100% free and unlimited to use, and I don\'t plan on changing that. If it saved me a headache, I figured it would save someone else one too.', 'vindecodertheme' ) . '</p>
+
+<div class="vd-author-box">
+	<div class="vd-author-avatar" aria-hidden="true">🙂</div>
+	<div class="vd-author-bio">
+		<p class="vd-author-name">[Your Name]</p>
+		<p class="vd-author-role">' . esc_html__( 'Founder', 'vindecodertheme' ) . ', ' . esc_html( get_bloginfo( 'name' ) ) . '</p>
+	</div>
+</div>
+
+<h2>' . esc_html__( 'What This Site Is (and Isn\'t)', 'vindecodertheme' ) . '</h2>
+<p>' . esc_html__( 'It\'s a free VIN decoder. Enter a VIN, get back the factory specs — nothing more, nothing less. It won\'t tell you if a car\'s been in an accident or had its odometer rolled back; for that you need an actual vehicle history report. What it will tell you, independent of anything a seller says, is exactly what the manufacturer built.', 'vindecodertheme' ) . '</p>
+
+<h2>' . esc_html__( 'Questions or Feedback?', 'vindecodertheme' ) . '</h2>
+<p>' . esc_html__( 'If something looks wrong, a brand\'s missing, or the tool just saved you from a bad purchase — I\'d like to hear about it.', 'vindecodertheme' ) . ' <a href="' . esc_url( home_url( '/contact/' ) ) . '">' . esc_html__( 'Get in touch here', 'vindecodertheme' ) . '</a>.</p>',
+		),
 	);
 
 	// One page per brand, using the shared decoder template.
@@ -973,6 +1006,19 @@ function vindecoder_provision_menus( $page_ids ) {
 				'menu-item-status' => 'publish',
 			)
 		);
+
+		if ( ! empty( $page_ids['about'] ) ) {
+			wp_update_nav_menu_item(
+				$menu_id,
+				0,
+				array(
+					'menu-item-object-id' => $page_ids['about'],
+					'menu-item-object'    => 'page',
+					'menu-item-type'      => 'post_type',
+					'menu-item-status'    => 'publish',
+				)
+			);
+		}
 
 		foreach ( vindecoder_get_nav_category_groups() as $category => $group ) {
 			$brand_slugs = vindecoder_get_brand_slugs_by_category( $category );

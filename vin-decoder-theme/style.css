@@ -356,6 +356,23 @@ ol.vd-vin-locator-legend li { display: flex; gap: var(--vd-space-3); align-items
 .vd-disclaimer p:last-child { margin-bottom: 0; }
 .vd-disclaimer a { color: var(--vd-color-danger); font-weight: 700; text-decoration: underline; }
 
+/* About page author box — a placeholder avatar (swap for a real photo
+   right in the WordPress editor) plus name/role. */
+.vd-author-box {
+  display: flex; align-items: center; gap: var(--vd-space-4);
+  background: var(--vd-color-surface-alt); border: 1px solid var(--vd-color-border);
+  border-radius: var(--vd-radius-md); padding: var(--vd-space-4) var(--vd-space-6);
+  margin: var(--vd-space-6) 0;
+}
+.vd-author-avatar {
+  flex: none; width: 56px; height: 56px; border-radius: 50%;
+  background: var(--vd-color-primary-light); display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; overflow: hidden;
+}
+.vd-author-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.vd-author-name { font-family: var(--vd-font-heading); font-weight: 800; font-size: 1.05rem; margin: 0; color: var(--vd-color-text); }
+.vd-author-role { font-size: 0.88rem; color: var(--vd-color-text-muted); margin: 0; }
+
 .vd-faq { margin-top: var(--vd-space-4); }
 .vd-faq-item { border: 1px solid var(--vd-color-border); border-radius: var(--vd-radius-md); background: var(--vd-color-surface); margin-bottom: var(--vd-space-3); overflow: hidden; transition: border-color .15s ease, box-shadow .15s ease; }
 .vd-faq-item:hover { border-color: var(--vd-color-primary); box-shadow: var(--vd-shadow-sm); }

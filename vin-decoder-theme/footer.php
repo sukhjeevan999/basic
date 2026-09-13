@@ -55,6 +55,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div>
 				<div class="vd-footer-heading"><?php esc_html_e( 'Legal', 'vindecodertheme' ); ?></div>
 				<ul class="vd-footer-links vd-footer-links--static">
+					<li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>"><?php esc_html_e( 'About', 'vindecodertheme' ); ?></a></li>
 					<?php $vd_privacy_id = (int) get_option( 'wp_page_for_privacy_policy' ); ?>
 					<li><a href="<?php echo esc_url( $vd_privacy_id ? get_permalink( $vd_privacy_id ) : home_url( '/privacy-policy/' ) ); ?>"><?php esc_html_e( 'Privacy Policy', 'vindecodertheme' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/terms-of-service/' ) ); ?>"><?php esc_html_e( 'Terms of Service', 'vindecodertheme' ); ?></a></li>
