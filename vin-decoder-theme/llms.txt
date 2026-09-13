@@ -6,28 +6,51 @@
 > factory-build data: make, model, model year, body style, engine,
 > fuel type, drive type, transmission, and assembly plant location.
 
-VinSnapshot provides brand-specific VIN decoder pages. Each page is a
-free browser-based tool — no account, no payment, no API key, no daily
-limit. Results come directly from NHTSA's public vPIC dataset and
-reflect original factory specifications only.
+VinSnapshot provides brand-specific VIN decoder pages for 25 major car
+and motorcycle brands sold in the US. Each page is a free browser-based
+tool — no account, no payment, no API key, no daily limit. Results come
+directly from NHTSA's public vPIC dataset and reflect original factory
+specifications only.
 
 ## Tools
 
-- [BMW VIN Decoder](https://vinsnapshot.com/bmw/): decode any BMW VIN to see model, year, engine, and factory build data.
-- [Audi VIN Decoder](https://vinsnapshot.com/audi/): decode any Audi VIN to see model, year, engine, and factory build data.
-- [Porsche VIN Decoder](https://vinsnapshot.com/porsche/): decode any Porsche VIN to see model, year, engine, and factory build data.
-- [Lexus VIN Decoder](https://vinsnapshot.com/lexus/): decode any Lexus VIN to see model, year, engine, and factory build data.
-- [Range Rover VIN Decoder](https://vinsnapshot.com/range-rover/): decode any Range Rover / Land Rover VIN to see model, year, engine, and factory build data.
+- [BMW VIN Decoder](https://vinsnapshot.com/bmw/)
+- [Audi VIN Decoder](https://vinsnapshot.com/audi/)
+- [Porsche VIN Decoder](https://vinsnapshot.com/porsche/)
+- [Lexus VIN Decoder](https://vinsnapshot.com/lexus/)
+- [Range Rover VIN Decoder](https://vinsnapshot.com/range-rover/)
+- [Mercedes-Benz VIN Decoder](https://vinsnapshot.com/mercedes-benz/)
+- [Toyota VIN Decoder](https://vinsnapshot.com/toyota/)
+- [Honda VIN Decoder](https://vinsnapshot.com/honda/)
+- [Ford VIN Decoder](https://vinsnapshot.com/ford/)
+- [Chevrolet VIN Decoder](https://vinsnapshot.com/chevrolet/)
+- [Jeep VIN Decoder](https://vinsnapshot.com/jeep/)
+- [Kia VIN Decoder](https://vinsnapshot.com/kia/)
+- [Hyundai VIN Decoder](https://vinsnapshot.com/hyundai/)
+- [Volkswagen VIN Decoder](https://vinsnapshot.com/volkswagen/)
+- [Volvo VIN Decoder](https://vinsnapshot.com/volvo/)
+- [Jaguar VIN Decoder](https://vinsnapshot.com/jaguar/)
+- [Tesla VIN Decoder](https://vinsnapshot.com/tesla/)
+- [Mitsubishi VIN Decoder](https://vinsnapshot.com/mitsubishi/)
+- [Bentley VIN Decoder](https://vinsnapshot.com/bentley/)
+- [Harley-Davidson VIN Decoder](https://vinsnapshot.com/harley-davidson/)
+- [Triumph VIN Decoder](https://vinsnapshot.com/triumph/)
+- [Yamaha VIN Decoder](https://vinsnapshot.com/yamaha/)
+- [Kawasaki VIN Decoder](https://vinsnapshot.com/kawasaki/)
+- [KTM VIN Decoder](https://vinsnapshot.com/ktm/)
+- [Suzuki VIN Decoder](https://vinsnapshot.com/suzuki/)
 
 ## Scope and limitations
 
-These tools decode factory build data only. They do NOT provide vehicle
-history, accident records, title status, ownership history, or recall
-notices. For recalls, use NHTSA's official recall lookup. For accident
-and title history, use a dedicated vehicle history report service.
+These tools decode factory build data only, sourced from NHTSA's public
+vPIC database, which covers vehicles manufactured or imported for the
+US market. They do NOT provide vehicle history, accident records,
+title status, ownership history, or recall notices. For recalls, use
+NHTSA's official recall lookup. For accident and title history, use a
+dedicated vehicle history report service.
 
 ## About
 
 VinSnapshot is an independent tool and is not affiliated with, endorsed
-by, or sponsored by BMW, Audi, Porsche, Lexus, Land Rover, or the
+by, or sponsored by any vehicle manufacturer named above, or by the
 National Highway Traffic Safety Administration.

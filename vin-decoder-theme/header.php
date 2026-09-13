@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 	<meta name="description" content="<?php echo esc_attr( $vindecoder_brand['meta_description'] ); ?>">
 	<?php elseif ( is_front_page() ) : ?>
-	<meta name="description" content="<?php echo esc_attr__( 'Free VIN decoder tools for BMW, Audi, Porsche, Lexus, and Range Rover. Enter your 17-character VIN to instantly see model, year, engine, and factory build details — powered by the official NHTSA database.', 'vindecodertheme' ); ?>">
+	<meta name="description" content="<?php echo esc_attr__( 'Free VIN decoder tools for 25 major car and motorcycle brands — BMW, Mercedes-Benz, Toyota, Ford, Harley-Davidson, and more. Enter your 17-character VIN to instantly see model, year, engine, and factory build details, for buyers across the US, UK, Canada, and Australia.', 'vindecodertheme' ); ?>">
 	<?php endif; ?>
 	<?php wp_head(); ?>
 </head>

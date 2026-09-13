@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					echo esc_html(
 						get_bloginfo( 'description' )
 							? get_bloginfo( 'description' )
-							: __( 'Free VIN decoder tools for BMW, Audi, Porsche, Lexus, and Range Rover — powered by the official NHTSA vehicle database.', 'vindecodertheme' )
+							: __( 'Free VIN decoder tools for 25 major car and motorcycle brands — powered by the official NHTSA vehicle database.', 'vindecodertheme' )
 					);
 					?>
 				</p>

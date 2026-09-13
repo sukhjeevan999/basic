@@ -43,7 +43,7 @@ get_header();
 		<div class="vd-prose">
 
 			<h2><?php esc_html_e( 'What a VIN Decode Actually Tells You', 'vindecodertheme' ); ?></h2>
-			<p><?php esc_html_e( 'Every vehicle\'s 17-character Vehicle Identification Number encodes real factory data: the manufacturer, model, model year, body style, engine, and the plant where it was built. Our decoders read that structure using the free public NHTSA vPIC database — the same reference data used by insurers, DMVs, and dealers — and turn it into a plain-English summary in seconds.', 'vindecodertheme' ); ?></p>
+			<p><?php esc_html_e( 'Every vehicle\'s 17-character Vehicle Identification Number encodes real factory data: the manufacturer, model, model year, body style, engine, and the plant where it was built. Our decoders read that structure using the free public NHTSA vPIC database — the same reference data used by insurers, DMVs, and dealers across the United States, and by used-car shoppers as far as the United Kingdom, Canada, and Australia — and turn it into a plain-English summary in seconds.', 'vindecodertheme' ); ?></p>
 			<p><?php esc_html_e( 'This is not a vehicle history report. It won\'t tell you about accidents, title status, or prior owners — for that you\'ll want a dedicated history report service. What it will tell you, independently of what any seller or listing claims, is exactly what the vehicle was built as.', 'vindecodertheme' ); ?></p>
 
 			<h2><?php esc_html_e( 'Why Decode Before You Buy', 'vindecodertheme' ); ?></h2>
@@ -70,7 +70,7 @@ get_header();
 				</details>
 				<details class="vd-faq-item">
 					<summary><?php esc_html_e( 'Can I decode a motorcycle, RV, or other vehicle type?', 'vindecodertheme' ); ?></summary>
-					<div class="vd-faq-answer"><p><?php esc_html_e( 'Right now this site covers BMW, Audi, Porsche, Lexus, and Range Rover passenger vehicles. Pick the closest brand above — the decoder will tell you if a VIN doesn\'t match that manufacturer.', 'vindecodertheme' ); ?></p></div>
+					<div class="vd-faq-answer"><p><?php esc_html_e( 'This site covers 25 major car and motorcycle brands (see the list above), all decoded through the same free NHTSA database. Pick the closest brand — the decoder will tell you if a VIN doesn\'t match that manufacturer.', 'vindecodertheme' ); ?></p></div>
 				</details>
 			</div>
 

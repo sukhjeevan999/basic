@@ -5,8 +5,9 @@
  * Shared template for every brand's dedicated decoder page. Which brand is
  * rendered is determined by the page's slug matching a key in
  * vindecoder_get_brands() (see functions.php) — no per-page custom fields
- * needed. Assign this template to a page with the slug "bmw", "audi",
- * "porsche", "lexus", or "range-rover" to bring that brand's page online.
+ * needed. Assign this template to a page whose slug matches any key in
+ * vindecoder_get_brands() (e.g. "bmw", "toyota", "harley-davidson") to
+ * bring that brand's page online.
  *
  * @package VinDecoderTheme
  */

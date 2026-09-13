@@ -64,6 +64,166 @@ function vindecoder_get_brands() {
 			'sample_vin'        => 'SALGS2SE6JA123456',
 			'intro'             => 'Range Rover model lines (Evoque, Velar, Sport, and the full-size Range Rover) share design language but differ enormously in engine options and factory specification. A VIN decode confirms exactly which one you\'re looking at, straight from the encoded build data.',
 		),
+		'mercedes-benz'    => array(
+			'label'            => 'Mercedes-Benz',
+			'title'            => 'Mercedes-Benz VIN Decoder',
+			'tagline'          => 'Decode any Mercedes-Benz VIN for free — model, engine, trim, and factory build details.',
+			'meta_description' => 'Free Mercedes-Benz VIN decoder for buyers and owners across California and the rest of the US. Enter your 17-character VIN to instantly reveal your Mercedes-Benz\'s model, year, engine, body style, and plant of manufacture.',
+			'sample_vin'       => 'WDDGF4HB1CA123456',
+			'intro'            => 'From a C-Class listing in California to a used GLE on a dealer lot across the country, a VIN decode gives you an independent, factory-encoded read on the model, model year, engine, and body style — before you trust a seller\'s description alone.',
+		),
+		'toyota'           => array(
+			'label'            => 'Toyota',
+			'title'            => 'Toyota VIN Decoder',
+			'tagline'          => 'Decode any Toyota VIN for free — model, engine, trim, and factory build details.',
+			'meta_description' => 'Free Toyota VIN decoder for used-car buyers in Texas and nationwide. Enter your 17-character VIN to instantly reveal your Toyota\'s model, year, engine, body style, and plant of manufacture.',
+			'sample_vin'       => '4T1BF1FK5CU123456',
+			'intro'            => 'Toyota builds the same nameplate — Camry, Corolla, RAV4 — across several plants and trim levels over the years. Whether you\'re shopping a used Toyota in Texas or anywhere else, a VIN decode confirms exactly what left the factory, independent of what any listing claims.',
+		),
+		'honda'            => array(
+			'label'            => 'Honda',
+			'title'            => 'Honda VIN Decoder',
+			'tagline'          => 'Decode any Honda VIN for free — model, engine, trim, and factory build details.',
+			'meta_description' => 'Free Honda VIN decoder for buyers in Florida and across the US. Enter your 17-character VIN to instantly reveal your Honda\'s model, year, engine, body style, and plant of manufacture.',
+			'sample_vin'       => '1HGCM82633A123456',
+			'intro'            => 'Civic, Accord, CR-V — Honda\'s best-sellers span multiple generations that can look nearly identical from a listing photo. A quick VIN decode settles the model year, engine, and body style question in seconds, whether you\'re buying in Florida or shipping a car across state lines.',
+		),
+		'ford'             => array(
+			'label'            => 'Ford',
+			'title'            => 'Ford VIN Decoder',
+			'tagline'          => 'Decode any Ford VIN for free — model, engine, trim, and factory build details.',
+			'meta_description' => 'Free Ford VIN decoder for buyers in Michigan and across the US. Enter your 17-character VIN to instantly reveal your Ford\'s model, year, engine, body style, and plant of manufacture.',
+			'sample_vin'       => '1FTFW1ET5EFA23456',
+			'intro'            => 'From an F-150 built in Michigan to a Mustang or Explorer anywhere else in the country, Ford VINs encode the exact model, model year, engine, and body style at the factory — useful to confirm before you buy, sell, or insure the truck or car in question.',
+		),
+		'chevrolet'        => array(
+			'label'            => 'Chevrolet',
+			'title'            => 'Chevrolet VIN Decoder',
+			'tagline'          => 'Decode any Chevrolet VIN for free — model, engine, trim, and factory build details.',
+			'meta_description' => 'Free Chevrolet VIN decoder for buyers in Ohio and across the US. Enter your 17-character VIN to instantly reveal your Chevrolet\'s model, year, engine, body style, and plant of manufacture.',
+			'sample_vin'       => '1G1ZE5ST8JF123456',
+			'intro'            => 'Silverado, Malibu, Equinox — Chevrolet\'s lineup is built across multiple plants including facilities in Ohio. A VIN decode confirms exactly which model, year, and engine you\'re looking at, independent of what a used-car listing says.',
+		),
+		'jeep'             => array(
+			'label'            => 'Jeep',
+			'title'            => 'Jeep VIN Decoder',
+			'tagline'          => 'Decode any Jeep VIN for free — model, engine, trim, and factory build details.',
+			'meta_description' => 'Free Jeep VIN decoder for buyers in Pennsylvania and across the US. Enter your 17-character VIN to instantly reveal your Jeep\'s model, year, engine, body style, and plant of manufacture.',
+			'sample_vin'       => '1C4RJFAG8FC123456',
+			'intro'            => 'Wrangler, Grand Cherokee, and Gladiator trims and engines vary a lot year to year. Whether you\'re looking at a listing in Pennsylvania or elsewhere, a VIN decode confirms the factory-encoded model, model year, and engine before you commit.',
+		),
+		'kia'              => array(
+			'label'            => 'Kia',
+			'title'            => 'Kia VIN Decoder',
+			'tagline'          => 'Decode any Kia VIN for free — model, engine, trim, and factory build details.',
+			'meta_description' => 'Free Kia VIN decoder for buyers in Georgia and across the US. Enter your 17-character VIN to instantly reveal your Kia\'s model, year, engine, body style, and plant of manufacture.',
+			'sample_vin'       => '5XYPHDA2XLG123456',
+			'intro'            => 'Kia builds several US-market models, including at its Georgia assembly plant. A VIN decode confirms the exact model, model year, and engine encoded into a specific Kia — handy for verifying a used-car listing before you buy.',
+		),
+		'hyundai'          => array(
+			'label'            => 'Hyundai',
+			'title'            => 'Hyundai VIN Decoder',
+			'tagline'          => 'Decode any Hyundai VIN for free — model, engine, trim, and factory build details.',
+			'meta_description' => 'Free Hyundai VIN decoder for buyers in North Carolina and across the US. Enter your 17-character VIN to instantly reveal your Hyundai\'s model, year, engine, body style, and plant of manufacture.',
+			'sample_vin'       => '5NPE24AF4FH123456',
+			'intro'            => 'Elantra, Sonata, Tucson — Hyundai\'s lineup spans several generations and factories. A VIN decode confirms exactly which model, model year, and engine you\'re looking at, whether you\'re shopping in North Carolina or anywhere else.',
+		),
+		'volkswagen'       => array(
+			'label'            => 'Volkswagen',
+			'title'            => 'Volkswagen VIN Decoder',
+			'tagline'          => 'Decode any Volkswagen VIN for free — model, engine, trim, and factory build details.',
+			'meta_description' => 'Free Volkswagen VIN decoder for buyers in New York and across the US. Enter your 17-character VIN to instantly reveal your Volkswagen\'s model, year, engine, body style, and plant of manufacture.',
+			'sample_vin'       => '3VWD07AJ5EM123456',
+			'intro'            => 'Jetta, Golf, Tiguan — Volkswagen trims and engines differ meaningfully between model years. A VIN decode confirms the factory-encoded details independent of a seller\'s description, whether you\'re buying in New York or elsewhere.',
+		),
+		'volvo'            => array(
+			'label'            => 'Volvo',
+			'title'            => 'Volvo VIN Decoder',
+			'tagline'          => 'Decode any Volvo VIN for free — model, engine, trim, and factory build details.',
+			'meta_description' => 'Free Volvo VIN decoder for buyers in Washington state and across the US. Enter your 17-character VIN to instantly reveal your Volvo\'s model, year, engine, body style, and plant of manufacture.',
+			'sample_vin'       => 'YV4A22PK4J1234567',
+			'intro'            => 'Volvo\'s XC and S/V-series overlap in body style but differ a lot in engine and trim. A VIN decode confirms exactly what a specific car is, whether you\'re shopping in Washington state or anywhere else.',
+		),
+		'jaguar'           => array(
+			'label'            => 'Jaguar',
+			'title'            => 'Jaguar VIN Decoder',
+			'tagline'          => 'Decode any Jaguar VIN for free — model, engine, trim, and factory build details.',
+			'meta_description' => 'Free Jaguar VIN decoder for buyers in the United States and United Kingdom. Enter your 17-character VIN to instantly reveal your Jaguar\'s model, year, engine, body style, and plant of manufacture.',
+			'sample_vin'       => 'SAJWA2GE4JMK12345',
+			'intro'            => 'Jaguar\'s F-Pace, XE, and F-Type share showroom space but differ substantially in engine and factory specification. A VIN decode confirms exactly which one you\'re looking at, whether you\'re researching a listing in the United Kingdom or the US.',
+		),
+		'tesla'            => array(
+			'label'            => 'Tesla',
+			'title'            => 'Tesla VIN Decoder',
+			'tagline'          => 'Decode any Tesla VIN for free — model, trim, and factory build details.',
+			'meta_description' => 'Free Tesla VIN decoder for buyers in Arizona and across the US. Enter your 17-character VIN to instantly reveal your Tesla\'s model, year, body style, and plant of manufacture.',
+			'sample_vin'       => '5YJ3E1EA1LF123456',
+			'intro'            => 'Model 3, Model Y, Model S, and Model X can be hard to tell apart from a photo alone. A VIN decode confirms the exact model and model year encoded at the factory, whether you\'re shopping in Arizona or anywhere else.',
+		),
+		'mitsubishi'       => array(
+			'label'            => 'Mitsubishi',
+			'title'            => 'Mitsubishi VIN Decoder',
+			'tagline'          => 'Decode any Mitsubishi VIN for free — model, engine, trim, and factory build details.',
+			'meta_description' => 'Free Mitsubishi VIN decoder for buyers in Illinois and across the US. Enter your 17-character VIN to instantly reveal your Mitsubishi\'s model, year, engine, body style, and plant of manufacture.',
+			'sample_vin'       => 'JA4AP3AU1KZ123456',
+			'intro'            => 'Outlander, Eclipse Cross, Mirage — a VIN decode confirms exactly which Mitsubishi model, model year, and engine you\'re looking at, whether you\'re shopping in Illinois or anywhere else in the country.',
+		),
+		'bentley'          => array(
+			'label'            => 'Bentley',
+			'title'            => 'Bentley VIN Decoder',
+			'tagline'          => 'Decode any Bentley VIN for free — model, engine, trim, and factory build details.',
+			'meta_description' => 'Free Bentley VIN decoder for buyers in the United States and Canada. Enter your 17-character VIN to instantly reveal your Bentley\'s model, year, engine, body style, and plant of manufacture.',
+			'sample_vin'       => 'SCBBR9ZA1JC123456',
+			'intro'            => 'A used Bentley Continental or Bentayga listing is a big-ticket decision — a VIN decode gives you an independent, factory-encoded confirmation of model, model year, and engine, whether you\'re buying in Canada or the US.',
+		),
+		'harley-davidson'  => array(
+			'label'            => 'Harley-Davidson',
+			'title'            => 'Harley-Davidson VIN Decoder',
+			'tagline'          => 'Decode any Harley-Davidson VIN for free — model, engine, and factory build details.',
+			'meta_description' => 'Free Harley-Davidson VIN decoder for riders in Wisconsin and across the US. Enter your 17-character VIN to instantly reveal your Harley-Davidson\'s model, year, engine, and plant of manufacture.',
+			'sample_vin'       => '1HD1KB4197Y123456',
+			'intro'            => 'From a Sportster to a Road King, Harley-Davidson\'s model lines — built at plants including its home state of Wisconsin — vary a lot year to year. A VIN decode confirms the factory-encoded model, model year, and engine before you buy.',
+		),
+		'triumph'          => array(
+			'label'            => 'Triumph',
+			'title'            => 'Triumph VIN Decoder',
+			'tagline'          => 'Decode any Triumph motorcycle VIN for free — model, engine, and factory build details.',
+			'meta_description' => 'Free Triumph motorcycle VIN decoder for riders in Australia and worldwide. Enter your 17-character VIN to instantly reveal your Triumph\'s model, year, engine, and plant of manufacture.',
+			'sample_vin'       => 'SMTA11EK9GT123456',
+			'intro'            => 'Bonneville, Street Triple, Tiger — Triumph\'s model range shares styling cues but differs a lot in engine and specification. A VIN decode confirms exactly what you\'re looking at, whether you\'re shopping in Australia or elsewhere.',
+		),
+		'yamaha'           => array(
+			'label'            => 'Yamaha',
+			'title'            => 'Yamaha VIN Decoder',
+			'tagline'          => 'Decode any Yamaha motorcycle VIN for free — model, engine, and factory build details.',
+			'meta_description' => 'Free Yamaha motorcycle VIN decoder for riders in New Zealand and worldwide. Enter your 17-character VIN to instantly reveal your Yamaha\'s model, year, engine, and plant of manufacture.',
+			'sample_vin'       => 'JYARN23E5GA123456',
+			'intro'            => 'Yamaha\'s motorcycle lineup — from the YZF-R series to cruisers — spans many model years and engine displacements. A VIN decode confirms the factory-encoded model and year, whether you\'re shopping in New Zealand or anywhere else.',
+		),
+		'kawasaki'         => array(
+			'label'            => 'Kawasaki',
+			'title'            => 'Kawasaki VIN Decoder',
+			'tagline'          => 'Decode any Kawasaki motorcycle VIN for free — model, engine, and factory build details.',
+			'meta_description' => 'Free Kawasaki motorcycle VIN decoder for riders in Ireland and worldwide. Enter your 17-character VIN to instantly reveal your Kawasaki\'s model, year, engine, and plant of manufacture.',
+			'sample_vin'       => 'JKAZX2N15GA123456',
+			'intro'            => 'Ninja, Z-series, Versys — Kawasaki\'s range varies significantly by engine displacement and model year. A VIN decode settles which one you\'re looking at, whether you\'re shopping in Ireland or elsewhere.',
+		),
+		'ktm'              => array(
+			'label'            => 'KTM',
+			'title'            => 'KTM VIN Decoder',
+			'tagline'          => 'Decode any KTM motorcycle VIN for free — model, engine, and factory build details.',
+			'meta_description' => 'Free KTM motorcycle VIN decoder for riders in Colorado and worldwide. Enter your 17-character VIN to instantly reveal your KTM\'s model, year, engine, and plant of manufacture.',
+			'sample_vin'       => 'VBKJA1401GM123456',
+			'intro'            => 'KTM\'s Duke, Adventure, and off-road model lines vary widely in displacement and specification. A VIN decode confirms exactly which model and model year you\'re looking at, whether you\'re shopping in Colorado or elsewhere.',
+		),
+		'suzuki'           => array(
+			'label'            => 'Suzuki',
+			'title'            => 'Suzuki VIN Decoder',
+			'tagline'          => 'Decode any Suzuki motorcycle VIN for free — model, engine, and factory build details.',
+			'meta_description' => 'Free Suzuki motorcycle VIN decoder for riders in Nevada and worldwide. Enter your 17-character VIN to instantly reveal your Suzuki\'s model, year, engine, and plant of manufacture.',
+			'sample_vin'       => 'JS1GT7DA1G2123456',
+			'intro'            => 'GSX-R, V-Strom, Boulevard — Suzuki\'s motorcycle range spans many engine sizes and generations. A VIN decode confirms the factory-encoded model and model year, whether you\'re shopping in Nevada or elsewhere.',
+		),
 	);
 }
 
@@ -239,7 +399,7 @@ function vindecoder_document_title_parts( $title_parts ) {
 			$title_parts['title'] = $brand['title'];
 		}
 	} elseif ( is_front_page() && ! is_paged() ) {
-		$title_parts['title'] = __( 'Free VIN Decoder — BMW, Audi, Porsche, Lexus & Range Rover', 'vindecodertheme' );
+		$title_parts['title'] = __( 'Free VIN Decoder — BMW, Mercedes, Toyota, Ford & 21 More Brands', 'vindecodertheme' );
 	}
 	return $title_parts;
 }
@@ -567,6 +727,9 @@ function vindecoder_get_active_affiliate_links() {
 function vindecoder_get_default_pages() {
 	$today = esc_html( date_i18n( get_option( 'date_format' ) ) );
 
+	$brand_labels     = wp_list_pluck( vindecoder_get_brands(), 'label' );
+	$brand_list_human = implode( ', ', array_slice( $brand_labels, 0, -1 ) ) . ', or ' . end( $brand_labels );
+
 	$pages = array(
 		'privacy-policy' => array(
 			'title'   => __( 'Privacy Policy', 'vindecodertheme' ),
@@ -584,7 +747,7 @@ function vindecoder_get_default_pages() {
 			'title'   => __( 'Terms of Service', 'vindecodertheme' ),
 			'content' => "<p><em>Last updated: {$today}</em></p>
 <h2>1. Description of Service</h2>
-<p>This Site provides free VIN decoding tools that query the publicly available NHTSA vPIC database. We are not affiliated with BMW, Audi, Porsche, Lexus, Land Rover/Range Rover, or any other vehicle manufacturer named on this Site; all trademarks belong to their respective owners and are used only to describe the vehicles our tool decodes.</p>
+<p>This Site provides free VIN decoding tools that query the publicly available NHTSA vPIC database. We are not affiliated with {$brand_list_human}, or any other vehicle manufacturer named on this Site; all trademarks belong to their respective owners and are used only to describe the vehicles our tool decodes.</p>
 <h2>2. No Warranty on Accuracy</h2>
 <p>Decode results are sourced from NHTSA's public vPIC database and are provided \"as is,\" without warranty of completeness or accuracy. Always verify critical details (recalls, title status, accident history) through an official manufacturer, dealer, or paid vehicle history report before making a purchase decision.</p>
 <h2>3. Not a Vehicle History or Title Report</h2>
@@ -600,7 +763,7 @@ function vindecoder_get_default_pages() {
 			'title'   => __( 'Disclaimer', 'vindecodertheme' ),
 			'content' => "<p><em>Last updated: {$today}</em></p>
 <h2>Not an Official Manufacturer or DMV Source</h2>
-<p>This Site is an independent tool and is not operated by, affiliated with, or endorsed by BMW, Audi, Porsche, Lexus, Land Rover, the NHTSA, or any DMV. Decode results come from NHTSA's public vPIC database, a free federal data source — not from manufacturer build-sheet systems, so factory-installed options and packages are not included.</p>
+<p>This Site is an independent tool and is not operated by, affiliated with, or endorsed by {$brand_list_human}, the NHTSA, or any DMV. Decode results come from NHTSA's public vPIC database, a free federal data source — not from manufacturer build-sheet systems, so factory-installed options and packages are not included.</p>
 <h2>Accuracy Limitations</h2>
 <p>VIN decoding is pattern-based. In rare cases (recalled VIN formats, pre-production vehicles, or data-entry variance at manufacture), a decode may be incomplete or inconsistent with the physical vehicle. Always cross-check critical details against the vehicle's title, registration, or a manufacturer-authorized dealer before a purchase.</p>
 <h2>Not a Substitute for a Vehicle History or Pre-Purchase Inspection</h2>
@@ -660,8 +823,52 @@ function vindecoder_provision_default_pages() {
 	}
 
 	vindecoder_provision_menus( $page_ids );
+	vindecoder_sync_brand_menu_items( $page_ids );
 }
 add_action( 'after_switch_theme', 'vindecoder_provision_default_pages' );
+
+/**
+ * vindecoder_provision_menus() only builds the primary/footer menus from
+ * scratch the first time (has_nav_menu() check), so a brand added later
+ * (like this update's 20 new brands) would silently exist as a page but
+ * never appear in an already-existing site's nav menu. This runs every
+ * time and just appends any brand page that isn't already a menu item —
+ * safe to run repeatedly, never duplicates or removes anything.
+ */
+function vindecoder_sync_brand_menu_items( $page_ids ) {
+	$locations = get_theme_mod( 'nav_menu_locations', array() );
+	if ( empty( $locations['primary'] ) ) {
+		return;
+	}
+	$menu_id = $locations['primary'];
+	$items   = wp_get_nav_menu_items( $menu_id );
+	if ( ! $items ) {
+		return;
+	}
+
+	$existing_page_ids = array();
+	foreach ( $items as $item ) {
+		if ( 'post_type' === $item->type && 'page' === $item->object ) {
+			$existing_page_ids[] = (int) $item->object_id;
+		}
+	}
+
+	foreach ( vindecoder_get_brands() as $slug => $brand ) {
+		if ( empty( $page_ids[ $slug ] ) || in_array( (int) $page_ids[ $slug ], $existing_page_ids, true ) ) {
+			continue;
+		}
+		wp_update_nav_menu_item(
+			$menu_id,
+			0,
+			array(
+				'menu-item-object-id' => $page_ids[ $slug ],
+				'menu-item-object'    => 'page',
+				'menu-item-type'      => 'post_type',
+				'menu-item-status'    => 'publish',
+			)
+		);
+	}
+}
 
 function vindecoder_provision_menus( $page_ids ) {
 	$locations = get_theme_mod( 'nav_menu_locations', array() );
