@@ -21,7 +21,7 @@ function vindecoder_get_default_posts() {
 	return array(
 
 		'bmw-vin-decoder-chassis-code' => array(
-			'title'   => 'How to Read a BMW Chassis Code From Your VIN',
+			'title'   => 'BMW VIN Decoder Guide: How to Read Your Chassis Code',
 			'excerpt' => 'BMW enthusiasts talk in chassis codes — E46, F30, G20 — more than model names. Here\'s where that code actually lives in your VIN, how to pull it out yourself, and what to actually look for in a free BMW VIN decoder.',
 			// Must mirror the "A Few Questions I Get Asked About This" section
 			// in 'content' below word-for-word — used for FAQPage schema.
