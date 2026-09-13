@@ -28,8 +28,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<p class="vd-footer-tagline"><?php esc_html_e( '17 characters in. The full story out.', 'vindecodertheme' ); ?></p>
 			</div>
 
-			<div id="footer-cars">
-				<div class="vd-footer-heading"><?php esc_html_e( 'Cars', 'vindecodertheme' ); ?></div>
+			<details class="vd-footer-accordion" id="footer-cars">
+				<summary class="vd-footer-heading"><?php esc_html_e( 'Cars', 'vindecodertheme' ); ?></summary>
 				<ul class="vd-footer-links">
 					<?php foreach ( vindecoder_get_brand_slugs_by_category( 'car' ) as $slug ) : ?>
 						<?php $vd_brand_page = get_page_by_path( $slug ); ?>
@@ -38,10 +38,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php endif; ?>
 					<?php endforeach; ?>
 				</ul>
-			</div>
+			</details>
 
-			<div id="footer-bikes">
-				<div class="vd-footer-heading"><?php esc_html_e( 'Bikes', 'vindecodertheme' ); ?></div>
+			<details class="vd-footer-accordion" id="footer-bikes">
+				<summary class="vd-footer-heading"><?php esc_html_e( 'Bikes', 'vindecodertheme' ); ?></summary>
 				<ul class="vd-footer-links">
 					<?php foreach ( vindecoder_get_brand_slugs_by_category( 'bike' ) as $slug ) : ?>
 						<?php $vd_brand_page = get_page_by_path( $slug ); ?>
@@ -50,11 +50,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php endif; ?>
 					<?php endforeach; ?>
 				</ul>
-			</div>
+			</details>
 
 			<div>
 				<div class="vd-footer-heading"><?php esc_html_e( 'Legal', 'vindecodertheme' ); ?></div>
-				<ul class="vd-footer-links">
+				<ul class="vd-footer-links vd-footer-links--static">
 					<?php $vd_privacy_id = (int) get_option( 'wp_page_for_privacy_policy' ); ?>
 					<li><a href="<?php echo esc_url( $vd_privacy_id ? get_permalink( $vd_privacy_id ) : home_url( '/privacy-policy/' ) ); ?>"><?php esc_html_e( 'Privacy Policy', 'vindecodertheme' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/terms-of-service/' ) ); ?>"><?php esc_html_e( 'Terms of Service', 'vindecodertheme' ); ?></a></li>

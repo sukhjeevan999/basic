@@ -34,7 +34,7 @@ function vindecoder_get_brands() {
 		'bmw'         => array(
 			'label'             => 'BMW',
 			'category'         => "car",
-			'title'             => 'BMW VIN Decoder',
+			'title'             => 'Free BMW VIN Decoder',
 			'tagline'           => 'Decode any BMW VIN for free — model, chassis era, engine, and factory build details.',
 			'meta_description'  => 'Free BMW VIN decoder. Enter your 17-character VIN to instantly reveal your BMW\'s model, year, engine, body style, and plant of manufacture — powered by the official NHTSA database.',
 			'sample_vin'        => 'WBA5A5C50FD509130',
@@ -43,7 +43,7 @@ function vindecoder_get_brands() {
 		'audi'        => array(
 			'label'             => 'Audi',
 			'category'         => "car",
-			'title'             => 'Audi VIN Decoder',
+			'title'             => 'Free Audi VIN Decoder',
 			'tagline'           => 'Decode any Audi VIN for free — model, engine, trim, and factory build details.',
 			'meta_description'  => 'Free Audi VIN decoder. Enter your 17-character VIN to instantly reveal your Audi\'s model, year, engine, body style, and plant of manufacture — powered by the official NHTSA database.',
 			'sample_vin'        => 'WAUZZZ4GZDN018595',
@@ -52,7 +52,7 @@ function vindecoder_get_brands() {
 		'porsche'     => array(
 			'label'             => 'Porsche',
 			'category'         => "car",
-			'title'             => 'Porsche VIN Decoder',
+			'title'             => 'Free Porsche VIN Decoder',
 			'tagline'           => 'Decode any Porsche VIN for free — model, engine, trim, and factory build details.',
 			'meta_description'  => 'Free Porsche VIN decoder. Enter your 17-character VIN to instantly reveal your Porsche\'s model, year, engine, body style, and plant of manufacture — powered by the official NHTSA database.',
 			'sample_vin'        => 'WP0AA2A99JS156123',
@@ -61,7 +61,7 @@ function vindecoder_get_brands() {
 		'lexus'       => array(
 			'label'             => 'Lexus',
 			'category'         => "car",
-			'title'             => 'Lexus VIN Decoder',
+			'title'             => 'Free Lexus VIN Decoder',
 			'tagline'           => 'Decode any Lexus VIN for free — model, engine, trim, and factory build details.',
 			'meta_description'  => 'Free Lexus VIN decoder. Enter your 17-character VIN to instantly reveal your Lexus\'s model, year, engine, body style, and plant of manufacture — powered by the official NHTSA database.',
 			'sample_vin'        => 'JTHBK1EG8E2123456',
@@ -71,7 +71,7 @@ function vindecoder_get_brands() {
 			'label'             => 'Range Rover',
 			'category'         => "car",
 			'nhtsa_make'        => 'Land Rover',
-			'title'             => 'Range Rover VIN Decoder',
+			'title'             => 'Free Range Rover VIN Decoder',
 			'tagline'           => 'Decode any Range Rover VIN for free — model, engine, trim, and factory build details.',
 			'meta_description'  => 'Free Range Rover VIN decoder. Enter your 17-character VIN to instantly reveal your Range Rover\'s model, year, engine, body style, and plant of manufacture — powered by the official NHTSA database.',
 			'sample_vin'        => 'SALGS2SE6JA123456',
@@ -80,7 +80,7 @@ function vindecoder_get_brands() {
 		'mercedes-benz'    => array(
 			'label'            => 'Mercedes-Benz',
 			'category'         => "car",
-			'title'            => 'Mercedes-Benz VIN Decoder',
+			'title'            => 'Free Mercedes-Benz VIN Decoder',
 			'tagline'          => 'Decode any Mercedes-Benz VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Mercedes-Benz VIN decoder for buyers and owners across California and the rest of the US. Enter your 17-character VIN to instantly reveal your Mercedes-Benz\'s model, year, engine, body style, and plant of manufacture.',
 			'sample_vin'       => 'WDDGF4HB1CA123456',
@@ -89,7 +89,7 @@ function vindecoder_get_brands() {
 		'toyota'           => array(
 			'label'            => 'Toyota',
 			'category'         => "car",
-			'title'            => 'Toyota VIN Decoder',
+			'title'            => 'Free Toyota VIN Decoder',
 			'tagline'          => 'Decode any Toyota VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Toyota VIN decoder for used-car buyers in Texas and nationwide. Enter your 17-character VIN to instantly reveal your Toyota\'s model, year, engine, body style, and plant of manufacture.',
 			'sample_vin'       => '4T1BF1FK5CU123456',
@@ -98,7 +98,7 @@ function vindecoder_get_brands() {
 		'honda'            => array(
 			'label'            => 'Honda',
 			'category'         => "car",
-			'title'            => 'Honda VIN Decoder',
+			'title'            => 'Free Honda VIN Decoder',
 			'tagline'          => 'Decode any Honda VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Honda VIN decoder for buyers in Florida and across the US. Enter your 17-character VIN to instantly reveal your Honda\'s model, year, engine, body style, and plant of manufacture.',
 			'sample_vin'       => '1HGCM82633A123456',
@@ -107,7 +107,7 @@ function vindecoder_get_brands() {
 		'ford'             => array(
 			'label'            => 'Ford',
 			'category'         => "car",
-			'title'            => 'Ford VIN Decoder',
+			'title'            => 'Free Ford VIN Decoder',
 			'tagline'          => 'Decode any Ford VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Ford VIN decoder for buyers in Michigan and across the US. Enter your 17-character VIN to instantly reveal your Ford\'s model, year, engine, body style, and plant of manufacture.',
 			'sample_vin'       => '1FTFW1ET5EFA23456',
@@ -116,7 +116,7 @@ function vindecoder_get_brands() {
 		'chevrolet'        => array(
 			'label'            => 'Chevrolet',
 			'category'         => "car",
-			'title'            => 'Chevrolet VIN Decoder',
+			'title'            => 'Free Chevrolet VIN Decoder',
 			'tagline'          => 'Decode any Chevrolet VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Chevrolet VIN decoder for buyers in Ohio and across the US. Enter your 17-character VIN to instantly reveal your Chevrolet\'s model, year, engine, body style, and plant of manufacture.',
 			'sample_vin'       => '1G1ZE5ST8JF123456',
@@ -125,7 +125,7 @@ function vindecoder_get_brands() {
 		'jeep'             => array(
 			'label'            => 'Jeep',
 			'category'         => "car",
-			'title'            => 'Jeep VIN Decoder',
+			'title'            => 'Free Jeep VIN Decoder',
 			'tagline'          => 'Decode any Jeep VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Jeep VIN decoder for buyers in Pennsylvania and across the US. Enter your 17-character VIN to instantly reveal your Jeep\'s model, year, engine, body style, and plant of manufacture.',
 			'sample_vin'       => '1C4RJFAG8FC123456',
@@ -134,7 +134,7 @@ function vindecoder_get_brands() {
 		'kia'              => array(
 			'label'            => 'Kia',
 			'category'         => "car",
-			'title'            => 'Kia VIN Decoder',
+			'title'            => 'Free Kia VIN Decoder',
 			'tagline'          => 'Decode any Kia VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Kia VIN decoder for buyers in Georgia and across the US. Enter your 17-character VIN to instantly reveal your Kia\'s model, year, engine, body style, and plant of manufacture.',
 			'sample_vin'       => '5XYPHDA2XLG123456',
@@ -143,7 +143,7 @@ function vindecoder_get_brands() {
 		'hyundai'          => array(
 			'label'            => 'Hyundai',
 			'category'         => "car",
-			'title'            => 'Hyundai VIN Decoder',
+			'title'            => 'Free Hyundai VIN Decoder',
 			'tagline'          => 'Decode any Hyundai VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Hyundai VIN decoder for buyers in North Carolina and across the US. Enter your 17-character VIN to instantly reveal your Hyundai\'s model, year, engine, body style, and plant of manufacture.',
 			'sample_vin'       => '5NPE24AF4FH123456',
@@ -152,7 +152,7 @@ function vindecoder_get_brands() {
 		'volkswagen'       => array(
 			'label'            => 'Volkswagen',
 			'category'         => "car",
-			'title'            => 'Volkswagen VIN Decoder',
+			'title'            => 'Free Volkswagen VIN Decoder',
 			'tagline'          => 'Decode any Volkswagen VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Volkswagen VIN decoder for buyers in New York and across the US. Enter your 17-character VIN to instantly reveal your Volkswagen\'s model, year, engine, body style, and plant of manufacture.',
 			'sample_vin'       => '3VWD07AJ5EM123456',
@@ -161,7 +161,7 @@ function vindecoder_get_brands() {
 		'volvo'            => array(
 			'label'            => 'Volvo',
 			'category'         => "car",
-			'title'            => 'Volvo VIN Decoder',
+			'title'            => 'Free Volvo VIN Decoder',
 			'tagline'          => 'Decode any Volvo VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Volvo VIN decoder for buyers in Washington state and across the US. Enter your 17-character VIN to instantly reveal your Volvo\'s model, year, engine, body style, and plant of manufacture.',
 			'sample_vin'       => 'YV4A22PK4J1234567',
@@ -170,7 +170,7 @@ function vindecoder_get_brands() {
 		'jaguar'           => array(
 			'label'            => 'Jaguar',
 			'category'         => "car",
-			'title'            => 'Jaguar VIN Decoder',
+			'title'            => 'Free Jaguar VIN Decoder',
 			'tagline'          => 'Decode any Jaguar VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Jaguar VIN decoder for buyers in the United States and United Kingdom. Enter your 17-character VIN to instantly reveal your Jaguar\'s model, year, engine, body style, and plant of manufacture.',
 			'sample_vin'       => 'SAJWA2GE4JMK12345',
@@ -179,7 +179,7 @@ function vindecoder_get_brands() {
 		'tesla'            => array(
 			'label'            => 'Tesla',
 			'category'         => "car",
-			'title'            => 'Tesla VIN Decoder',
+			'title'            => 'Free Tesla VIN Decoder',
 			'tagline'          => 'Decode any Tesla VIN for free — model, trim, and factory build details.',
 			'meta_description' => 'Free Tesla VIN decoder for buyers in Arizona and across the US. Enter your 17-character VIN to instantly reveal your Tesla\'s model, year, body style, and plant of manufacture.',
 			'sample_vin'       => '5YJ3E1EA1LF123456',
@@ -188,7 +188,7 @@ function vindecoder_get_brands() {
 		'mitsubishi'       => array(
 			'label'            => 'Mitsubishi',
 			'category'         => "car",
-			'title'            => 'Mitsubishi VIN Decoder',
+			'title'            => 'Free Mitsubishi VIN Decoder',
 			'tagline'          => 'Decode any Mitsubishi VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Mitsubishi VIN decoder for buyers in Illinois and across the US. Enter your 17-character VIN to instantly reveal your Mitsubishi\'s model, year, engine, body style, and plant of manufacture.',
 			'sample_vin'       => 'JA4AP3AU1KZ123456',
@@ -197,7 +197,7 @@ function vindecoder_get_brands() {
 		'bentley'          => array(
 			'label'            => 'Bentley',
 			'category'         => "car",
-			'title'            => 'Bentley VIN Decoder',
+			'title'            => 'Free Bentley VIN Decoder',
 			'tagline'          => 'Decode any Bentley VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Bentley VIN decoder for buyers in the United States and Canada. Enter your 17-character VIN to instantly reveal your Bentley\'s model, year, engine, body style, and plant of manufacture.',
 			'sample_vin'       => 'SCBBR9ZA1JC123456',
@@ -206,7 +206,7 @@ function vindecoder_get_brands() {
 		'harley-davidson'  => array(
 			'label'            => 'Harley-Davidson',
 			'category'         => "bike",
-			'title'            => 'Harley-Davidson VIN Decoder',
+			'title'            => 'Free Harley-Davidson VIN Decoder',
 			'tagline'          => 'Decode any Harley-Davidson VIN for free — model, engine, and factory build details.',
 			'meta_description' => 'Free Harley-Davidson VIN decoder for riders in Wisconsin and across the US. Enter your 17-character VIN to instantly reveal your Harley-Davidson\'s model, year, engine, and plant of manufacture.',
 			'sample_vin'       => '1HD1KB4197Y123456',
@@ -215,7 +215,7 @@ function vindecoder_get_brands() {
 		'triumph'          => array(
 			'label'            => 'Triumph',
 			'category'         => "bike",
-			'title'            => 'Triumph VIN Decoder',
+			'title'            => 'Free Triumph VIN Decoder',
 			'tagline'          => 'Decode any Triumph motorcycle VIN for free — model, engine, and factory build details.',
 			'meta_description' => 'Free Triumph motorcycle VIN decoder for riders in Australia and worldwide. Enter your 17-character VIN to instantly reveal your Triumph\'s model, year, engine, and plant of manufacture.',
 			'sample_vin'       => 'SMTA11EK9GT123456',
@@ -224,7 +224,7 @@ function vindecoder_get_brands() {
 		'yamaha'           => array(
 			'label'            => 'Yamaha',
 			'category'         => "bike",
-			'title'            => 'Yamaha VIN Decoder',
+			'title'            => 'Free Yamaha VIN Decoder',
 			'tagline'          => 'Decode any Yamaha motorcycle VIN for free — model, engine, and factory build details.',
 			'meta_description' => 'Free Yamaha motorcycle VIN decoder for riders in New Zealand and worldwide. Enter your 17-character VIN to instantly reveal your Yamaha\'s model, year, engine, and plant of manufacture.',
 			'sample_vin'       => 'JYARN23E5GA123456',
@@ -233,7 +233,7 @@ function vindecoder_get_brands() {
 		'kawasaki'         => array(
 			'label'            => 'Kawasaki',
 			'category'         => "bike",
-			'title'            => 'Kawasaki VIN Decoder',
+			'title'            => 'Free Kawasaki VIN Decoder',
 			'tagline'          => 'Decode any Kawasaki motorcycle VIN for free — model, engine, and factory build details.',
 			'meta_description' => 'Free Kawasaki motorcycle VIN decoder for riders in Ireland and worldwide. Enter your 17-character VIN to instantly reveal your Kawasaki\'s model, year, engine, and plant of manufacture.',
 			'sample_vin'       => 'JKAZX2N15GA123456',
@@ -242,7 +242,7 @@ function vindecoder_get_brands() {
 		'ktm'              => array(
 			'label'            => 'KTM',
 			'category'         => "bike",
-			'title'            => 'KTM VIN Decoder',
+			'title'            => 'Free KTM VIN Decoder',
 			'tagline'          => 'Decode any KTM motorcycle VIN for free — model, engine, and factory build details.',
 			'meta_description' => 'Free KTM motorcycle VIN decoder for riders in Colorado and worldwide. Enter your 17-character VIN to instantly reveal your KTM\'s model, year, engine, and plant of manufacture.',
 			'sample_vin'       => 'VBKJA1401GM123456',
@@ -251,7 +251,7 @@ function vindecoder_get_brands() {
 		'suzuki'           => array(
 			'label'            => 'Suzuki',
 			'category'         => "bike",
-			'title'            => 'Suzuki VIN Decoder',
+			'title'            => 'Free Suzuki VIN Decoder',
 			'tagline'          => 'Decode any Suzuki motorcycle VIN for free — model, engine, and factory build details.',
 			'meta_description' => 'Free Suzuki motorcycle VIN decoder for riders in Nevada and worldwide. Enter your 17-character VIN to instantly reveal your Suzuki\'s model, year, engine, and plant of manufacture.',
 			'sample_vin'       => 'JS1GT7DA1G2123456',

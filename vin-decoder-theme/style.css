@@ -383,10 +383,23 @@ button { cursor: pointer; }
 .vd-footer-desc { color: #9aa9c9; font-size: 0.9rem; max-width: 340px; margin-bottom: var(--vd-space-3); }
 .vd-footer-tagline { color: #5b8cff; font-family: var(--vd-font-heading); font-weight: 700; font-size: 0.92rem; letter-spacing: .01em; }
 .vd-footer-heading { color: #fff; font-size: 0.85rem; text-transform: uppercase; letter-spacing: .04em; margin-bottom: var(--vd-space-3); }
-.vd-footer-links { list-style: none; margin: 0; padding: 0; max-height: 340px; overflow-y: auto; }
+.vd-footer-links { list-style: none; margin: 0; padding: 0; }
 .vd-footer-links li { margin-bottom: var(--vd-space-2); }
 .vd-footer-links a { color: #cfd8ec; font-size: 0.92rem; }
 .vd-footer-links a:hover { color: #fff; }
+
+/* "Cars" / "Bikes" footer columns: collapsed by default, click the
+   heading to reveal that category's full brand list. "Legal" (a plain
+   .vd-footer-heading div, not a <details>) stays always expanded. */
+.vd-footer-accordion { border: none; }
+.vd-footer-accordion summary.vd-footer-heading {
+  cursor: pointer; list-style: none; margin-bottom: var(--vd-space-2);
+  display: flex; align-items: center; justify-content: space-between; gap: var(--vd-space-2);
+}
+.vd-footer-accordion summary::-webkit-details-marker { display: none; }
+.vd-footer-accordion summary::after { content: "+"; font-size: 1.1rem; font-weight: 400; color: #9aa9c9; flex: none; }
+.vd-footer-accordion[open] summary::after { content: "\2212"; }
+.vd-footer-accordion .vd-footer-links { max-height: 300px; overflow-y: auto; margin-top: var(--vd-space-2); }
 .vd-footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: var(--vd-space-6); display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--vd-space-3); font-size: 0.82rem; color: #9aa9c9; }
 .vd-footer-legal-note { max-width: 640px; }
 
