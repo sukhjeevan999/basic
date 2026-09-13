@@ -65,6 +65,34 @@
 		return parts.length ? parts.join( ', ' ) : '';
 	}
 
+	/**
+	 * Some manufacturers run their own free, official "window sticker"
+	 * (Monroney label) lookup by VIN — a PDF with factory options, colors,
+	 * and MSRP that goes beyond what NHTSA's public vPIC data covers.
+	 * These are the manufacturer's own customer-service tools, not a
+	 * public API, so we only ever link out to them (new tab, no
+	 * scraping/embedding) and only for the few brands with a known,
+	 * stable URL pattern. Matched against the DECODED make (not just
+	 * the current page's brand) so it's correct even on a mismatch.
+	 */
+	function buildWindowStickerUrl( result ) {
+		var make = ( result.make || '' ).toUpperCase();
+		var vin = result.vin || '';
+		if ( ! vin ) {
+			return '';
+		}
+		if ( make.indexOf( 'FORD' ) !== -1 || make.indexOf( 'LINCOLN' ) !== -1 ) {
+			return 'https://www.windowsticker.forddirect.com/windowsticker.pdf?vin=' + encodeURIComponent( vin );
+		}
+		if ( [ 'CHEVROLET', 'GMC', 'BUICK', 'CADILLAC' ].some( function ( m ) { return make.indexOf( m ) !== -1; } ) ) {
+			return 'https://cws.gm.com/vs-cws/vehshop/v2/vehicle/windowsticker?vin=' + encodeURIComponent( vin );
+		}
+		if ( [ 'JEEP', 'DODGE', 'RAM', 'CHRYSLER' ].some( function ( m ) { return make.indexOf( m ) !== -1; } ) ) {
+			return 'https://www.chrysler.com/hostd/windowsticker/getWindowStickerPdf.do?vin=' + encodeURIComponent( vin );
+		}
+		return '';
+	}
+
 	function renderVinStrip( vin ) {
 		var strip = document.getElementById( 'vd-vin-strip' );
 		if ( ! strip ) {
@@ -101,6 +129,8 @@
 		var decodeBtn = document.getElementById( 'vd-decode-btn' );
 		var mismatchEl = document.getElementById( 'vd-brand-mismatch' );
 		var toastEl = document.getElementById( 'vd-toast' );
+		var windowStickerLink = document.getElementById( 'vd-window-sticker-link' );
+		var windowStickerNote = document.getElementById( 'vd-window-sticker-note' );
 
 		var config = window.VinDecoderConfig || {};
 
@@ -172,6 +202,18 @@
 				mismatchEl.hidden = false;
 			} else {
 				mismatchEl.hidden = true;
+			}
+
+			if ( windowStickerLink && windowStickerNote ) {
+				var stickerUrl = buildWindowStickerUrl( result );
+				if ( stickerUrl ) {
+					windowStickerLink.href = stickerUrl;
+					windowStickerLink.hidden = false;
+					windowStickerNote.hidden = false;
+				} else {
+					windowStickerLink.hidden = true;
+					windowStickerNote.hidden = true;
+				}
 			}
 
 			resultsEl.hidden = false;

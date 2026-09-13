@@ -89,8 +89,10 @@ get_header();
 			<div class="vd-results-actions">
 				<button type="button" class="vd-btn vd-btn-primary" id="vd-download-pdf"><?php esc_html_e( 'Download as PDF', 'vindecodertheme' ); ?></button>
 				<button type="button" class="vd-btn vd-btn-secondary" id="vd-download-image"><?php esc_html_e( 'Download as Image', 'vindecodertheme' ); ?></button>
+				<a class="vd-btn vd-btn-secondary" id="vd-window-sticker-link" href="#" target="_blank" rel="nofollow noopener" hidden><?php esc_html_e( 'View Official Window Sticker ↗', 'vindecodertheme' ); ?></a>
 				<button type="button" class="vd-btn vd-btn-secondary" id="vd-decode-another"><?php esc_html_e( 'Decode Another VIN', 'vindecodertheme' ); ?></button>
 			</div>
+			<p class="vd-window-sticker-note" id="vd-window-sticker-note" hidden><?php esc_html_e( 'Opens the manufacturer\'s own free lookup in a new tab — not hosted by us, and not available for every VIN or model year.', 'vindecodertheme' ); ?></p>
 		</div>
 
 	</div>

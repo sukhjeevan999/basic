@@ -302,6 +302,7 @@ button { cursor: pointer; }
 .vd-vin-char.is-year { background: #eafaf1; border-color: var(--vd-color-success); color: var(--vd-color-success); }
 
 .vd-results-actions { display: flex; gap: var(--vd-space-3); flex-wrap: wrap; justify-content: center; margin-top: var(--vd-space-8); }
+.vd-window-sticker-note { text-align: center; font-size: 0.82rem; color: var(--vd-color-text-muted); margin: var(--vd-space-3) 0 0; }
 
 /* Static "What is a VIN?" structure diagram (homepage, educational —
    not tied to a live decode). Reuses the .vd-vin-char cell look. */
