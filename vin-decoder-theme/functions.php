@@ -981,6 +981,29 @@ function vindecoder_provision_default_pages() {
 add_action( 'after_switch_theme', 'vindecoder_provision_default_pages' );
 
 /**
+ * Maps a brand slug to the post slug(s) (from inc/default-posts.php)
+ * written specifically about it — shown as a "Related Reading" card
+ * right below the tool on that brand's page (template-vin-decoder.php).
+ * A brand with no matching article yet just shows nothing there.
+ */
+function vindecoder_get_related_post_slugs() {
+	return array(
+		'bmw'             => array( 'bmw-vin-decoder-chassis-code' ),
+		'audi'            => array( 'audi-vin-position-breakdown' ),
+		'ford'            => array( 'ford-vin-decoder-build-sheet' ),
+		'jeep'            => array( 'jeep-vin-decoder-guide' ),
+		'toyota'          => array( 'toyota-vin-code-decoder' ),
+		'porsche'         => array( 'porsche-vin-decoder-guide' ),
+		'harley-davidson' => array( 'harley-davidson-vin-decoder-guide' ),
+		'tesla'           => array( 'tesla-vin-decoder-models' ),
+		'chevrolet'       => array( 'chevrolet-vin-decoder-guide' ),
+		'range-rover'     => array( 'range-rover-vs-land-rover-vin' ),
+		'kia'             => array( 'kia-vs-hyundai-vin-decoder' ),
+		'hyundai'         => array( 'kia-vs-hyundai-vin-decoder' ),
+	);
+}
+
+/**
  * Same never-overwrite-if-it-exists pattern as the default pages above,
  * for the theme's starter blog posts (see inc/default-posts.php). Runs
  * as part of the same provisioning pass, so it's also covered by

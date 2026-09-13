@@ -121,6 +121,35 @@ get_header();
 </section>
 <?php endif; ?>
 
+<?php
+/**
+ * Related blog post(s) for this brand — shown right below the tool.
+ * vindecoder_get_related_post_slugs() maps brand slug => post slug(s);
+ * a brand with no article yet simply shows nothing here.
+ */
+$vd_related_map   = vindecoder_get_related_post_slugs();
+$vd_related_slugs = $vd_related_map[ get_post()->post_name ] ?? array();
+?>
+<?php if ( ! empty( $vd_related_slugs ) ) : ?>
+<section class="vd-content-section" style="padding-top: 0;">
+	<div class="vd-container">
+		<div class="vd-prose">
+			<div class="vd-card" style="background: var(--vd-color-surface-alt);">
+				<h2 style="margin-bottom: var(--vd-space-4);"><?php esc_html_e( 'Related Reading', 'vindecodertheme' ); ?></h2>
+				<?php foreach ( $vd_related_slugs as $vd_related_slug ) : ?>
+					<?php $vd_related_post = get_page_by_path( $vd_related_slug, OBJECT, 'post' ); ?>
+					<?php if ( $vd_related_post instanceof WP_Post ) : ?>
+						<p style="margin-bottom: var(--vd-space-2);">
+							<a href="<?php echo esc_url( get_permalink( $vd_related_post ) ); ?>"><strong><?php echo esc_html( get_the_title( $vd_related_post ) ); ?></strong> →</a>
+						</p>
+					<?php endif; ?>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</div>
+</section>
+<?php endif; ?>
+
 <section class="vd-content-section">
 	<div class="vd-container">
 		<div class="vd-prose">
