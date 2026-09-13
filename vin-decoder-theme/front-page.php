@@ -29,6 +29,7 @@ get_header();
 					<?php $vd_page = $brand ? get_page_by_path( $slug ) : null; ?>
 					<?php if ( $vd_page instanceof WP_Post ) : ?>
 						<a class="vd-brand-card" href="<?php echo esc_url( get_permalink( $vd_page ) ); ?>">
+							<span class="vd-brand-icon"><?php echo vindecoder_get_category_icon_svg( $brand['category'] ?? 'car' ); ?></span>
 							<div class="vd-brand-name"><?php echo esc_html( $brand['label'] ); ?></div>
 							<div class="vd-brand-cta"><?php esc_html_e( 'Decode a', 'vindecodertheme' ); ?> <?php echo esc_html( $brand['label'] ); ?> <?php esc_html_e( 'VIN →', 'vindecodertheme' ); ?></div>
 						</a>

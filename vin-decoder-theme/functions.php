@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * same URL. Forgetting to bump this is why a real, correct code change
  * can still show up broken/unstyled on the live site.
  */
-define( 'VINDECODER_VERSION', '1.2.0' );
+define( 'VINDECODER_VERSION', '1.3.0' );
 
 /**
  * ==========================================================================
@@ -305,6 +305,22 @@ function vindecoder_get_brand_slugs_by_category( $category ) {
 		}
 	}
 	return $slugs;
+}
+
+/**
+ * A small generic car/motorcycle line icon for a brand's category.
+ * Deliberately generic rather than an actual manufacturer logo — brand
+ * logos (the BMW roundel, Audi rings, etc.) are registered trademarks,
+ * and displaying them on a decoder tool that isn't licensed by those
+ * manufacturers risks a trademark/passing-off problem. A plain vehicle
+ * icon carries no such risk and still visually distinguishes cars from
+ * motorcycles. Echo-ready (static, trusted markup — not user input).
+ */
+function vindecoder_get_category_icon_svg( $category ) {
+	if ( 'bike' === $category ) {
+		return '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="5.5" cy="17.5" r="3.5" stroke="currentColor" stroke-width="1.6"/><circle cx="18.5" cy="17.5" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 17.5 9 10h5l1.5 3M9 10 7.5 7h-2M14 10l2 4h2.5M11.5 14h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+	}
+	return '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3.5 16v-2.5L5 9.8A2 2 0 0 1 6.9 8.5h10.2A2 2 0 0 1 19 9.8l1.5 3.7V16" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3.5 16h17M7 8.5l1-3h8l1 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="16.5" r="1.8" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="16.5" r="1.8" stroke="currentColor" stroke-width="1.6"/></svg>';
 }
 
 /**
