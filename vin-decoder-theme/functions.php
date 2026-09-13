@@ -22,12 +22,14 @@ require_once get_template_directory() . '/inc/default-posts.php';
 define( 'VINDECODER_VERSION', '1.8.0' );
 
 /**
- * Bump this whenever vindecoder_get_default_pages() adds/changes a
- * default page (About, Privacy, etc.) or the menu structure changes.
- * See vindecoder_maybe_reprovision() below — this is what makes a new
- * default page appear automatically without a manual theme reactivation.
+ * Bump this whenever vindecoder_get_default_pages()/get_default_posts()
+ * adds, removes, or edits an entry, or the menu structure changes — this
+ * is a one-shot gate (see vindecoder_maybe_reprovision() below), so once
+ * it's run at a given number it won't run again at that same number even
+ * if a page/post was since deleted on the live site. Forgetting to bump
+ * this is exactly why a manually-deleted post can fail to come back.
  */
-define( 'VINDECODER_PROVISION_VERSION', '4' );
+define( 'VINDECODER_PROVISION_VERSION', '5' );
 
 /**
  * ==========================================================================
