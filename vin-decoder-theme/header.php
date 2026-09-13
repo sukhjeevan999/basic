@@ -56,8 +56,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<div class="vd-header-actions">
 			<button type="button" class="vd-theme-toggle" id="vd-theme-toggle" aria-label="<?php esc_attr_e( 'Toggle dark mode', 'vindecodertheme' ); ?>">
-				<svg class="vd-theme-icon vd-theme-icon-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 2.5v2M12 19.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.5 12h2M19.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
-				<svg class="vd-theme-icon vd-theme-icon-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/></svg>
+				<svg class="vd-theme-icon vd-theme-icon-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 2.5v2M12 19.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.5 12h2M19.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+				<svg class="vd-theme-icon vd-theme-icon-moon" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/></svg>
 			</button>
 
 			<button type="button" class="vd-nav-toggle" id="vd-nav-toggle" aria-controls="vd-primary-nav" aria-expanded="false">

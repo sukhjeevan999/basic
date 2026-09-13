@@ -53,7 +53,7 @@
 			toggleBtn.className = 'vd-submenu-toggle';
 			toggleBtn.setAttribute( 'aria-expanded', 'false' );
 			toggleBtn.setAttribute( 'aria-label', 'Show submenu' );
-			toggleBtn.innerHTML = '<svg viewBox="0 0 12 8" fill="none" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+			toggleBtn.innerHTML = '<svg width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 			parentLink.insertAdjacentElement( 'afterend', toggleBtn );
 
 			toggleBtn.addEventListener( 'click', function ( event ) {

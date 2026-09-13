@@ -9,7 +9,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-define( 'VINDECODER_VERSION', '1.0.0' );
+/**
+ * Bump this on every CSS/JS change. It's appended as ?ver=... on every
+ * enqueued stylesheet/script, which is what forces browsers AND any
+ * server-side cache (Hostinger/LiteSpeed, a caching plugin, etc.) to
+ * fetch the new file instead of serving a stale cached copy under the
+ * same URL. Forgetting to bump this is why a real, correct code change
+ * can still show up broken/unstyled on the live site.
+ */
+define( 'VINDECODER_VERSION', '1.1.0' );
 
 /**
  * ==========================================================================
