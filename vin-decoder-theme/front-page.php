@@ -85,6 +85,41 @@ get_header();
 
 			<p><?php esc_html_e( 'Every decoder on this site reads exactly this structure against the free public NHTSA vPIC database and hands you back a plain-English summary — no manual lookup tables, no guesswork.', 'vindecodertheme' ); ?></p>
 
+			<h2><?php esc_html_e( 'Where to Find Your VIN', 'vindecodertheme' ); ?></h2>
+			<p><?php esc_html_e( 'No VIN handy? It\'s stamped or printed in a few standard spots on every vehicle — here are the three easiest to check:', 'vindecodertheme' ); ?></p>
+
+			<div class="vd-vin-locator">
+				<svg class="vd-vin-locator-svg" viewBox="0 0 560 220" role="img" aria-label="<?php esc_attr_e( 'Side-view car diagram with 3 numbered VIN locations: the engine bay, the dashboard visible through the windshield, and the driver\'s door jamb.', 'vindecodertheme' ); ?>">
+					<line x1="40" y1="182" x2="540" y2="182" stroke="var(--vd-color-border)" stroke-width="1.5"/>
+					<path d="M50,182 C50,160 55,145 72,138 L148,116 C165,72 202,46 235,46 L345,46 C372,46 392,62 402,88 L468,124 C490,132 520,146 520,182 Z" fill="var(--vd-color-surface-alt)" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+					<path d="M150,116 L172,80 Q200,58 235,58 L345,58 Q368,58 385,80 L402,110" fill="none" stroke="currentColor" stroke-width="1.6"/>
+					<line x1="272" y1="58" x2="272" y2="182" stroke="currentColor" stroke-width="1.6"/>
+					<circle cx="135" cy="182" r="26" fill="var(--vd-color-surface)" stroke="currentColor" stroke-width="2"/>
+					<circle cx="135" cy="182" r="10" fill="var(--vd-color-surface-alt)" stroke="currentColor" stroke-width="1.6"/>
+					<circle cx="440" cy="182" r="26" fill="var(--vd-color-surface)" stroke="currentColor" stroke-width="2"/>
+					<circle cx="440" cy="182" r="10" fill="var(--vd-color-surface-alt)" stroke="currentColor" stroke-width="1.6"/>
+					<g class="vd-vin-locator-pin">
+						<circle cx="100" cy="130" r="14"/>
+						<text x="100" y="135">1</text>
+					</g>
+					<g class="vd-vin-locator-pin">
+						<circle cx="190" cy="95" r="14"/>
+						<text x="190" y="100">2</text>
+					</g>
+					<g class="vd-vin-locator-pin">
+						<circle cx="285" cy="150" r="14"/>
+						<text x="285" y="155">3</text>
+					</g>
+				</svg>
+
+				<ol class="vd-vin-locator-legend">
+					<li><span class="vd-vin-locator-num">1</span><div><strong><?php esc_html_e( 'Engine bay', 'vindecodertheme' ); ?></strong> — <?php esc_html_e( 'open the hood; it\'s stamped on the front of the engine block or the firewall.', 'vindecodertheme' ); ?></div></li>
+					<li><span class="vd-vin-locator-num">2</span><div><strong><?php esc_html_e( 'Dashboard', 'vindecodertheme' ); ?></strong> — <?php esc_html_e( 'visible through the windshield from outside, at the base of the driver\'s side corner.', 'vindecodertheme' ); ?></div></li>
+					<li><span class="vd-vin-locator-num">3</span><div><strong><?php esc_html_e( 'Driver\'s door jamb', 'vindecodertheme' ); ?></strong> — <?php esc_html_e( 'on a sticker where the door latches when closed, usually alongside tire and paint codes.', 'vindecodertheme' ); ?></div></li>
+				</ol>
+			</div>
+			<p><?php esc_html_e( 'You\'ll also find it printed on the vehicle\'s title, registration, and insurance card.', 'vindecodertheme' ); ?></p>
+
 			<h2><?php esc_html_e( 'What a VIN Decode Actually Tells You', 'vindecodertheme' ); ?></h2>
 			<p><?php esc_html_e( 'Every vehicle\'s 17-character Vehicle Identification Number encodes real factory data: the manufacturer, model, model year, body style, engine, and the plant where it was built. Our decoders read that structure using the free public NHTSA vPIC database — the same reference data used by insurers, DMVs, and dealers across the United States, and by used-car shoppers as far as the United Kingdom, Canada, and Australia — and turn it into a plain-English summary in seconds.', 'vindecodertheme' ); ?></p>
 			<p><?php esc_html_e( 'This is not a vehicle history report. It won\'t tell you about accidents, title status, or prior owners — for that you\'ll want a dedicated history report service. What it will tell you, independently of what any seller or listing claims, is exactly what the vehicle was built as.', 'vindecodertheme' ); ?></p>

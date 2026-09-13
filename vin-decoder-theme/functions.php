@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * same URL. Forgetting to bump this is why a real, correct code change
  * can still show up broken/unstyled on the live site.
  */
-define( 'VINDECODER_VERSION', '1.3.0' );
+define( 'VINDECODER_VERSION', '1.4.0' );
 
 /**
  * ==========================================================================

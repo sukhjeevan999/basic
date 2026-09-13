@@ -316,6 +316,21 @@ button { cursor: pointer; }
 .vd-vin-diagram-group.is-vis .vd-vin-char { background: #eafaf1; border-color: var(--vd-color-success); color: var(--vd-color-success); }
 .vd-vin-diagram-group.is-vis .vd-vin-diagram-label { color: var(--vd-color-success); }
 
+/* "Where to Find Your VIN" car diagram — a generic side-profile
+   illustration (not any real make/model) with 3 numbered pins. */
+.vd-vin-locator { display: flex; flex-wrap: wrap; align-items: center; gap: var(--vd-space-8); margin: var(--vd-space-6) 0; }
+.vd-vin-locator-svg { width: 100%; max-width: 340px; flex: 1 1 300px; color: var(--vd-color-text-muted); }
+.vd-vin-locator-pin circle { fill: var(--vd-color-accent); stroke: var(--vd-color-surface); stroke-width: 2; }
+.vd-vin-locator-pin text { fill: #fff; font-family: var(--vd-font-heading); font-weight: 800; font-size: 15px; text-anchor: middle; }
+.vd-vin-locator-legend { list-style: none; margin: 0; padding: 0; flex: 1 1 260px; }
+ol.vd-vin-locator-legend li { display: flex; gap: var(--vd-space-3); align-items: flex-start; margin-bottom: var(--vd-space-4); max-width: none; }
+.vd-vin-locator-num {
+  flex: none; width: 26px; height: 26px; border-radius: 999px; background: var(--vd-color-accent); color: #fff;
+  font-family: var(--vd-font-heading); font-weight: 800; font-size: 0.85rem;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.vd-vin-locator-legend strong { color: var(--vd-color-text); }
+
 /* ==========================================================================
    7. GUIDE / CONTENT SECTION
    ========================================================================== */
