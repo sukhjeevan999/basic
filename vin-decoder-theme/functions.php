@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * same URL. Forgetting to bump this is why a real, correct code change
  * can still show up broken/unstyled on the live site.
  */
-define( 'VINDECODER_VERSION', '1.7.0' );
+define( 'VINDECODER_VERSION', '1.8.0' );
 
 /**
  * Bump this whenever vindecoder_get_default_pages() adds/changes a
@@ -25,7 +25,7 @@ define( 'VINDECODER_VERSION', '1.7.0' );
  * See vindecoder_maybe_reprovision() below — this is what makes a new
  * default page appear automatically without a manual theme reactivation.
  */
-define( 'VINDECODER_PROVISION_VERSION', '2' );
+define( 'VINDECODER_PROVISION_VERSION', '3' );
 
 /**
  * ==========================================================================
@@ -896,10 +896,10 @@ function vindecoder_get_default_pages() {
 		),
 		'about' => array(
 			'title'   => __( 'About', 'vindecodertheme' ),
-			// Edit the "[Your Name]" bits below (and swap the placeholder
-			// avatar for a real photo, right in the WordPress editor) once
-			// you're ready — the rest of the story is written to be true
-			// for whoever actually built and runs the site.
+			// The [vindecoder_author_box] shortcode below pulls name/photo/
+			// role from Appearance > Customize > About / Author — set those
+			// there rather than editing this HTML. The rest of the story is
+			// written to be true for whoever actually built and runs the site.
 			'content' => '<p><em>' . esc_html__( 'A personal note from the person who built this site.', 'vindecodertheme' ) . '</em></p>
 
 <h2>' . esc_html__( 'Why I Built This', 'vindecodertheme' ) . '</h2>
@@ -908,13 +908,7 @@ function vindecoder_get_default_pages() {
 <p>' . esc_html__( 'So I built it myself. This site pulls straight from NHTSA\'s own public vehicle database — the same records insurers and DMVs use — and shows you exactly what comes back, with nothing hidden behind a paywall. No account, no credit card, no "one free search then pay up." I started with the BMW decoder because that\'s the car I was actually checking that day, then kept adding brands as people asked for their own.', 'vindecodertheme' ) . '</p>
 <p>' . esc_html__( 'It\'s still 100% free and unlimited to use, and I don\'t plan on changing that. If it saved me a headache, I figured it would save someone else one too.', 'vindecodertheme' ) . '</p>
 
-<div class="vd-author-box">
-	<div class="vd-author-avatar" aria-hidden="true">🙂</div>
-	<div class="vd-author-bio">
-		<p class="vd-author-name">[Your Name]</p>
-		<p class="vd-author-role">' . esc_html__( 'Founder', 'vindecodertheme' ) . ', ' . esc_html( get_bloginfo( 'name' ) ) . '</p>
-	</div>
-</div>
+[vindecoder_author_box]
 
 <h2>' . esc_html__( 'What This Site Is (and Isn\'t)', 'vindecodertheme' ) . '</h2>
 <p>' . esc_html__( 'It\'s a free VIN decoder. Enter a VIN, get back the factory specs — nothing more, nothing less. It won\'t tell you if a car\'s been in an accident or had its odometer rolled back; for that you need an actual vehicle history report. What it will tell you, independent of anything a seller says, is exactly what the manufacturer built.', 'vindecodertheme' ) . '</p>
@@ -1115,3 +1109,283 @@ function vindecoder_provision_menus( $page_ids ) {
 
 	set_theme_mod( 'nav_menu_locations', $locations );
 }
+
+/**
+ * ==========================================================================
+ * 11. FULL THEME CUSTOMIZATION (Appearance > Customize)
+ * ==========================================================================
+ * Color palette, typography, layout width, header/footer options, and the
+ * About/Author name+photo — all live-editable without touching code. Site
+ * logo, title, and tagline are already covered by WordPress's own built-in
+ * Site Identity panel (custom-logo theme support, added in section 2).
+ *
+ * Defaults below match style.css's hardcoded :root values exactly, so an
+ * untouched install looks pixel-identical to before this section existed —
+ * nothing changes until someone actually edits a setting.
+ */
+function vindecoder_customizer_defaults() {
+	return array(
+		'color_primary'       => '#1d4ed8',
+		'color_accent'        => '#d97a1f',
+		'color_bg_light'      => '#f5f7fa',
+		'color_text_light'    => '#131b2e',
+		'color_bg_dark'       => '#10141f',
+		'color_text_dark'     => '#eef1f8',
+		'heading_font'        => 'Manrope',
+		'body_font'           => 'system',
+		'container_width'     => 'standard',
+		'header_show_tagline' => false,
+		'header_sticky'       => true,
+		'footer_tagline'      => '17 characters in. The full story out.',
+		'author_name'         => '',
+		'author_photo'        => '',
+		'author_bio'          => __( 'Founder', 'vindecodertheme' ),
+	);
+}
+
+function vindecoder_sanitize_checkbox( $checked ) {
+	return ( true === $checked || '1' === $checked || 1 === $checked );
+}
+
+function vindecoder_sanitize_select( $input, $setting ) {
+	$input   = sanitize_text_field( $input );
+	$control = $setting->manager->get_control( $setting->id );
+	$choices = $control ? $control->choices : array();
+	return array_key_exists( $input, $choices ) ? $input : $setting->default;
+}
+
+// ---- Small color-math helpers so a handful of picked colors cascade into
+// a full, coherent palette (hover shades, subtle tints, borders) instead of
+// requiring a dozen confusing individual color fields. ----
+function vindecoder_hex_to_rgb( $hex ) {
+	$hex = ltrim( (string) $hex, '#' );
+	if ( 3 === strlen( $hex ) ) {
+		$hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+	}
+	if ( 6 !== strlen( $hex ) || ! ctype_xdigit( $hex ) ) {
+		return array( 29, 78, 216 ); // Fallback: default primary blue.
+	}
+	return array( hexdec( substr( $hex, 0, 2 ) ), hexdec( substr( $hex, 2, 2 ) ), hexdec( substr( $hex, 4, 2 ) ) );
+}
+
+function vindecoder_mix_color( $hex, $target_hex, $weight ) {
+	$a     = vindecoder_hex_to_rgb( $hex );
+	$b     = vindecoder_hex_to_rgb( $target_hex );
+	$mixed = array();
+	for ( $i = 0; $i < 3; $i++ ) {
+		$mixed[ $i ] = max( 0, min( 255, round( $a[ $i ] + ( $b[ $i ] - $a[ $i ] ) * $weight ) ) );
+	}
+	return sprintf( '#%02x%02x%02x', $mixed[0], $mixed[1], $mixed[2] );
+}
+
+function vindecoder_customize_register_theme_options( $wp_customize ) {
+	$d = vindecoder_customizer_defaults();
+
+	// ---- Color Palette ----
+	$wp_customize->add_section(
+		'vindecoder_colors',
+		array(
+			'title'       => __( 'Color Palette', 'vindecodertheme' ),
+			'description' => __( 'Pick 6 colors and every button, card, badge, and border shade is derived from them automatically — for both light and dark mode.', 'vindecodertheme' ),
+			'priority'    => 40,
+		)
+	);
+	$color_fields = array(
+		'color_primary'    => __( 'Primary Color (buttons, links, accents)', 'vindecodertheme' ),
+		'color_accent'     => __( 'Accent Color (highlights, badges)', 'vindecodertheme' ),
+		'color_bg_light'   => __( 'Light Mode — Background', 'vindecodertheme' ),
+		'color_text_light' => __( 'Light Mode — Text', 'vindecodertheme' ),
+		'color_bg_dark'    => __( 'Dark Mode — Background', 'vindecodertheme' ),
+		'color_text_dark'  => __( 'Dark Mode — Text', 'vindecodertheme' ),
+	);
+	foreach ( $color_fields as $key => $label ) {
+		$id = 'vindecoder_' . $key;
+		$wp_customize->add_setting( $id, array( 'default' => $d[ $key ], 'sanitize_callback' => 'sanitize_hex_color' ) );
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control( $wp_customize, $id, array( 'label' => $label, 'section' => 'vindecoder_colors' ) )
+		);
+	}
+
+	// ---- Typography ----
+	$wp_customize->add_section( 'vindecoder_typography', array( 'title' => __( 'Typography', 'vindecodertheme' ), 'priority' => 41 ) );
+
+	$heading_fonts = array(
+		'Manrope'          => __( 'Manrope (default)', 'vindecodertheme' ),
+		'Poppins'          => 'Poppins',
+		'Montserrat'       => 'Montserrat',
+		'Playfair Display' => 'Playfair Display',
+		'Merriweather'     => 'Merriweather',
+	);
+	$wp_customize->add_setting( 'vindecoder_heading_font', array( 'default' => $d['heading_font'], 'sanitize_callback' => 'vindecoder_sanitize_select' ) );
+	$wp_customize->add_control( 'vindecoder_heading_font', array( 'label' => __( 'Heading Font', 'vindecodertheme' ), 'section' => 'vindecoder_typography', 'type' => 'select', 'choices' => $heading_fonts ) );
+
+	$body_fonts = array(
+		'system'    => __( 'System Default (fastest to load)', 'vindecodertheme' ),
+		'Inter'     => 'Inter',
+		'Roboto'    => 'Roboto',
+		'Open Sans' => 'Open Sans',
+		'Lato'      => 'Lato',
+	);
+	$wp_customize->add_setting( 'vindecoder_body_font', array( 'default' => $d['body_font'], 'sanitize_callback' => 'vindecoder_sanitize_select' ) );
+	$wp_customize->add_control( 'vindecoder_body_font', array( 'label' => __( 'Body Font', 'vindecodertheme' ), 'section' => 'vindecoder_typography', 'type' => 'select', 'choices' => $body_fonts ) );
+
+	// ---- Layout ----
+	$wp_customize->add_section( 'vindecoder_layout', array( 'title' => __( 'Layout', 'vindecodertheme' ), 'priority' => 42 ) );
+	$wp_customize->add_setting( 'vindecoder_container_width', array( 'default' => $d['container_width'], 'sanitize_callback' => 'vindecoder_sanitize_select' ) );
+	$wp_customize->add_control(
+		'vindecoder_container_width',
+		array(
+			'label'   => __( 'Page Content Width', 'vindecodertheme' ),
+			'section' => 'vindecoder_layout',
+			'type'    => 'select',
+			'choices' => array(
+				'narrow'   => __( 'Narrow (960px)', 'vindecodertheme' ),
+				'standard' => __( 'Standard (1120px, default)', 'vindecodertheme' ),
+				'wide'     => __( 'Wide (1320px)', 'vindecodertheme' ),
+			),
+		)
+	);
+
+	// ---- Header ----
+	$wp_customize->add_section( 'vindecoder_header', array( 'title' => __( 'Header', 'vindecodertheme' ), 'priority' => 43 ) );
+	$wp_customize->add_setting( 'vindecoder_header_show_tagline', array( 'default' => $d['header_show_tagline'], 'sanitize_callback' => 'vindecoder_sanitize_checkbox' ) );
+	$wp_customize->add_control( 'vindecoder_header_show_tagline', array( 'label' => __( 'Show the site tagline next to the logo', 'vindecodertheme' ), 'section' => 'vindecoder_header', 'type' => 'checkbox' ) );
+	$wp_customize->add_setting( 'vindecoder_header_sticky', array( 'default' => $d['header_sticky'], 'sanitize_callback' => 'vindecoder_sanitize_checkbox' ) );
+	$wp_customize->add_control( 'vindecoder_header_sticky', array( 'label' => __( 'Keep the header fixed at the top while scrolling', 'vindecodertheme' ), 'section' => 'vindecoder_header', 'type' => 'checkbox' ) );
+
+	// ---- Footer ----
+	$wp_customize->add_section( 'vindecoder_footer', array( 'title' => __( 'Footer', 'vindecodertheme' ), 'priority' => 44 ) );
+	$wp_customize->add_setting( 'vindecoder_footer_tagline', array( 'default' => $d['footer_tagline'], 'sanitize_callback' => 'sanitize_text_field' ) );
+	$wp_customize->add_control( 'vindecoder_footer_tagline', array( 'label' => __( 'Footer Tagline', 'vindecodertheme' ), 'section' => 'vindecoder_footer', 'type' => 'text' ) );
+
+	// ---- About / Author ----
+	$wp_customize->add_section(
+		'vindecoder_author',
+		array(
+			'title'       => __( 'About / Author', 'vindecodertheme' ),
+			'description' => __( 'Powers the author box on the homepage and the About page — no code editing needed.', 'vindecodertheme' ),
+			'priority'    => 45,
+		)
+	);
+	$wp_customize->add_setting( 'vindecoder_author_name', array( 'default' => $d['author_name'], 'sanitize_callback' => 'sanitize_text_field' ) );
+	$wp_customize->add_control( 'vindecoder_author_name', array( 'label' => __( 'Your Name', 'vindecodertheme' ), 'section' => 'vindecoder_author', 'type' => 'text' ) );
+
+	$wp_customize->add_setting( 'vindecoder_author_photo', array( 'default' => $d['author_photo'], 'sanitize_callback' => 'esc_url_raw' ) );
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control( $wp_customize, 'vindecoder_author_photo', array( 'label' => __( 'Your Photo', 'vindecodertheme' ), 'section' => 'vindecoder_author' ) )
+	);
+
+	$wp_customize->add_setting( 'vindecoder_author_bio', array( 'default' => $d['author_bio'], 'sanitize_callback' => 'sanitize_text_field' ) );
+	$wp_customize->add_control( 'vindecoder_author_bio', array( 'label' => __( 'Role (e.g. "Founder")', 'vindecodertheme' ), 'section' => 'vindecoder_author', 'type' => 'text' ) );
+}
+add_action( 'customize_register', 'vindecoder_customize_register_theme_options' );
+
+/**
+ * Renders all customizer choices as one inline <style> block, computing
+ * hover/tint/border shades from the 6 chosen colors. A few small decorative
+ * accents elsewhere in style.css (e.g. the FAQ mismatch-notice tint) are
+ * hardcoded literals rather than variables and won't shift with the
+ * palette — everything else (buttons, links, header, hero, cards, nav,
+ * footer, badges) reads these same custom properties already.
+ */
+function vindecoder_customizer_css() {
+	$d = vindecoder_customizer_defaults();
+
+	$primary     = get_theme_mod( 'vindecoder_color_primary', $d['color_primary'] );
+	$accent      = get_theme_mod( 'vindecoder_color_accent', $d['color_accent'] );
+	$bg_light    = get_theme_mod( 'vindecoder_color_bg_light', $d['color_bg_light'] );
+	$text_light  = get_theme_mod( 'vindecoder_color_text_light', $d['color_text_light'] );
+	$bg_dark     = get_theme_mod( 'vindecoder_color_bg_dark', $d['color_bg_dark'] );
+	$text_dark   = get_theme_mod( 'vindecoder_color_text_dark', $d['color_text_dark'] );
+	$heading_font = get_theme_mod( 'vindecoder_heading_font', $d['heading_font'] );
+	$body_font    = get_theme_mod( 'vindecoder_body_font', $d['body_font'] );
+	$container    = get_theme_mod( 'vindecoder_container_width', $d['container_width'] );
+	$header_sticky = get_theme_mod( 'vindecoder_header_sticky', $d['header_sticky'] );
+
+	$container_px = array( 'narrow' => 960, 'standard' => 1120, 'wide' => 1320 );
+	$container_px = $container_px[ $container ] ?? 1120;
+
+	$primary_dark        = vindecoder_mix_color( $primary, '#000000', 0.18 );
+	$primary_light_light = vindecoder_mix_color( $primary, '#ffffff', 0.88 );
+	$primary_light_dark  = vindecoder_mix_color( $primary, $bg_dark, 0.7 );
+
+	$surface_light     = vindecoder_mix_color( $bg_light, '#ffffff', 0.7 );
+	$surface_alt_light = vindecoder_mix_color( $bg_light, '#ffffff', 0.35 );
+	$border_light      = vindecoder_mix_color( $text_light, $bg_light, 0.82 );
+
+	$surface_dark     = vindecoder_mix_color( $bg_dark, '#ffffff', 0.08 );
+	$surface_alt_dark = vindecoder_mix_color( $bg_dark, '#ffffff', 0.14 );
+	$border_dark      = vindecoder_mix_color( $text_dark, $bg_dark, 0.75 );
+
+	$body_font_stack = 'system' === $body_font
+		? '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
+		: '"' . $body_font . '", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+	?>
+	<style id="vindecoder-customizer-css">
+		:root {
+			--vd-color-primary: <?php echo esc_html( $primary ); ?>;
+			--vd-color-primary-dark: <?php echo esc_html( $primary_dark ); ?>;
+			--vd-color-primary-light: <?php echo esc_html( $primary_light_light ); ?>;
+			--vd-color-accent: <?php echo esc_html( $accent ); ?>;
+			--vd-color-bg: <?php echo esc_html( $bg_light ); ?>;
+			--vd-color-surface: <?php echo esc_html( $surface_light ); ?>;
+			--vd-color-surface-alt: <?php echo esc_html( $surface_alt_light ); ?>;
+			--vd-color-border: <?php echo esc_html( $border_light ); ?>;
+			--vd-color-text: <?php echo esc_html( $text_light ); ?>;
+			--vd-font-heading: "<?php echo esc_html( $heading_font ); ?>", var(--vd-font-base);
+			--vd-font-base: <?php echo esc_html( $body_font_stack ); ?>;
+			--vd-container: <?php echo (int) $container_px; ?>px;
+		}
+		:root[data-vd-theme="dark"] {
+			--vd-color-primary-light: <?php echo esc_html( $primary_light_dark ); ?>;
+			--vd-color-bg: <?php echo esc_html( $bg_dark ); ?>;
+			--vd-color-surface: <?php echo esc_html( $surface_dark ); ?>;
+			--vd-color-surface-alt: <?php echo esc_html( $surface_alt_dark ); ?>;
+			--vd-color-border: <?php echo esc_html( $border_dark ); ?>;
+			--vd-color-text: <?php echo esc_html( $text_dark ); ?>;
+		}
+		<?php if ( ! $header_sticky ) : ?>
+		.vd-site-header { position: static; }
+		<?php endif; ?>
+	</style>
+	<?php
+	if ( 'Manrope' !== $heading_font ) {
+		echo '<link rel="stylesheet" href="' . esc_url( 'https://fonts.googleapis.com/css2?family=' . rawurlencode( $heading_font ) . ':wght@700;800&display=swap' ) . '">' . "\n";
+	}
+	if ( 'system' !== $body_font ) {
+		echo '<link rel="stylesheet" href="' . esc_url( 'https://fonts.googleapis.com/css2?family=' . rawurlencode( $body_font ) . ':wght@400;600&display=swap' ) . '">' . "\n";
+	}
+}
+add_action( 'wp_head', 'vindecoder_customizer_css', 20 );
+
+/**
+ * [vindecoder_author_box] — the photo + name + role box shown on the
+ * homepage and the About page, fully driven by Appearance > Customize >
+ * About / Author. Falls back to a neutral placeholder until a name is set.
+ */
+function vindecoder_author_box_shortcode() {
+	$name  = get_theme_mod( 'vindecoder_author_name', '' );
+	$photo = get_theme_mod( 'vindecoder_author_photo', '' );
+	$role  = get_theme_mod( 'vindecoder_author_bio', __( 'Founder', 'vindecodertheme' ) );
+
+	$display_name = $name ? $name : __( 'Add your name under Appearance → Customize → About / Author', 'vindecodertheme' );
+
+	ob_start();
+	?>
+	<div class="vd-author-box">
+		<div class="vd-author-avatar" aria-hidden="true">
+			<?php if ( $photo ) : ?>
+				<img src="<?php echo esc_url( $photo ); ?>" alt="<?php echo esc_attr( $name ? $name : '' ); ?>">
+			<?php else : ?>
+				🙂
+			<?php endif; ?>
+		</div>
+		<div class="vd-author-bio">
+			<p class="vd-author-name"><?php echo esc_html( $display_name ); ?></p>
+			<p class="vd-author-role"><?php echo esc_html( $role ); ?>, <?php bloginfo( 'name' ); ?></p>
+		</div>
+	</div>
+	<?php
+	return ob_get_clean();
+}
+add_shortcode( 'vindecoder_author_box', 'vindecoder_author_box_shortcode' );

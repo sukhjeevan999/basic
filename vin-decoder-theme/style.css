@@ -138,6 +138,7 @@ button { cursor: pointer; }
 .vd-header-inner { display: flex; align-items: center; justify-content: space-between; padding: var(--vd-space-3) var(--vd-space-4); gap: var(--vd-space-4); }
 .vd-logo { display: flex; align-items: center; gap: var(--vd-space-2); font-family: var(--vd-font-heading); font-size: 1.25rem; font-weight: 800; letter-spacing: -0.01em; color: var(--vd-color-text); }
 .vd-logo:hover { text-decoration: none; color: var(--vd-color-primary); }
+.vd-logo-tagline { display: block; font-size: 0.7rem; font-weight: 500; color: var(--vd-color-text-muted); letter-spacing: 0; }
 .vd-logo-mark { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 9px; background: var(--vd-color-primary); color: #fff; font-size: 0.9rem; font-family: var(--vd-font-mono); font-weight: 700; }
 .vd-header-actions { display: flex; align-items: center; gap: var(--vd-space-3); }
 .vd-nav-toggle { display: none; background: transparent; border: 1px solid var(--vd-color-border); border-radius: var(--vd-radius-sm); padding: 8px 10px; }

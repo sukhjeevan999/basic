@@ -50,7 +50,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php the_custom_logo(); ?>
 			<?php else : ?>
 				<span class="vd-logo-mark" aria-hidden="true">VIN</span>
-				<span><?php bloginfo( 'name' ); ?></span>
+				<span>
+					<?php bloginfo( 'name' ); ?>
+					<?php if ( get_theme_mod( 'vindecoder_header_show_tagline', false ) && get_bloginfo( 'description' ) ) : ?>
+						<span class="vd-logo-tagline"><?php bloginfo( 'description' ); ?></span>
+					<?php endif; ?>
+				</span>
 			<?php endif; ?>
 		</a>
 

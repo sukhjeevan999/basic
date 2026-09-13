@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					);
 					?>
 				</p>
-				<p class="vd-footer-tagline"><?php esc_html_e( '17 characters in. The full story out.', 'vindecodertheme' ); ?></p>
+				<p class="vd-footer-tagline"><?php echo esc_html( get_theme_mod( 'vindecoder_footer_tagline', __( '17 characters in. The full story out.', 'vindecodertheme' ) ) ); ?></p>
 			</div>
 
 			<details class="vd-footer-accordion" id="footer-cars">
