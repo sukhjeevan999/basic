@@ -23,6 +23,26 @@ function vindecoder_get_default_posts() {
 		'bmw-vin-decoder-chassis-code' => array(
 			'title'   => 'How to Read a BMW Chassis Code From Your VIN',
 			'excerpt' => 'BMW enthusiasts talk in chassis codes — E46, F30, G20 — more than model names. Here\'s where that code actually lives in your VIN, how to pull it out yourself, and what to actually look for in a free BMW VIN decoder.',
+			// Must mirror the "A Few Questions I Get Asked About This" section
+			// in 'content' below word-for-word — used for FAQPage schema.
+			'faqs'    => array(
+				array(
+					'question' => 'Does a free BMW VIN decoder work for every BMW model, or just the 3 Series?',
+					'answer'   => 'It should cover the full lineup — 1 Series through 8 Series, X-series SUVs, M models, everything BMW has sold in the U.S. market. The underlying VIN structure is identical across the whole range; only the specific model and engine codes inside positions 4 through 8 change. If a tool only seems to work for one or two models, that\'s a sign it\'s not actually reading the real data.',
+				),
+				array(
+					'question' => 'Is a VIN decoder the same thing as a Carfax or AutoCheck report?',
+					'answer'   => 'No, and this is worth being clear about. A VIN decoder reads the structure of the VIN itself and tells you what the car was built as — model, year, engine, body style. A history report like Carfax pulls from an entirely different set of records — title transfers, accident reports, odometer readings — to tell you what\'s happened to that specific car since it left the factory. They answer different questions, and for anything beyond a very casual purchase, you genuinely want both, not one instead of the other.',
+				),
+				array(
+					'question' => 'Why does the same VIN sometimes decode slightly differently on different free tools?',
+					'answer'   => 'Most legitimate free tools ultimately pull from the same underlying source — NHTSA\'s public vPIC database — so the core facts (model, year, engine) should agree across any tool that\'s actually querying real data. Differences usually show up in formatting or which fields a given tool chooses to display, not in the underlying facts themselves. If two tools give you genuinely contradictory answers for the exact same VIN, that\'s worth double-checking rather than shrugging off.',
+				),
+				array(
+					'question' => 'I have an older BMW — will the VIN still decode correctly?',
+					'answer'   => 'The 17-character VIN standard has been required in the U.S. since 1981, so anything from that point forward should decode. Data completeness can thin out a little on genuinely old or rare models simply because manufacturer submissions to the database were sparser decades ago, but the core structure — and the check-digit validation — works the same regardless of age.',
+				),
+			),
 			'content' => '<p>Two years ago I drove ninety minutes to look at a BMW 3 Series a private seller had listed as "2013, low miles, one owner, immaculate." The photos looked right. The price felt right, if anything a little low for what was described. And then I stood next to it in a gravel parking lot outside a coffee shop, phone in hand, and realized I genuinely couldn\'t tell from the listing alone whether this was the outgoing E90 chassis or the brand-new F30 that had just launched — because "2013" and "3 Series" don\'t actually pin that down on their own. Both were technically on sale that year in different markets. So before I even said hello to the seller, I pulled the VIN off the door jamb, ran it through a decoder right there in the parking lot, and confirmed exactly what I was looking at. Took about fifteen seconds. That fifteen seconds is the entire reason this article exists.</p>
 
 <h2>Why BMW People Talk in Chassis Codes, Not Model Names</h2>

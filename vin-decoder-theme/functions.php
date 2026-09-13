@@ -761,6 +761,72 @@ function vindecoder_brand_schema() {
 add_action( 'wp_head', 'vindecoder_brand_schema' );
 
 /**
+ * Structured data for blog posts (Article + FAQPage). Runs on every
+ * single post, not just the ones seeded from inc/default-posts.php —
+ * Article schema uses standard WP post data either way. FAQPage schema
+ * only appears when the post has an 'faqs' array in that source file,
+ * matched by slug, so it never gets emitted without an actual matching
+ * FAQ section already visible in the post content.
+ */
+function vindecoder_post_schema() {
+	if ( ! is_single() || 'post' !== get_post_type() ) {
+		return;
+	}
+
+	$post_obj      = get_post();
+	$author_name   = get_theme_mod( 'vindecoder_author_name', '' );
+	$article_schema = array(
+		'@context'         => 'https://schema.org',
+		'@type'            => 'Article',
+		'headline'         => get_the_title(),
+		'description'      => get_the_excerpt(),
+		'datePublished'    => get_the_date( DATE_W3C ),
+		'dateModified'     => get_the_modified_date( DATE_W3C ),
+		'author'           => array(
+			'@type' => 'Person',
+			'name'  => $author_name ? $author_name : get_the_author(),
+		),
+		'publisher'        => array(
+			'@type' => 'Organization',
+			'name'  => get_bloginfo( 'name' ),
+		),
+		'mainEntityOfPage' => get_permalink(),
+	);
+
+	echo '<script type="application/ld+json">' . wp_json_encode( $article_schema ) . '</script>' . "\n";
+
+	// FAQPage schema, only if this post's entry in inc/default-posts.php
+	// includes an 'faqs' array — matched by slug, must mirror the visible
+	// on-page FAQ word-for-word.
+	$default_posts = vindecoder_get_default_posts();
+	$post_data     = $default_posts[ $post_obj->post_name ] ?? null;
+	if ( empty( $post_data['faqs'] ) ) {
+		return;
+	}
+
+	$faq_entities = array();
+	foreach ( $post_data['faqs'] as $item ) {
+		$faq_entities[] = array(
+			'@type'          => 'Question',
+			'name'           => $item['question'],
+			'acceptedAnswer' => array(
+				'@type' => 'Answer',
+				'text'  => $item['answer'],
+			),
+		);
+	}
+
+	$faq_schema = array(
+		'@context'   => 'https://schema.org',
+		'@type'      => 'FAQPage',
+		'mainEntity' => $faq_entities,
+	);
+
+	echo '<script type="application/ld+json">' . wp_json_encode( $faq_schema ) . '</script>' . "\n";
+}
+add_action( 'wp_head', 'vindecoder_post_schema' );
+
+/**
  * ==========================================================================
  * 9. AFFILIATE / RESOURCE LINKS (vehicle history reports, etc.)
  * ==========================================================================
