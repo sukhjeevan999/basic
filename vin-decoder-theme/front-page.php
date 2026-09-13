@@ -36,62 +36,53 @@ get_header();
 				<?php endforeach; ?>
 			</div>
 		</div>
-	</div>
-</section>
 
-<?php
-/**
- * "More brands" — every remaining car and motorcycle brand, as a plain
- * link list rather than a full card (keeps the 5 featured cards above
- * the visual focus). Anchor IDs match the Car/Bike nav submenu links
- * (see vindecoder_provision_menus() in functions.php).
- */
-$vd_featured_slugs     = vindecoder_get_featured_brand_slugs();
-$vd_more_car_slugs     = array_diff( vindecoder_get_brand_slugs_by_category( 'car' ), $vd_featured_slugs );
-$vd_more_bike_slugs    = array_diff( vindecoder_get_brand_slugs_by_category( 'bike' ), $vd_featured_slugs );
-?>
-
-<?php if ( ! empty( $vd_more_car_slugs ) ) : ?>
-<section class="vd-content-section" id="car-brands" style="padding-top: 0;">
-	<div class="vd-container">
-		<div class="vd-prose">
-			<h2><?php esc_html_e( 'More Car Brands', 'vindecodertheme' ); ?></h2>
-			<ul class="vd-plain-list">
-				<?php foreach ( $vd_more_car_slugs as $slug ) : ?>
-					<?php $brand = vindecoder_get_brand( $slug ); ?>
-					<?php $vd_page = get_page_by_path( $slug ); ?>
-					<?php if ( $vd_page instanceof WP_Post ) : ?>
-						<li><a href="<?php echo esc_url( get_permalink( $vd_page ) ); ?>"><?php echo esc_html( $brand['title'] ); ?></a></li>
-					<?php endif; ?>
-				<?php endforeach; ?>
-			</ul>
+		<div class="vd-trust-row">
+			<div class="vd-trust-item">
+				<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V5l-8-3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+				<span><?php esc_html_e( 'Official U.S. NHTSA data', 'vindecodertheme' ); ?></span>
+			</div>
+			<div class="vd-trust-item">
+				<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M5 12l4-4M5 12l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				<span><?php esc_html_e( '25 brands, one decoder each', 'vindecodertheme' ); ?></span>
+			</div>
+			<div class="vd-trust-item">
+				<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				<span><?php esc_html_e( '100% free, no sign-up', 'vindecodertheme' ); ?></span>
+			</div>
 		</div>
 	</div>
 </section>
-<?php endif; ?>
-
-<?php if ( ! empty( $vd_more_bike_slugs ) ) : ?>
-<section class="vd-content-section" id="bike-brands" style="padding-top: 0;">
-	<div class="vd-container">
-		<div class="vd-prose">
-			<h2><?php esc_html_e( 'Motorcycle Brands', 'vindecodertheme' ); ?></h2>
-			<ul class="vd-plain-list">
-				<?php foreach ( $vd_more_bike_slugs as $slug ) : ?>
-					<?php $brand = vindecoder_get_brand( $slug ); ?>
-					<?php $vd_page = get_page_by_path( $slug ); ?>
-					<?php if ( $vd_page instanceof WP_Post ) : ?>
-						<li><a href="<?php echo esc_url( get_permalink( $vd_page ) ); ?>"><?php echo esc_html( $brand['title'] ); ?></a></li>
-					<?php endif; ?>
-				<?php endforeach; ?>
-			</ul>
-		</div>
-	</div>
-</section>
-<?php endif; ?>
 
 <section class="vd-content-section">
 	<div class="vd-container">
 		<div class="vd-prose">
+
+			<h2><?php esc_html_e( 'What Is a VIN Number?', 'vindecodertheme' ); ?></h2>
+			<p><?php esc_html_e( 'A Vehicle Identification Number is a fixed 17-character code every manufacturer stamps onto a vehicle at the factory. It\'s not random — three sections of it each encode something specific:', 'vindecodertheme' ); ?></p>
+
+			<div class="vd-vin-diagram">
+				<div class="vd-vin-diagram-group is-wmi">
+					<div class="vd-vin-diagram-chars">
+						<?php foreach ( str_split( 'WMI' ) as $vd_char ) : ?><span class="vd-vin-char"><?php echo esc_html( $vd_char ); ?></span><?php endforeach; ?>
+					</div>
+					<div class="vd-vin-diagram-label"><?php esc_html_e( 'Positions 1–3: manufacturer & country of origin', 'vindecodertheme' ); ?></div>
+				</div>
+				<div class="vd-vin-diagram-group is-vds">
+					<div class="vd-vin-diagram-chars">
+						<?php foreach ( str_split( 'VDSVDS' ) as $vd_char ) : ?><span class="vd-vin-char"><?php echo esc_html( $vd_char ); ?></span><?php endforeach; ?>
+					</div>
+					<div class="vd-vin-diagram-label"><?php esc_html_e( 'Positions 4–9: model, body style, engine, check digit', 'vindecodertheme' ); ?></div>
+				</div>
+				<div class="vd-vin-diagram-group is-vis">
+					<div class="vd-vin-diagram-chars">
+						<?php foreach ( str_split( 'VISVISVIS' ) as $vd_char ) : ?><span class="vd-vin-char"><?php echo esc_html( $vd_char ); ?></span><?php endforeach; ?>
+					</div>
+					<div class="vd-vin-diagram-label"><?php esc_html_e( 'Positions 10–17: model year, assembly plant, serial number', 'vindecodertheme' ); ?></div>
+				</div>
+			</div>
+
+			<p><?php esc_html_e( 'Every decoder on this site reads exactly this structure against the free public NHTSA vPIC database and hands you back a plain-English summary — no manual lookup tables, no guesswork.', 'vindecodertheme' ); ?></p>
 
 			<h2><?php esc_html_e( 'What a VIN Decode Actually Tells You', 'vindecodertheme' ); ?></h2>
 			<p><?php esc_html_e( 'Every vehicle\'s 17-character Vehicle Identification Number encodes real factory data: the manufacturer, model, model year, body style, engine, and the plant where it was built. Our decoders read that structure using the free public NHTSA vPIC database — the same reference data used by insurers, DMVs, and dealers across the United States, and by used-car shoppers as far as the United Kingdom, Canada, and Australia — and turn it into a plain-English summary in seconds.', 'vindecodertheme' ); ?></p>
@@ -121,7 +112,7 @@ $vd_more_bike_slugs    = array_diff( vindecoder_get_brand_slugs_by_category( 'bi
 				</details>
 				<details class="vd-faq-item">
 					<summary><?php esc_html_e( 'Can I decode a motorcycle, RV, or other vehicle type?', 'vindecodertheme' ); ?></summary>
-					<div class="vd-faq-answer"><p><?php esc_html_e( 'This site covers 25 major car and motorcycle brands — 5 featured above, and the rest listed further down this page or under the Car / Bike menu — all decoded through the same free NHTSA database. Pick the closest brand — the decoder will tell you if a VIN doesn\'t match that manufacturer.', 'vindecodertheme' ); ?></p></div>
+					<div class="vd-faq-answer"><p><?php esc_html_e( 'This site covers 25 major car and motorcycle brands — 5 featured above, and the rest under the Car / Bike menu or in the footer — all decoded through the same free NHTSA database. Pick the closest brand — the decoder will tell you if a VIN doesn\'t match that manufacturer.', 'vindecodertheme' ); ?></p></div>
 				</details>
 			</div>
 

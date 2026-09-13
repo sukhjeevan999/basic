@@ -300,6 +300,20 @@ function vindecoder_get_brand_slugs_by_category( $category ) {
 }
 
 /**
+ * The Car/Bike nav groups, each with the menu label and the footer
+ * anchor (id="footer-cars" / id="footer-bikes" in footer.php, present
+ * on every page) its parent link jumps to. Shared by
+ * vindecoder_provision_menus() and vindecoder_fallback_primary_menu()
+ * so both build the exact same structure.
+ */
+function vindecoder_get_nav_category_groups() {
+	return array(
+		'car'  => array( 'title' => __( 'Car', 'vindecodertheme' ), 'anchor' => 'footer-cars' ),
+		'bike' => array( 'title' => __( 'Bike', 'vindecodertheme' ), 'anchor' => 'footer-bikes' ),
+	);
+}
+
+/**
  * ==========================================================================
  * 2. THEME SETUP
  * ==========================================================================
@@ -588,16 +602,12 @@ function vindecoder_fallback_primary_menu() {
 	echo '<ul id="primary-menu">';
 	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Home', 'vindecodertheme' ) . '</a></li>';
 
-	$category_groups = array(
-		'car'  => __( 'Car', 'vindecodertheme' ),
-		'bike' => __( 'Bike', 'vindecodertheme' ),
-	);
-	foreach ( $category_groups as $category => $group_title ) {
+	foreach ( vindecoder_get_nav_category_groups() as $category => $group ) {
 		$brand_slugs = vindecoder_get_brand_slugs_by_category( $category );
 		if ( empty( $brand_slugs ) ) {
 			continue;
 		}
-		echo '<li class="menu-item-has-children"><a href="' . esc_url( home_url( '/#' . $category . '-brands' ) ) . '">' . esc_html( $group_title ) . '</a><ul class="sub-menu">';
+		echo '<li class="menu-item-has-children"><a href="#' . esc_attr( $group['anchor'] ) . '">' . esc_html( $group['title'] ) . '</a><ul class="sub-menu">';
 		foreach ( $brand_slugs as $slug ) {
 			$page = get_page_by_path( $slug );
 			if ( $page instanceof WP_Post ) {
@@ -940,12 +950,7 @@ function vindecoder_provision_menus( $page_ids ) {
 			)
 		);
 
-		$category_groups = array(
-			'car'  => __( 'Car', 'vindecodertheme' ),
-			'bike' => __( 'Bike', 'vindecodertheme' ),
-		);
-
-		foreach ( $category_groups as $category => $group_title ) {
+		foreach ( vindecoder_get_nav_category_groups() as $category => $group ) {
 			$brand_slugs = vindecoder_get_brand_slugs_by_category( $category );
 			if ( empty( $brand_slugs ) ) {
 				continue;
@@ -955,8 +960,8 @@ function vindecoder_provision_menus( $page_ids ) {
 				$menu_id,
 				0,
 				array(
-					'menu-item-title'  => $group_title,
-					'menu-item-url'    => home_url( '/#' . $category . '-brands' ),
+					'menu-item-title'  => $group['title'],
+					'menu-item-url'    => '#' . $group['anchor'],
 					'menu-item-status' => 'publish',
 				)
 			);

@@ -25,18 +25,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 					);
 					?>
 				</p>
+				<p class="vd-footer-tagline"><?php esc_html_e( '17 characters in. The full story out.', 'vindecodertheme' ); ?></p>
 			</div>
 
-			<div>
-				<div class="vd-footer-heading"><?php esc_html_e( 'Decoders', 'vindecodertheme' ); ?></div>
+			<div id="footer-cars">
+				<div class="vd-footer-heading"><?php esc_html_e( 'Cars', 'vindecodertheme' ); ?></div>
 				<ul class="vd-footer-links">
-					<?php foreach ( vindecoder_get_brands() as $slug => $brand ) : ?>
+					<?php foreach ( vindecoder_get_brand_slugs_by_category( 'car' ) as $slug ) : ?>
 						<?php $vd_brand_page = get_page_by_path( $slug ); ?>
 						<?php if ( $vd_brand_page instanceof WP_Post ) : ?>
-							<li><a href="<?php echo esc_url( get_permalink( $vd_brand_page ) ); ?>"><?php echo esc_html( $brand['label'] ); ?></a></li>
+							<li><a href="<?php echo esc_url( get_permalink( $vd_brand_page ) ); ?>"><?php echo esc_html( vindecoder_get_brand( $slug )['label'] ); ?></a></li>
 						<?php endif; ?>
 					<?php endforeach; ?>
-					<li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'Contact Us', 'vindecodertheme' ); ?></a></li>
+				</ul>
+			</div>
+
+			<div id="footer-bikes">
+				<div class="vd-footer-heading"><?php esc_html_e( 'Bikes', 'vindecodertheme' ); ?></div>
+				<ul class="vd-footer-links">
+					<?php foreach ( vindecoder_get_brand_slugs_by_category( 'bike' ) as $slug ) : ?>
+						<?php $vd_brand_page = get_page_by_path( $slug ); ?>
+						<?php if ( $vd_brand_page instanceof WP_Post ) : ?>
+							<li><a href="<?php echo esc_url( get_permalink( $vd_brand_page ) ); ?>"><?php echo esc_html( vindecoder_get_brand( $slug )['label'] ); ?></a></li>
+						<?php endif; ?>
+					<?php endforeach; ?>
 				</ul>
 			</div>
 
@@ -47,6 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<li><a href="<?php echo esc_url( $vd_privacy_id ? get_permalink( $vd_privacy_id ) : home_url( '/privacy-policy/' ) ); ?>"><?php esc_html_e( 'Privacy Policy', 'vindecodertheme' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/terms-of-service/' ) ); ?>"><?php esc_html_e( 'Terms of Service', 'vindecodertheme' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/disclaimer/' ) ); ?>"><?php esc_html_e( 'Disclaimer', 'vindecodertheme' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'Contact Us', 'vindecodertheme' ); ?></a></li>
 				</ul>
 			</div>
 		</div>
