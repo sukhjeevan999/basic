@@ -156,5 +156,21 @@ get_header();
 	</div>
 </section>
 
+<section class="vd-content-section" style="padding-top: 0;">
+	<div class="vd-container">
+		<div class="vd-prose">
+			<h2><?php esc_html_e( 'Why I Built This', 'vindecodertheme' ); ?></h2>
+			<p><?php esc_html_e( 'I was trying to check a VIN on a used BMW and every "free" decoder I found either wanted a credit card first or handed back junk data that didn\'t match the car. So I built this instead — it reads straight from NHTSA\'s own public records, no account, no catch, and I\'ve kept it that way as I\'ve added more brands.', 'vindecodertheme' ); ?></p>
+			<div class="vd-author-box">
+				<div class="vd-author-avatar" aria-hidden="true">🙂</div>
+				<div class="vd-author-bio">
+					<p class="vd-author-name">[Your Name]</p>
+					<p class="vd-author-role"><?php esc_html_e( 'Founder', 'vindecodertheme' ); ?>, <?php bloginfo( 'name' ); ?> — <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>"><?php esc_html_e( 'read the full story', 'vindecodertheme' ); ?> →</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
 <?php
 get_footer();

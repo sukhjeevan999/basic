@@ -17,7 +17,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  * same URL. Forgetting to bump this is why a real, correct code change
  * can still show up broken/unstyled on the live site.
  */
-define( 'VINDECODER_VERSION', '1.6.0' );
+define( 'VINDECODER_VERSION', '1.7.0' );
+
+/**
+ * Bump this whenever vindecoder_get_default_pages() adds/changes a
+ * default page (About, Privacy, etc.) or the menu structure changes.
+ * See vindecoder_maybe_reprovision() below — this is what makes a new
+ * default page appear automatically without a manual theme reactivation.
+ */
+define( 'VINDECODER_PROVISION_VERSION', '2' );
 
 /**
  * ==========================================================================
@@ -964,6 +972,26 @@ function vindecoder_provision_default_pages() {
 	vindecoder_provision_menus( $page_ids );
 }
 add_action( 'after_switch_theme', 'vindecoder_provision_default_pages' );
+
+/**
+ * Relying on after_switch_theme alone means new default pages/menu
+ * structure (e.g. this update's About page) only ever get created if
+ * someone actually switches the theme away and back after uploading —
+ * an easy step to forget, and each time it's missed the new page
+ * 404s ("Nothing Found") even though the code creating it is live.
+ * This re-runs provisioning once per bumped VINDECODER_PROVISION_VERSION,
+ * automatically, the next time wp-admin loads at all — no manual
+ * reactivation needed. Bump the version constant whenever
+ * vindecoder_get_default_pages() gains/changes a page.
+ */
+function vindecoder_maybe_reprovision() {
+	if ( get_option( 'vindecoder_provision_version' ) === VINDECODER_PROVISION_VERSION ) {
+		return;
+	}
+	vindecoder_provision_default_pages();
+	update_option( 'vindecoder_provision_version', VINDECODER_PROVISION_VERSION );
+}
+add_action( 'admin_init', 'vindecoder_maybe_reprovision' );
 
 /**
  * Builds the primary nav as: Home, Car (submenu of every 'car'-category
