@@ -9,6 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+require_once get_template_directory() . '/inc/default-posts.php';
+
 /**
  * Bump this on every CSS/JS change. It's appended as ?ver=... on every
  * enqueued stylesheet/script, which is what forces browsers AND any
@@ -25,7 +27,7 @@ define( 'VINDECODER_VERSION', '1.8.0' );
  * See vindecoder_maybe_reprovision() below — this is what makes a new
  * default page appear automatically without a manual theme reactivation.
  */
-define( 'VINDECODER_PROVISION_VERSION', '3' );
+define( 'VINDECODER_PROVISION_VERSION', '4' );
 
 /**
  * ==========================================================================
@@ -395,6 +397,7 @@ add_action( 'after_setup_theme', 'vindecoder_content_width', 0 );
  */
 function vindecoder_register_page_templates( $templates ) {
 	$templates['template-vin-decoder.php'] = __( 'VIN Decoder — Brand Page', 'vindecodertheme' );
+	$templates['template-blog-index.php']  = __( 'Blog Index', 'vindecodertheme' );
 	return $templates;
 }
 add_filter( 'theme_page_templates', 'vindecoder_register_page_templates' );
@@ -637,6 +640,10 @@ function vindecoder_fallback_primary_menu() {
 	$about_page = get_page_by_path( 'about' );
 	if ( $about_page instanceof WP_Post ) {
 		echo '<li><a href="' . esc_url( get_permalink( $about_page ) ) . '">' . esc_html__( 'About', 'vindecodertheme' ) . '</a></li>';
+	}
+	$blog_page = get_page_by_path( 'blog' );
+	if ( $blog_page instanceof WP_Post ) {
+		echo '<li><a href="' . esc_url( get_permalink( $blog_page ) ) . '">' . esc_html__( 'Blog', 'vindecodertheme' ) . '</a></li>';
 	}
 
 	foreach ( vindecoder_get_nav_category_groups() as $category => $group ) {
@@ -916,6 +923,11 @@ function vindecoder_get_default_pages() {
 <h2>' . esc_html__( 'Questions or Feedback?', 'vindecodertheme' ) . '</h2>
 <p>' . esc_html__( 'If something looks wrong, a brand\'s missing, or the tool just saved you from a bad purchase — I\'d like to hear about it.', 'vindecodertheme' ) . ' <a href="' . esc_url( home_url( '/contact/' ) ) . '">' . esc_html__( 'Get in touch here', 'vindecodertheme' ) . '</a>.</p>',
 		),
+		'blog' => array(
+			'title'    => __( 'Blog', 'vindecodertheme' ),
+			'content'  => '', // Content is rendered entirely by template-blog-index.php.
+			'template' => 'template-blog-index.php',
+		),
 	);
 
 	// One page per brand, using the shared decoder template.
@@ -964,8 +976,36 @@ function vindecoder_provision_default_pages() {
 	}
 
 	vindecoder_provision_menus( $page_ids );
+	vindecoder_provision_default_posts();
 }
 add_action( 'after_switch_theme', 'vindecoder_provision_default_pages' );
+
+/**
+ * Same never-overwrite-if-it-exists pattern as the default pages above,
+ * for the theme's starter blog posts (see inc/default-posts.php). Runs
+ * as part of the same provisioning pass, so it's also covered by
+ * vindecoder_maybe_reprovision() below -- no separate reactivation step.
+ */
+function vindecoder_provision_default_posts() {
+	foreach ( vindecoder_get_default_posts() as $slug => $post ) {
+		$existing = get_page_by_path( $slug, OBJECT, 'post' );
+		if ( $existing instanceof WP_Post ) {
+			continue;
+		}
+
+		wp_insert_post(
+			array(
+				'post_title'   => $post['title'],
+				'post_name'    => $slug,
+				'post_content' => $post['content'],
+				'post_excerpt' => $post['excerpt'],
+				'post_status'  => 'publish',
+				'post_type'    => 'post',
+			),
+			true
+		);
+	}
+}
 
 /**
  * Relying on after_switch_theme alone means new default pages/menu
@@ -1029,12 +1069,15 @@ function vindecoder_provision_menus( $page_ids ) {
 			)
 		);
 
-		if ( ! empty( $page_ids['about'] ) ) {
+		foreach ( array( 'about', 'blog' ) as $vd_static_slug ) {
+			if ( empty( $page_ids[ $vd_static_slug ] ) ) {
+				continue;
+			}
 			wp_update_nav_menu_item(
 				$menu_id,
 				0,
 				array(
-					'menu-item-object-id' => $page_ids['about'],
+					'menu-item-object-id' => $page_ids[ $vd_static_slug ],
 					'menu-item-object'    => 'page',
 					'menu-item-type'      => 'post_type',
 					'menu-item-status'    => 'publish',
