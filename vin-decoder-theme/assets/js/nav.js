@@ -34,5 +34,22 @@
 				toggle.setAttribute( 'aria-expanded', 'false' );
 			}
 		} );
+
+		// Dark/light mode toggle. The initial theme is already set by the
+		// inline script in header.php (before paint) — this just handles
+		// the click and remembers the choice.
+		var themeToggle = document.getElementById( 'vd-theme-toggle' );
+		if ( themeToggle ) {
+			themeToggle.addEventListener( 'click', function () {
+				var current = document.documentElement.getAttribute( 'data-vd-theme' ) === 'dark' ? 'dark' : 'light';
+				var next = 'dark' === current ? 'light' : 'dark';
+				document.documentElement.setAttribute( 'data-vd-theme', next );
+				try {
+					localStorage.setItem( 'vd-theme', next );
+				} catch ( e ) {
+					// Ignore — the toggle still works for the current page view.
+				}
+			} );
+		}
 	} );
 } )();

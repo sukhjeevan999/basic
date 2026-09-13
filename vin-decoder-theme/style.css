@@ -56,6 +56,30 @@ Tags: one-column, custom-logo, custom-menu, translation-ready, automotive, minim
   --vd-container-narrow: 760px;
 }
 
+/* Dark palette — activated by setting data-vd-theme="dark" on <html>.
+   header.php sets this before paint (saved choice, else OS preference);
+   the toggle button in the header flips it and remembers the choice. */
+:root[data-vd-theme="dark"] {
+  --vd-color-bg: #10141f;
+  --vd-color-surface: #1a2033;
+  --vd-color-surface-alt: #232a40;
+  --vd-color-border: #323b52;
+  --vd-color-text: #eef1f8;
+  --vd-color-text-muted: #a6afc7;
+  --vd-color-primary: #5b8cff;
+  --vd-color-primary-dark: #7fa3ff;
+  --vd-color-primary-light: #1f2a4d;
+  --vd-color-accent: #f0a144;
+  --vd-color-danger: #ff6b64;
+  --vd-color-danger-bg: #3a2020;
+  --vd-color-success: #3ecf8e;
+
+  --vd-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --vd-shadow-md: 0 6px 20px rgba(0, 0, 0, 0.45);
+  --vd-shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.55);
+}
+body { transition: background-color .15s ease, color .15s ease; }
+
 /* ==========================================================================
    2. RESET
    ========================================================================== */
@@ -115,8 +139,21 @@ button { cursor: pointer; }
 .vd-logo { display: flex; align-items: center; gap: var(--vd-space-2); font-family: var(--vd-font-heading); font-size: 1.25rem; font-weight: 800; letter-spacing: -0.01em; color: var(--vd-color-text); }
 .vd-logo:hover { text-decoration: none; color: var(--vd-color-primary); }
 .vd-logo-mark { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 9px; background: var(--vd-color-primary); color: #fff; font-size: 0.9rem; font-family: var(--vd-font-mono); font-weight: 700; }
+.vd-header-actions { display: flex; align-items: center; gap: var(--vd-space-3); }
 .vd-nav-toggle { display: none; background: transparent; border: 1px solid var(--vd-color-border); border-radius: var(--vd-radius-sm); padding: 8px 10px; }
 .vd-nav-toggle span { display: block; width: 22px; height: 2px; background: var(--vd-color-text); margin: 4px 0; }
+
+.vd-theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; flex: 0 0 auto;
+  background: transparent; border: 1px solid var(--vd-color-border); border-radius: 999px;
+  color: var(--vd-color-text); transition: border-color .15s ease, background .15s ease;
+}
+.vd-theme-toggle:hover { border-color: var(--vd-color-primary); }
+.vd-theme-icon { width: 19px; height: 19px; }
+.vd-theme-icon-moon { display: none; }
+:root[data-vd-theme="dark"] .vd-theme-icon-sun { display: none; }
+:root[data-vd-theme="dark"] .vd-theme-icon-moon { display: block; }
 .vd-primary-nav ul { list-style: none; display: flex; gap: var(--vd-space-6); margin: 0; padding: 0; flex-wrap: wrap; }
 .vd-primary-nav a { color: var(--vd-color-text); font-weight: 600; font-size: 0.92rem; }
 .vd-primary-nav a:hover { color: var(--vd-color-primary); text-decoration: none; }
