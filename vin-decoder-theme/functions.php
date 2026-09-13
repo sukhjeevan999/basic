@@ -19,7 +19,7 @@ require_once get_template_directory() . '/inc/default-posts.php';
  * same URL. Forgetting to bump this is why a real, correct code change
  * can still show up broken/unstyled on the live site.
  */
-define( 'VINDECODER_VERSION', '1.8.0' );
+define( 'VINDECODER_VERSION', '1.9.0' );
 
 /**
  * Bump this whenever vindecoder_get_default_pages()/get_default_posts()

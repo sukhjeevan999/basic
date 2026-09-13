@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="VinSnapshot">
+	<path d="M28 26 L52 74" stroke="currentColor" stroke-width="12" stroke-linecap="round" fill="none"/>
+	<rect x="55" y="54" width="8" height="20" rx="2" fill="currentColor"/>
+	<rect x="65" y="42" width="8" height="32" rx="2" fill="currentColor"/>
+	<rect x="75" y="27" width="9" height="47" rx="2" fill="currentColor"/>
+</svg>

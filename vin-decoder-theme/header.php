@@ -15,6 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#1d4ed8">
+	<link rel="icon" href="<?php echo esc_url( get_template_directory_uri() . '/assets/img/favicon-32.png?v=' . VINDECODER_VERSION ); ?>" sizes="32x32">
+	<link rel="icon" href="<?php echo esc_url( get_template_directory_uri() . '/assets/img/favicon-16.png?v=' . VINDECODER_VERSION ); ?>" sizes="16x16">
+	<link rel="apple-touch-icon" href="<?php echo esc_url( get_template_directory_uri() . '/assets/img/icon-192.png?v=' . VINDECODER_VERSION ); ?>">
 	<script>
 	// Runs before CSS paints so there's no flash of the wrong theme.
 	// Respects a saved choice first, then the OS/browser light-dark setting.
@@ -36,6 +39,29 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php elseif ( is_front_page() ) : ?>
 	<meta name="description" content="<?php echo esc_attr__( 'Free VIN decoder tools for 25 major car and motorcycle brands — BMW, Mercedes-Benz, Toyota, Ford, Harley-Davidson, and more. Enter your 17-character VIN to instantly see model, year, engine, and factory build details, for buyers across the US, UK, Canada, and Australia.', 'vindecodertheme' ); ?>">
 	<?php endif; ?>
+	<?php
+	$vindecoder_og_title = $vindecoder_brand ? $vindecoder_brand['title'] : wp_get_document_title();
+	$vindecoder_og_desc  = $vindecoder_brand
+		? $vindecoder_brand['meta_description']
+		: ( is_singular() && has_excerpt() ? get_the_excerpt() : get_bloginfo( 'description' ) );
+	if ( ! $vindecoder_og_desc ) {
+		$vindecoder_og_desc = __( 'Free VIN decoder tools for 25 major car and motorcycle brands, powered by the official NHTSA vehicle database.', 'vindecodertheme' );
+	}
+	?>
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="<?php bloginfo( 'name' ); ?>">
+	<meta property="og:title" content="<?php echo esc_attr( $vindecoder_og_title ); ?>">
+	<meta property="og:description" content="<?php echo esc_attr( wp_strip_all_tags( $vindecoder_og_desc ) ); ?>">
+	<?php
+	global $wp;
+	$vindecoder_og_url = is_singular() ? get_permalink() : home_url( $wp->request );
+	?>
+	<meta property="og:url" content="<?php echo esc_url( $vindecoder_og_url ); ?>">
+	<meta property="og:image" content="<?php echo esc_url( get_template_directory_uri() . '/assets/img/social-share-banner.png' ); ?>">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="<?php echo esc_attr( $vindecoder_og_title ); ?>">
+	<meta name="twitter:description" content="<?php echo esc_attr( wp_strip_all_tags( $vindecoder_og_desc ) ); ?>">
+	<meta name="twitter:image" content="<?php echo esc_url( get_template_directory_uri() . '/assets/img/social-share-banner.png' ); ?>">
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -49,7 +75,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php if ( has_custom_logo() ) : ?>
 				<?php the_custom_logo(); ?>
 			<?php else : ?>
-				<span class="vd-logo-mark" aria-hidden="true">VIN</span>
+				<span class="vd-logo-mark" aria-hidden="true">
+					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/logo-mark.svg' ); ?>" alt="" width="34" height="34" loading="eager">
+				</span>
 				<span>
 					<?php bloginfo( 'name' ); ?>
 					<?php if ( get_theme_mod( 'vindecoder_header_show_tagline', false ) && get_bloginfo( 'description' ) ) : ?>
