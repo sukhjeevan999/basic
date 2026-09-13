@@ -24,8 +24,9 @@ get_header();
 		<div class="vd-card" style="max-width: 960px; margin: 0 auto;">
 			<h2 class="vd-text-center" style="margin-bottom: var(--vd-space-6);"><?php esc_html_e( 'Choose Your Brand', 'vindecodertheme' ); ?></h2>
 			<div class="vd-brand-grid">
-				<?php foreach ( vindecoder_get_brands() as $slug => $brand ) : ?>
-					<?php $vd_page = get_page_by_path( $slug ); ?>
+				<?php foreach ( vindecoder_get_featured_brand_slugs() as $slug ) : ?>
+					<?php $brand = vindecoder_get_brand( $slug ); ?>
+					<?php $vd_page = $brand ? get_page_by_path( $slug ) : null; ?>
 					<?php if ( $vd_page instanceof WP_Post ) : ?>
 						<a class="vd-brand-card" href="<?php echo esc_url( get_permalink( $vd_page ) ); ?>">
 							<div class="vd-brand-name"><?php echo esc_html( $brand['label'] ); ?></div>
@@ -37,6 +38,56 @@ get_header();
 		</div>
 	</div>
 </section>
+
+<?php
+/**
+ * "More brands" — every remaining car and motorcycle brand, as a plain
+ * link list rather than a full card (keeps the 5 featured cards above
+ * the visual focus). Anchor IDs match the Car/Bike nav submenu links
+ * (see vindecoder_provision_menus() in functions.php).
+ */
+$vd_featured_slugs     = vindecoder_get_featured_brand_slugs();
+$vd_more_car_slugs     = array_diff( vindecoder_get_brand_slugs_by_category( 'car' ), $vd_featured_slugs );
+$vd_more_bike_slugs    = array_diff( vindecoder_get_brand_slugs_by_category( 'bike' ), $vd_featured_slugs );
+?>
+
+<?php if ( ! empty( $vd_more_car_slugs ) ) : ?>
+<section class="vd-content-section" id="car-brands" style="padding-top: 0;">
+	<div class="vd-container">
+		<div class="vd-prose">
+			<h2><?php esc_html_e( 'More Car Brands', 'vindecodertheme' ); ?></h2>
+			<ul class="vd-plain-list">
+				<?php foreach ( $vd_more_car_slugs as $slug ) : ?>
+					<?php $brand = vindecoder_get_brand( $slug ); ?>
+					<?php $vd_page = get_page_by_path( $slug ); ?>
+					<?php if ( $vd_page instanceof WP_Post ) : ?>
+						<li><a href="<?php echo esc_url( get_permalink( $vd_page ) ); ?>"><?php echo esc_html( $brand['title'] ); ?></a></li>
+					<?php endif; ?>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	</div>
+</section>
+<?php endif; ?>
+
+<?php if ( ! empty( $vd_more_bike_slugs ) ) : ?>
+<section class="vd-content-section" id="bike-brands" style="padding-top: 0;">
+	<div class="vd-container">
+		<div class="vd-prose">
+			<h2><?php esc_html_e( 'Motorcycle Brands', 'vindecodertheme' ); ?></h2>
+			<ul class="vd-plain-list">
+				<?php foreach ( $vd_more_bike_slugs as $slug ) : ?>
+					<?php $brand = vindecoder_get_brand( $slug ); ?>
+					<?php $vd_page = get_page_by_path( $slug ); ?>
+					<?php if ( $vd_page instanceof WP_Post ) : ?>
+						<li><a href="<?php echo esc_url( get_permalink( $vd_page ) ); ?>"><?php echo esc_html( $brand['title'] ); ?></a></li>
+					<?php endif; ?>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	</div>
+</section>
+<?php endif; ?>
 
 <section class="vd-content-section">
 	<div class="vd-container">
@@ -70,7 +121,7 @@ get_header();
 				</details>
 				<details class="vd-faq-item">
 					<summary><?php esc_html_e( 'Can I decode a motorcycle, RV, or other vehicle type?', 'vindecodertheme' ); ?></summary>
-					<div class="vd-faq-answer"><p><?php esc_html_e( 'This site covers 25 major car and motorcycle brands (see the list above), all decoded through the same free NHTSA database. Pick the closest brand — the decoder will tell you if a VIN doesn\'t match that manufacturer.', 'vindecodertheme' ); ?></p></div>
+					<div class="vd-faq-answer"><p><?php esc_html_e( 'This site covers 25 major car and motorcycle brands — 5 featured above, and the rest listed further down this page or under the Car / Bike menu — all decoded through the same free NHTSA database. Pick the closest brand — the decoder will tell you if a VIN doesn\'t match that manufacturer.', 'vindecodertheme' ); ?></p></div>
 				</details>
 			</div>
 

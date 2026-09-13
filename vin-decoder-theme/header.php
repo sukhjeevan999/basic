@@ -73,7 +73,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							'theme_location' => 'primary',
 							'container'      => false,
 							'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-							'depth'          => 1,
+							'depth'          => 2,
 						)
 					);
 				} else {

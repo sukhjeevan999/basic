@@ -154,9 +154,39 @@ button { cursor: pointer; }
 .vd-theme-icon-moon { display: none; }
 :root[data-vd-theme="dark"] .vd-theme-icon-sun { display: none; }
 :root[data-vd-theme="dark"] .vd-theme-icon-moon { display: block; }
-.vd-primary-nav ul { list-style: none; display: flex; gap: var(--vd-space-6); margin: 0; padding: 0; flex-wrap: wrap; }
+.vd-primary-nav > ul { list-style: none; display: flex; gap: var(--vd-space-6); margin: 0; padding: 0; flex-wrap: wrap; }
 .vd-primary-nav a { color: var(--vd-color-text); font-weight: 600; font-size: 0.92rem; }
 .vd-primary-nav a:hover { color: var(--vd-color-primary); text-decoration: none; }
+.vd-primary-nav li.menu-item-has-children { display: flex; align-items: center; }
+
+/* Car / Bike submenu — hidden until hovered/opened. */
+.vd-primary-nav .sub-menu {
+  list-style: none; margin: 0; padding: 0; display: none;
+}
+.vd-submenu-toggle {
+  background: transparent; border: none; padding: 4px; margin-left: 2px;
+  color: var(--vd-color-text-muted); cursor: pointer; line-height: 0;
+}
+.vd-submenu-toggle svg { width: 14px; height: 14px; transition: transform .15s ease; }
+
+@media (min-width: 861px) {
+  .vd-primary-nav li.menu-item-has-children { position: relative; }
+  .vd-primary-nav li.menu-item-has-children:hover > .sub-menu,
+  .vd-primary-nav li.menu-item-has-children.is-open > .sub-menu {
+    display: block;
+  }
+  .vd-primary-nav .sub-menu {
+    position: absolute; top: 100%; left: 0; margin-top: var(--vd-space-2);
+    min-width: 210px; max-height: 60vh; overflow-y: auto;
+    background: var(--vd-color-surface); border: 1px solid var(--vd-color-border);
+    border-radius: var(--vd-radius-md); box-shadow: var(--vd-shadow-md);
+    padding: var(--vd-space-2) 0; z-index: 20;
+  }
+  .vd-primary-nav .sub-menu a { display: block; padding: var(--vd-space-2) var(--vd-space-4); white-space: nowrap; }
+  .vd-primary-nav .sub-menu a:hover { background: var(--vd-color-surface-alt); }
+  .vd-primary-nav li.menu-item-has-children.is-open > .vd-submenu-toggle svg { transform: rotate(180deg); }
+}
+
 @media (max-width: 860px) {
   .vd-nav-toggle { display: inline-flex; flex-direction: column; }
   .vd-primary-nav {
@@ -165,10 +195,17 @@ button { cursor: pointer; }
     box-shadow: var(--vd-shadow-md); display: none;
   }
   .vd-primary-nav.is-open { display: block; }
-  .vd-primary-nav ul { flex-direction: column; gap: 0; padding: var(--vd-space-2) var(--vd-space-4) var(--vd-space-4); }
-  .vd-primary-nav li { border-bottom: 1px solid var(--vd-color-border); }
+  .vd-primary-nav > ul { flex-direction: column; gap: 0; padding: var(--vd-space-2) var(--vd-space-4) var(--vd-space-4); }
+  .vd-primary-nav li { border-bottom: 1px solid var(--vd-color-border); flex-wrap: wrap; }
   .vd-primary-nav li:last-child { border-bottom: none; }
   .vd-primary-nav a { display: block; padding: var(--vd-space-3) 0; }
+  .vd-primary-nav li.menu-item-has-children > a { flex: 1 1 auto; }
+  .vd-primary-nav .sub-menu { flex-basis: 100%; padding: 0 0 var(--vd-space-2) var(--vd-space-4); }
+  .vd-primary-nav li.menu-item-has-children.is-open > .sub-menu { display: block; }
+  .vd-primary-nav .sub-menu li { border-bottom: none; }
+  .vd-primary-nav .sub-menu a { padding: var(--vd-space-2) 0; color: var(--vd-color-text-muted); }
+  .vd-submenu-toggle svg { transition: transform .15s ease; }
+  .vd-primary-nav li.menu-item-has-children.is-open > .vd-submenu-toggle svg { transform: rotate(180deg); }
 }
 
 /* ==========================================================================
@@ -242,6 +279,21 @@ button { cursor: pointer; }
 .vd-prose h3 { font-size: 1.1rem; margin-top: var(--vd-space-6); }
 .vd-prose p, .vd-prose li { color: var(--vd-color-text); font-size: 1.02rem; max-width: 68ch; }
 .vd-prose ul li, .vd-prose ol li { margin-bottom: var(--vd-space-2); }
+
+/* Plain brand link lists ("More Car Brands" / "Motorcycle Brands" on the
+   homepage) — deliberately lighter-weight than .vd-brand-card, since
+   these are the long tail below the 5 featured cards. */
+.vd-plain-list {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--vd-space-2) var(--vd-space-6);
+}
+.vd-plain-list li { margin: 0; border-bottom: 1px solid var(--vd-color-border); }
+.vd-plain-list a {
+  display: block; padding: var(--vd-space-3) 0;
+  color: var(--vd-color-text); font-weight: 600;
+}
+.vd-plain-list a:hover { color: var(--vd-color-primary); text-decoration: none; }
 
 .vd-table-wrap { overflow-x: auto; margin: var(--vd-space-6) 0; border: 1px solid var(--vd-color-border); border-radius: var(--vd-radius-md); }
 .vd-table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }

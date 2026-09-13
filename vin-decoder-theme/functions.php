@@ -25,6 +25,7 @@ function vindecoder_get_brands() {
 	return array(
 		'bmw'         => array(
 			'label'             => 'BMW',
+			'category'         => "car",
 			'title'             => 'BMW VIN Decoder',
 			'tagline'           => 'Decode any BMW VIN for free — model, chassis era, engine, and factory build details.',
 			'meta_description'  => 'Free BMW VIN decoder. Enter your 17-character VIN to instantly reveal your BMW\'s model, year, engine, body style, and plant of manufacture — powered by the official NHTSA database.',
@@ -33,6 +34,7 @@ function vindecoder_get_brands() {
 		),
 		'audi'        => array(
 			'label'             => 'Audi',
+			'category'         => "car",
 			'title'             => 'Audi VIN Decoder',
 			'tagline'           => 'Decode any Audi VIN for free — model, engine, trim, and factory build details.',
 			'meta_description'  => 'Free Audi VIN decoder. Enter your 17-character VIN to instantly reveal your Audi\'s model, year, engine, body style, and plant of manufacture — powered by the official NHTSA database.',
@@ -41,6 +43,7 @@ function vindecoder_get_brands() {
 		),
 		'porsche'     => array(
 			'label'             => 'Porsche',
+			'category'         => "car",
 			'title'             => 'Porsche VIN Decoder',
 			'tagline'           => 'Decode any Porsche VIN for free — model, engine, trim, and factory build details.',
 			'meta_description'  => 'Free Porsche VIN decoder. Enter your 17-character VIN to instantly reveal your Porsche\'s model, year, engine, body style, and plant of manufacture — powered by the official NHTSA database.',
@@ -49,6 +52,7 @@ function vindecoder_get_brands() {
 		),
 		'lexus'       => array(
 			'label'             => 'Lexus',
+			'category'         => "car",
 			'title'             => 'Lexus VIN Decoder',
 			'tagline'           => 'Decode any Lexus VIN for free — model, engine, trim, and factory build details.',
 			'meta_description'  => 'Free Lexus VIN decoder. Enter your 17-character VIN to instantly reveal your Lexus\'s model, year, engine, body style, and plant of manufacture — powered by the official NHTSA database.',
@@ -57,6 +61,7 @@ function vindecoder_get_brands() {
 		),
 		'range-rover' => array(
 			'label'             => 'Range Rover',
+			'category'         => "car",
 			'nhtsa_make'        => 'Land Rover',
 			'title'             => 'Range Rover VIN Decoder',
 			'tagline'           => 'Decode any Range Rover VIN for free — model, engine, trim, and factory build details.',
@@ -66,6 +71,7 @@ function vindecoder_get_brands() {
 		),
 		'mercedes-benz'    => array(
 			'label'            => 'Mercedes-Benz',
+			'category'         => "car",
 			'title'            => 'Mercedes-Benz VIN Decoder',
 			'tagline'          => 'Decode any Mercedes-Benz VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Mercedes-Benz VIN decoder for buyers and owners across California and the rest of the US. Enter your 17-character VIN to instantly reveal your Mercedes-Benz\'s model, year, engine, body style, and plant of manufacture.',
@@ -74,6 +80,7 @@ function vindecoder_get_brands() {
 		),
 		'toyota'           => array(
 			'label'            => 'Toyota',
+			'category'         => "car",
 			'title'            => 'Toyota VIN Decoder',
 			'tagline'          => 'Decode any Toyota VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Toyota VIN decoder for used-car buyers in Texas and nationwide. Enter your 17-character VIN to instantly reveal your Toyota\'s model, year, engine, body style, and plant of manufacture.',
@@ -82,6 +89,7 @@ function vindecoder_get_brands() {
 		),
 		'honda'            => array(
 			'label'            => 'Honda',
+			'category'         => "car",
 			'title'            => 'Honda VIN Decoder',
 			'tagline'          => 'Decode any Honda VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Honda VIN decoder for buyers in Florida and across the US. Enter your 17-character VIN to instantly reveal your Honda\'s model, year, engine, body style, and plant of manufacture.',
@@ -90,6 +98,7 @@ function vindecoder_get_brands() {
 		),
 		'ford'             => array(
 			'label'            => 'Ford',
+			'category'         => "car",
 			'title'            => 'Ford VIN Decoder',
 			'tagline'          => 'Decode any Ford VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Ford VIN decoder for buyers in Michigan and across the US. Enter your 17-character VIN to instantly reveal your Ford\'s model, year, engine, body style, and plant of manufacture.',
@@ -98,6 +107,7 @@ function vindecoder_get_brands() {
 		),
 		'chevrolet'        => array(
 			'label'            => 'Chevrolet',
+			'category'         => "car",
 			'title'            => 'Chevrolet VIN Decoder',
 			'tagline'          => 'Decode any Chevrolet VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Chevrolet VIN decoder for buyers in Ohio and across the US. Enter your 17-character VIN to instantly reveal your Chevrolet\'s model, year, engine, body style, and plant of manufacture.',
@@ -106,6 +116,7 @@ function vindecoder_get_brands() {
 		),
 		'jeep'             => array(
 			'label'            => 'Jeep',
+			'category'         => "car",
 			'title'            => 'Jeep VIN Decoder',
 			'tagline'          => 'Decode any Jeep VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Jeep VIN decoder for buyers in Pennsylvania and across the US. Enter your 17-character VIN to instantly reveal your Jeep\'s model, year, engine, body style, and plant of manufacture.',
@@ -114,6 +125,7 @@ function vindecoder_get_brands() {
 		),
 		'kia'              => array(
 			'label'            => 'Kia',
+			'category'         => "car",
 			'title'            => 'Kia VIN Decoder',
 			'tagline'          => 'Decode any Kia VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Kia VIN decoder for buyers in Georgia and across the US. Enter your 17-character VIN to instantly reveal your Kia\'s model, year, engine, body style, and plant of manufacture.',
@@ -122,6 +134,7 @@ function vindecoder_get_brands() {
 		),
 		'hyundai'          => array(
 			'label'            => 'Hyundai',
+			'category'         => "car",
 			'title'            => 'Hyundai VIN Decoder',
 			'tagline'          => 'Decode any Hyundai VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Hyundai VIN decoder for buyers in North Carolina and across the US. Enter your 17-character VIN to instantly reveal your Hyundai\'s model, year, engine, body style, and plant of manufacture.',
@@ -130,6 +143,7 @@ function vindecoder_get_brands() {
 		),
 		'volkswagen'       => array(
 			'label'            => 'Volkswagen',
+			'category'         => "car",
 			'title'            => 'Volkswagen VIN Decoder',
 			'tagline'          => 'Decode any Volkswagen VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Volkswagen VIN decoder for buyers in New York and across the US. Enter your 17-character VIN to instantly reveal your Volkswagen\'s model, year, engine, body style, and plant of manufacture.',
@@ -138,6 +152,7 @@ function vindecoder_get_brands() {
 		),
 		'volvo'            => array(
 			'label'            => 'Volvo',
+			'category'         => "car",
 			'title'            => 'Volvo VIN Decoder',
 			'tagline'          => 'Decode any Volvo VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Volvo VIN decoder for buyers in Washington state and across the US. Enter your 17-character VIN to instantly reveal your Volvo\'s model, year, engine, body style, and plant of manufacture.',
@@ -146,6 +161,7 @@ function vindecoder_get_brands() {
 		),
 		'jaguar'           => array(
 			'label'            => 'Jaguar',
+			'category'         => "car",
 			'title'            => 'Jaguar VIN Decoder',
 			'tagline'          => 'Decode any Jaguar VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Jaguar VIN decoder for buyers in the United States and United Kingdom. Enter your 17-character VIN to instantly reveal your Jaguar\'s model, year, engine, body style, and plant of manufacture.',
@@ -154,6 +170,7 @@ function vindecoder_get_brands() {
 		),
 		'tesla'            => array(
 			'label'            => 'Tesla',
+			'category'         => "car",
 			'title'            => 'Tesla VIN Decoder',
 			'tagline'          => 'Decode any Tesla VIN for free — model, trim, and factory build details.',
 			'meta_description' => 'Free Tesla VIN decoder for buyers in Arizona and across the US. Enter your 17-character VIN to instantly reveal your Tesla\'s model, year, body style, and plant of manufacture.',
@@ -162,6 +179,7 @@ function vindecoder_get_brands() {
 		),
 		'mitsubishi'       => array(
 			'label'            => 'Mitsubishi',
+			'category'         => "car",
 			'title'            => 'Mitsubishi VIN Decoder',
 			'tagline'          => 'Decode any Mitsubishi VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Mitsubishi VIN decoder for buyers in Illinois and across the US. Enter your 17-character VIN to instantly reveal your Mitsubishi\'s model, year, engine, body style, and plant of manufacture.',
@@ -170,6 +188,7 @@ function vindecoder_get_brands() {
 		),
 		'bentley'          => array(
 			'label'            => 'Bentley',
+			'category'         => "car",
 			'title'            => 'Bentley VIN Decoder',
 			'tagline'          => 'Decode any Bentley VIN for free — model, engine, trim, and factory build details.',
 			'meta_description' => 'Free Bentley VIN decoder for buyers in the United States and Canada. Enter your 17-character VIN to instantly reveal your Bentley\'s model, year, engine, body style, and plant of manufacture.',
@@ -178,6 +197,7 @@ function vindecoder_get_brands() {
 		),
 		'harley-davidson'  => array(
 			'label'            => 'Harley-Davidson',
+			'category'         => "bike",
 			'title'            => 'Harley-Davidson VIN Decoder',
 			'tagline'          => 'Decode any Harley-Davidson VIN for free — model, engine, and factory build details.',
 			'meta_description' => 'Free Harley-Davidson VIN decoder for riders in Wisconsin and across the US. Enter your 17-character VIN to instantly reveal your Harley-Davidson\'s model, year, engine, and plant of manufacture.',
@@ -186,6 +206,7 @@ function vindecoder_get_brands() {
 		),
 		'triumph'          => array(
 			'label'            => 'Triumph',
+			'category'         => "bike",
 			'title'            => 'Triumph VIN Decoder',
 			'tagline'          => 'Decode any Triumph motorcycle VIN for free — model, engine, and factory build details.',
 			'meta_description' => 'Free Triumph motorcycle VIN decoder for riders in Australia and worldwide. Enter your 17-character VIN to instantly reveal your Triumph\'s model, year, engine, and plant of manufacture.',
@@ -194,6 +215,7 @@ function vindecoder_get_brands() {
 		),
 		'yamaha'           => array(
 			'label'            => 'Yamaha',
+			'category'         => "bike",
 			'title'            => 'Yamaha VIN Decoder',
 			'tagline'          => 'Decode any Yamaha motorcycle VIN for free — model, engine, and factory build details.',
 			'meta_description' => 'Free Yamaha motorcycle VIN decoder for riders in New Zealand and worldwide. Enter your 17-character VIN to instantly reveal your Yamaha\'s model, year, engine, and plant of manufacture.',
@@ -202,6 +224,7 @@ function vindecoder_get_brands() {
 		),
 		'kawasaki'         => array(
 			'label'            => 'Kawasaki',
+			'category'         => "bike",
 			'title'            => 'Kawasaki VIN Decoder',
 			'tagline'          => 'Decode any Kawasaki motorcycle VIN for free — model, engine, and factory build details.',
 			'meta_description' => 'Free Kawasaki motorcycle VIN decoder for riders in Ireland and worldwide. Enter your 17-character VIN to instantly reveal your Kawasaki\'s model, year, engine, and plant of manufacture.',
@@ -210,6 +233,7 @@ function vindecoder_get_brands() {
 		),
 		'ktm'              => array(
 			'label'            => 'KTM',
+			'category'         => "bike",
 			'title'            => 'KTM VIN Decoder',
 			'tagline'          => 'Decode any KTM motorcycle VIN for free — model, engine, and factory build details.',
 			'meta_description' => 'Free KTM motorcycle VIN decoder for riders in Colorado and worldwide. Enter your 17-character VIN to instantly reveal your KTM\'s model, year, engine, and plant of manufacture.',
@@ -218,6 +242,7 @@ function vindecoder_get_brands() {
 		),
 		'suzuki'           => array(
 			'label'            => 'Suzuki',
+			'category'         => "bike",
 			'title'            => 'Suzuki VIN Decoder',
 			'tagline'          => 'Decode any Suzuki motorcycle VIN for free — model, engine, and factory build details.',
 			'meta_description' => 'Free Suzuki motorcycle VIN decoder for riders in Nevada and worldwide. Enter your 17-character VIN to instantly reveal your Suzuki\'s model, year, engine, and plant of manufacture.',
@@ -247,6 +272,31 @@ function vindecoder_get_current_brand() {
 		return null;
 	}
 	return vindecoder_get_brand( $post->post_name );
+}
+
+/**
+ * The 5 original brands, shown as prominent cards at the top of the
+ * homepage. Every brand (these 5 included) still gets its own Car/Bike
+ * nav submenu entry and a plain-list homepage link — "featured" only
+ * controls what earns a big card up top.
+ */
+function vindecoder_get_featured_brand_slugs() {
+	return array( 'bmw', 'audi', 'porsche', 'lexus', 'range-rover' );
+}
+
+/**
+ * All brand slugs (in registry order) whose 'category' matches, e.g.
+ * 'car' or 'bike'. Used to build the Car/Bike nav submenus and the
+ * homepage's "more brands" lists.
+ */
+function vindecoder_get_brand_slugs_by_category( $category ) {
+	$slugs = array();
+	foreach ( vindecoder_get_brands() as $slug => $brand ) {
+		if ( isset( $brand['category'] ) && $category === $brand['category'] ) {
+			$slugs[] = $slug;
+		}
+	}
+	return $slugs;
 }
 
 /**
@@ -527,15 +577,37 @@ function vindecoder_handle_decode_request( $request ) {
  * 6. TEMPLATE HELPERS
  * ==========================================================================
  */
+/**
+ * Only ever renders if vindecoder_provision_menus() hasn't run yet (e.g.
+ * theme files updated without reactivating). Mirrors the same Home /
+ * Car (+ submenu) / Bike (+ submenu) / Contact structure — including the
+ * "menu-item-has-children" / "sub-menu" classes wp_nav_menu()'s default
+ * walker would output — so the dropdown CSS/JS behaves the same either way.
+ */
 function vindecoder_fallback_primary_menu() {
 	echo '<ul id="primary-menu">';
 	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Home', 'vindecodertheme' ) . '</a></li>';
-	foreach ( vindecoder_get_brands() as $slug => $brand ) {
-		$page = get_page_by_path( $slug );
-		if ( $page instanceof WP_Post ) {
-			echo '<li><a href="' . esc_url( get_permalink( $page ) ) . '">' . esc_html( $brand['label'] ) . '</a></li>';
+
+	$category_groups = array(
+		'car'  => __( 'Car', 'vindecodertheme' ),
+		'bike' => __( 'Bike', 'vindecodertheme' ),
+	);
+	foreach ( $category_groups as $category => $group_title ) {
+		$brand_slugs = vindecoder_get_brand_slugs_by_category( $category );
+		if ( empty( $brand_slugs ) ) {
+			continue;
 		}
+		echo '<li class="menu-item-has-children"><a href="' . esc_url( home_url( '/#' . $category . '-brands' ) ) . '">' . esc_html( $group_title ) . '</a><ul class="sub-menu">';
+		foreach ( $brand_slugs as $slug ) {
+			$page = get_page_by_path( $slug );
+			if ( $page instanceof WP_Post ) {
+				$brand = vindecoder_get_brand( $slug );
+				echo '<li><a href="' . esc_url( get_permalink( $page ) ) . '">' . esc_html( $brand['label'] ) . '</a></li>';
+			}
+		}
+		echo '</ul></li>';
 	}
+
 	echo '<li><a href="' . esc_url( home_url( '/contact/' ) ) . '">' . esc_html__( 'Contact', 'vindecodertheme' ) . '</a></li>';
 	echo '</ul>';
 }
@@ -823,65 +895,76 @@ function vindecoder_provision_default_pages() {
 	}
 
 	vindecoder_provision_menus( $page_ids );
-	vindecoder_sync_brand_menu_items( $page_ids );
 }
 add_action( 'after_switch_theme', 'vindecoder_provision_default_pages' );
 
 /**
- * vindecoder_provision_menus() only builds the primary/footer menus from
- * scratch the first time (has_nav_menu() check), so a brand added later
- * (like this update's 20 new brands) would silently exist as a page but
- * never appear in an already-existing site's nav menu. This runs every
- * time and just appends any brand page that isn't already a menu item —
- * safe to run repeatedly, never duplicates or removes anything.
+ * Builds the primary nav as: Home, Car (submenu of every 'car'-category
+ * brand), Bike (submenu of every 'bike'-category brand), Contact.
+ *
+ * Runs on every theme (re)activation and fully rebuilds the primary
+ * menu's items every time from the current vindecoder_get_brands()
+ * registry, rather than trying to incrementally patch an existing menu.
+ * This is deliberate: WP nav menu items are pure structure (no visitor
+ * data lives on them), so wiping and rebuilding is simpler and more
+ * reliable than diffing — a brand added, renamed, or recategorized in
+ * the registry is reflected correctly every time, with no drift.
+ * The menu ID/location assignment itself is preserved (created once,
+ * reused after), so Appearance > Menus customizations to menu *display*
+ * settings aren't affected, only which items exist.
  */
-function vindecoder_sync_brand_menu_items( $page_ids ) {
-	$locations = get_theme_mod( 'nav_menu_locations', array() );
-	if ( empty( $locations['primary'] ) ) {
-		return;
-	}
-	$menu_id = $locations['primary'];
-	$items   = wp_get_nav_menu_items( $menu_id );
-	if ( ! $items ) {
-		return;
-	}
-
-	$existing_page_ids = array();
-	foreach ( $items as $item ) {
-		if ( 'post_type' === $item->type && 'page' === $item->object ) {
-			$existing_page_ids[] = (int) $item->object_id;
-		}
-	}
-
-	foreach ( vindecoder_get_brands() as $slug => $brand ) {
-		if ( empty( $page_ids[ $slug ] ) || in_array( (int) $page_ids[ $slug ], $existing_page_ids, true ) ) {
-			continue;
-		}
-		wp_update_nav_menu_item(
-			$menu_id,
-			0,
-			array(
-				'menu-item-object-id' => $page_ids[ $slug ],
-				'menu-item-object'    => 'page',
-				'menu-item-type'      => 'post_type',
-				'menu-item-status'    => 'publish',
-			)
-		);
-	}
-}
-
 function vindecoder_provision_menus( $page_ids ) {
 	$locations = get_theme_mod( 'nav_menu_locations', array() );
 	if ( ! is_array( $locations ) ) {
 		$locations = array();
 	}
 
-	if ( ! has_nav_menu( 'primary' ) ) {
-		$menu_id = wp_create_nav_menu( __( 'Primary Menu', 'vindecodertheme' ) );
-		if ( ! is_wp_error( $menu_id ) ) {
-			wp_update_nav_menu_item( $menu_id, 0, array( 'menu-item-title' => __( 'Home', 'vindecodertheme' ), 'menu-item-url' => home_url( '/' ), 'menu-item-status' => 'publish' ) );
+	$menu_id = ! empty( $locations['primary'] ) ? (int) $locations['primary'] : 0;
+	if ( ! $menu_id || ! wp_get_nav_menu_object( $menu_id ) ) {
+		$created = wp_create_nav_menu( __( 'Primary Menu', 'vindecodertheme' ) );
+		$menu_id = is_wp_error( $created ) ? 0 : $created;
+	}
 
-			foreach ( vindecoder_get_brands() as $slug => $brand ) {
+	if ( $menu_id ) {
+		foreach ( (array) wp_get_nav_menu_items( $menu_id ) as $existing_item ) {
+			wp_delete_post( $existing_item->ID, true );
+		}
+
+		wp_update_nav_menu_item(
+			$menu_id,
+			0,
+			array(
+				'menu-item-title'  => __( 'Home', 'vindecodertheme' ),
+				'menu-item-url'    => home_url( '/' ),
+				'menu-item-status' => 'publish',
+			)
+		);
+
+		$category_groups = array(
+			'car'  => __( 'Car', 'vindecodertheme' ),
+			'bike' => __( 'Bike', 'vindecodertheme' ),
+		);
+
+		foreach ( $category_groups as $category => $group_title ) {
+			$brand_slugs = vindecoder_get_brand_slugs_by_category( $category );
+			if ( empty( $brand_slugs ) ) {
+				continue;
+			}
+
+			$parent_id = wp_update_nav_menu_item(
+				$menu_id,
+				0,
+				array(
+					'menu-item-title'  => $group_title,
+					'menu-item-url'    => home_url( '/#' . $category . '-brands' ),
+					'menu-item-status' => 'publish',
+				)
+			);
+			if ( is_wp_error( $parent_id ) ) {
+				continue;
+			}
+
+			foreach ( $brand_slugs as $slug ) {
 				if ( empty( $page_ids[ $slug ] ) ) {
 					continue;
 				}
@@ -889,6 +972,7 @@ function vindecoder_provision_menus( $page_ids ) {
 					$menu_id,
 					0,
 					array(
+						'menu-item-parent-id' => $parent_id,
 						'menu-item-object-id' => $page_ids[ $slug ],
 						'menu-item-object'    => 'page',
 						'menu-item-type'      => 'post_type',
@@ -896,17 +980,17 @@ function vindecoder_provision_menus( $page_ids ) {
 					)
 				);
 			}
-
-			if ( ! empty( $page_ids['contact'] ) ) {
-				wp_update_nav_menu_item(
-					$menu_id,
-					0,
-					array( 'menu-item-object-id' => $page_ids['contact'], 'menu-item-object' => 'page', 'menu-item-type' => 'post_type', 'menu-item-status' => 'publish' )
-				);
-			}
-
-			$locations['primary'] = $menu_id;
 		}
+
+		if ( ! empty( $page_ids['contact'] ) ) {
+			wp_update_nav_menu_item(
+				$menu_id,
+				0,
+				array( 'menu-item-object-id' => $page_ids['contact'], 'menu-item-object' => 'page', 'menu-item-type' => 'post_type', 'menu-item-status' => 'publish' )
+			);
+		}
+
+		$locations['primary'] = $menu_id;
 	}
 
 	if ( ! has_nav_menu( 'footer' ) ) {
