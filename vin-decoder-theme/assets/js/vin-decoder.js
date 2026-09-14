@@ -234,19 +234,24 @@
 				return;
 			}
 
-			if ( ! config.restUrl ) {
+			if ( ! config.ajaxUrl ) {
 				showError( 'The decoder isn\'t configured correctly. Please try again later.' );
 				return;
 			}
 
 			setBusy( true );
 
-			var url = config.restUrl + '?vin=' + encodeURIComponent( vin );
+			// Uses admin-ajax.php rather than the WP REST API on purpose: the
+			// REST API runs a global cookie/nonce check on every request when
+			// the visiting browser holds a valid wp-admin login cookie, which
+			// can fail with WordPress's own "Cookie check failed" error on a
+			// cached page whose baked-in nonce no longer matches (e.g. right
+			// after logging into wp-admin on that same device). admin-ajax.php
+			// has no such check, so this tool works the same whether or not
+			// the visitor happens to be logged in.
+			var url = config.ajaxUrl + '?action=vindecoder_decode&vin=' + encodeURIComponent( vin );
 
-			fetch( url, {
-				method: 'GET',
-				headers: { 'X-WP-Nonce': config.nonce || '' }
-			} )
+			fetch( url, { method: 'GET' } )
 				.then( function ( response ) {
 					return response.json().then( function ( body ) {
 						if ( ! response.ok ) {

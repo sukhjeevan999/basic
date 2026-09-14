@@ -19,7 +19,7 @@ require_once get_template_directory() . '/inc/default-posts.php';
  * same URL. Forgetting to bump this is why a real, correct code change
  * can still show up broken/unstyled on the live site.
  */
-define( 'VINDECODER_VERSION', '1.9.0' );
+define( 'VINDECODER_VERSION', '1.9.1' );
 
 /**
  * Bump this whenever vindecoder_get_default_pages()/get_default_posts()
@@ -433,8 +433,7 @@ function vindecoder_scripts() {
 			'vindecoder-tool',
 			'VinDecoderConfig',
 			array(
-				'restUrl'      => esc_url_raw( rest_url( 'vindecoder/v1/decode' ) ),
-				'nonce'        => wp_create_nonce( 'wp_rest' ),
+				'ajaxUrl'      => esc_url_raw( admin_url( 'admin-ajax.php' ) ),
 				'expectedMake' => vindecoder_get_current_brand()
 					? ( vindecoder_get_current_brand()['nhtsa_make'] ?? vindecoder_get_current_brand()['label'] )
 					: '',
@@ -508,36 +507,47 @@ add_filter( 'document_title_parts', 'vindecoder_document_title_parts' );
 
 /**
  * ==========================================================================
- * 5. REST API — SERVER-SIDE NHTSA PROXY
+ * 5. AJAX — SERVER-SIDE NHTSA PROXY
  * ==========================================================================
- * The browser calls this same-origin endpoint instead of the NHTSA vPIC API
- * directly, which avoids any CORS issues and lets us validate/sanitize the
- * VIN server-side before forwarding the request. No API key, no cost — the
- * NHTSA vPIC API is a free public service of the U.S. Dept. of Transportation.
+ * The browser calls this same-origin admin-ajax.php endpoint instead of the
+ * NHTSA vPIC API directly, which avoids any CORS issues and lets us
+ * validate/sanitize the VIN server-side before forwarding the request. No
+ * API key, no cost — the NHTSA vPIC API is a free public service of the
+ * U.S. Dept. of Transportation.
+ *
+ * This used to be a custom WP REST API route (/wp-json/vindecoder/v1/decode).
+ * Switched to admin-ajax.php because WordPress core's REST API runs a global
+ * cookie/nonce check (rest_cookie_check_errors) on every REST request when
+ * the visiting browser holds a valid wp-admin login cookie — completely
+ * independent of this route's own permission_callback, which was already
+ * public. Anyone testing the tool while logged into wp-admin on that same
+ * browser (e.g. after visiting wp-admin from a phone) would see it fail with
+ * WordPress's own "Cookie check failed" error, especially on a cached page
+ * whose baked-in nonce no longer matches. admin-ajax.php has no such
+ * built-in check, so it isn't exposed to this failure mode at all.
+ *
+ * Deliberately no nonce check here: this action is read-only (it never
+ * changes state — decoded results are cached, keyed only by VIN), so there
+ * is no CSRF to defend against, and a nonce would only reintroduce the same
+ * cached-page-vs-logged-in-session mismatch problem described above.
  */
-function vindecoder_register_rest_routes() {
-	register_rest_route(
-		'vindecoder/v1',
-		'/decode',
-		array(
-			'methods'             => 'GET',
-			'callback'            => 'vindecoder_handle_decode_request',
-			'permission_callback' => '__return_true',
-			'args'                => array(
-				'vin' => array(
-					'required'          => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'sanitize_text_field',
-				),
-			),
-		)
-	);
+function vindecoder_ajax_decode() {
+	$vin    = isset( $_GET['vin'] ) ? strtoupper( trim( sanitize_text_field( wp_unslash( $_GET['vin'] ) ) ) ) : '';
+	$result = vindecoder_decode_vin_core( $vin );
+
+	if ( is_wp_error( $result ) ) {
+		$error_data = $result->get_error_data();
+		$status     = ( is_array( $error_data ) && ! empty( $error_data['status'] ) ) ? (int) $error_data['status'] : 400;
+		status_header( $status );
+		wp_send_json( array( 'message' => $result->get_error_message() ) );
+	}
+
+	wp_send_json( $result );
 }
-add_action( 'rest_api_init', 'vindecoder_register_rest_routes' );
+add_action( 'wp_ajax_vindecoder_decode', 'vindecoder_ajax_decode' );
+add_action( 'wp_ajax_nopriv_vindecoder_decode', 'vindecoder_ajax_decode' );
 
-function vindecoder_handle_decode_request( $request ) {
-	$vin = strtoupper( trim( (string) $request->get_param( 'vin' ) ) );
-
+function vindecoder_decode_vin_core( $vin ) {
 	// VIN standard: exactly 17 characters, excludes I, O, Q to avoid
 	// confusion with 1 and 0.
 	if ( ! preg_match( '/^[A-HJ-NPR-Z0-9]{17}$/', $vin ) ) {
@@ -551,7 +561,7 @@ function vindecoder_handle_decode_request( $request ) {
 	$transient_key = 'vindecoder_' . md5( $vin );
 	$cached        = get_transient( $transient_key );
 	if ( false !== $cached ) {
-		return rest_ensure_response( $cached );
+		return $cached;
 	}
 
 	// NOTE: the correct vPIC host is vpic.nhtsa.dot.gov — NOT vpic.nhtsa.gov,
@@ -620,7 +630,7 @@ function vindecoder_handle_decode_request( $request ) {
 	// so this cuts repeat-lookup load on the free NHTSA service to zero.
 	set_transient( $transient_key, $result, DAY_IN_SECONDS );
 
-	return rest_ensure_response( $result );
+	return $result;
 }
 
 /**
