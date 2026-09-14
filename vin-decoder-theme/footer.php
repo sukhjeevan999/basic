@@ -62,6 +62,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<li><a href="<?php echo esc_url( home_url( '/terms-of-service/' ) ); ?>"><?php esc_html_e( 'Terms of Service', 'vindecodertheme' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/disclaimer/' ) ); ?>"><?php esc_html_e( 'Disclaimer', 'vindecodertheme' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'Contact Us', 'vindecodertheme' ); ?></a></li>
+					<li><button type="button" id="vd-cookie-settings-link" onclick="window.vdReopenCookieBanner && window.vdReopenCookieBanner();"><?php esc_html_e( 'Cookie Settings', 'vindecodertheme' ); ?></button></li>
 				</ul>
 			</div>
 		</div>

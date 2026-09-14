@@ -15,6 +15,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#1d4ed8">
+	<script>
+	// Google Consent Mode — must run before any analytics/ads tag (e.g. Site
+	// Kit's gtag.js) so those tags pick up these defaults from the start.
+	// Everything starts denied; our cookie banner below is what grants it.
+	// If the visitor already chose "Accept" on a previous visit, we restore
+	// that immediately too so returning visitors aren't reset to denied.
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){ dataLayer.push(arguments); }
+	gtag( 'consent', 'default', {
+		'ad_storage': 'denied',
+		'ad_user_data': 'denied',
+		'ad_personalization': 'denied',
+		'analytics_storage': 'denied'
+	} );
+	try {
+		if ( localStorage.getItem( 'vd-cookie-consent' ) === 'accepted' ) {
+			gtag( 'consent', 'update', {
+				'ad_storage': 'granted',
+				'ad_user_data': 'granted',
+				'ad_personalization': 'granted',
+				'analytics_storage': 'granted'
+			} );
+		}
+	} catch ( e ) {
+		// localStorage can throw in some privacy modes — default (denied) stands.
+	}
+	</script>
 	<link rel="icon" href="<?php echo esc_url( get_template_directory_uri() . '/assets/img/favicon-32.png?v=' . VINDECODER_VERSION ); ?>" sizes="32x32">
 	<link rel="icon" href="<?php echo esc_url( get_template_directory_uri() . '/assets/img/favicon-16.png?v=' . VINDECODER_VERSION ); ?>" sizes="16x16">
 	<link rel="apple-touch-icon" href="<?php echo esc_url( get_template_directory_uri() . '/assets/img/icon-192.png?v=' . VINDECODER_VERSION ); ?>">

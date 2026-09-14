@@ -456,6 +456,42 @@ ol.vd-vin-locator-legend li { display: flex; gap: var(--vd-space-3); align-items
 .vd-toast { position: fixed; bottom: var(--vd-space-4); left: 50%; transform: translateX(-50%) translateY(20px); background: var(--vd-color-text); color: #fff; padding: 0.75rem 1.25rem; border-radius: var(--vd-radius-sm); font-size: 0.9rem; opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; z-index: 9999; }
 .vd-toast.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
 
+/* ==========================================================================
+   Cookie consent banner
+   ========================================================================== */
+.vd-cookie-banner {
+	position: fixed;
+	left: var(--vd-space-4);
+	right: var(--vd-space-4);
+	bottom: var(--vd-space-4);
+	z-index: 9998;
+	max-width: 760px;
+	margin: 0 auto;
+	background: var(--vd-color-surface);
+	border: 1px solid var(--vd-color-border);
+	border-radius: var(--vd-radius-md);
+	box-shadow: var(--vd-shadow-md);
+	padding: var(--vd-space-4) var(--vd-space-5, var(--vd-space-4));
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--vd-space-4);
+	opacity: 0;
+	transform: translateY(16px);
+	transition: opacity .25s ease, transform .25s ease;
+}
+.vd-cookie-banner.is-visible { opacity: 1; transform: translateY(0); }
+.vd-cookie-text { flex: 1 1 320px; margin: 0; font-size: 0.88rem; line-height: 1.5; color: var(--vd-color-text-muted); }
+.vd-cookie-text a { color: var(--vd-color-primary); font-weight: 600; }
+.vd-cookie-actions { display: flex; gap: var(--vd-space-2); flex: 0 0 auto; }
+.vd-cookie-actions .vd-btn { padding: 0.6rem 1.1rem; font-size: 0.88rem; white-space: nowrap; }
+@media (max-width: 560px) {
+	.vd-cookie-banner { left: var(--vd-space-2); right: var(--vd-space-2); bottom: var(--vd-space-2); padding: var(--vd-space-4); }
+	.vd-cookie-actions { width: 100%; }
+	.vd-cookie-actions .vd-btn { flex: 1 1 0; }
+}
+#vd-cookie-settings-link { cursor: pointer; background: none; border: none; padding: 0; font: inherit; color: inherit; text-decoration: underline; }
+
 @media print {
   .vd-site-header, .vd-site-footer, .vd-hero-head, #vd-tool-card, .vd-content-section, .vd-results-actions { display: none !important; }
   #vd-results { max-width: 100%; margin: 0; }

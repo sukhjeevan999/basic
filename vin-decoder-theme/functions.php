@@ -19,7 +19,7 @@ require_once get_template_directory() . '/inc/default-posts.php';
  * same URL. Forgetting to bump this is why a real, correct code change
  * can still show up broken/unstyled on the live site.
  */
-define( 'VINDECODER_VERSION', '1.9.1' );
+define( 'VINDECODER_VERSION', '1.10.0' );
 
 /**
  * Bump this whenever vindecoder_get_default_pages()/get_default_posts()
@@ -414,6 +414,18 @@ function vindecoder_scripts() {
 	wp_enqueue_style( 'vindecoder-style', get_stylesheet_uri(), array( 'vindecoder-google-fonts' ), VINDECODER_VERSION );
 
 	wp_enqueue_script( 'vindecoder-nav', get_template_directory_uri() . '/assets/js/nav.js', array(), VINDECODER_VERSION, true );
+
+	// Cookie consent banner — every page, not just the decoder tool pages,
+	// since it governs analytics/ads cookies site-wide.
+	wp_enqueue_script( 'vindecoder-cookie-consent', get_template_directory_uri() . '/assets/js/cookie-consent.js', array(), VINDECODER_VERSION, true );
+	$vindecoder_privacy_page = get_page_by_path( 'privacy-policy' );
+	wp_localize_script(
+		'vindecoder-cookie-consent',
+		'VinDecoderCookieConfig',
+		array(
+			'privacyUrl' => $vindecoder_privacy_page ? get_permalink( $vindecoder_privacy_page ) : home_url( '/privacy-policy/' ),
+		)
+	);
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
