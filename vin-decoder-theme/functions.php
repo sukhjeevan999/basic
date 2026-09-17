@@ -29,7 +29,7 @@ define( 'VINDECODER_VERSION', '1.10.0' );
  * if a page/post was since deleted on the live site. Forgetting to bump
  * this is exactly why a manually-deleted post can fail to come back.
  */
-define( 'VINDECODER_PROVISION_VERSION', '5' );
+define( 'VINDECODER_PROVISION_VERSION', '6' );
 
 /**
  * ==========================================================================
