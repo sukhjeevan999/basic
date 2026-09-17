@@ -134,17 +134,30 @@ $vd_related_slugs = $vd_related_map[ get_post()->post_name ] ?? array();
 <section class="vd-content-section" style="padding-top: 0;">
 	<div class="vd-container">
 		<div class="vd-prose">
-			<div class="vd-card" style="background: var(--vd-color-surface-alt);">
-				<h2 style="margin-bottom: var(--vd-space-4);"><?php esc_html_e( 'Related Reading', 'vindecodertheme' ); ?></h2>
-				<?php foreach ( $vd_related_slugs as $vd_related_slug ) : ?>
-					<?php $vd_related_post = get_page_by_path( $vd_related_slug, OBJECT, 'post' ); ?>
-					<?php if ( $vd_related_post instanceof WP_Post ) : ?>
-						<p style="margin-bottom: var(--vd-space-2);">
-							<a href="<?php echo esc_url( get_permalink( $vd_related_post ) ); ?>"><strong><?php echo esc_html( get_the_title( $vd_related_post ) ); ?></strong> →</a>
-						</p>
-					<?php endif; ?>
-				<?php endforeach; ?>
-			</div>
+			<h2 style="margin-bottom: var(--vd-space-4);"><?php esc_html_e( 'Related Reading', 'vindecodertheme' ); ?></h2>
+		</div>
+		<div class="vd-related-grid">
+			<?php foreach ( $vd_related_slugs as $vd_related_slug ) : ?>
+				<?php $vd_related_post = get_page_by_path( $vd_related_slug, OBJECT, 'post' ); ?>
+				<?php if ( $vd_related_post instanceof WP_Post ) : ?>
+					<a class="vd-related-card" href="<?php echo esc_url( get_permalink( $vd_related_post ) ); ?>">
+						<div class="vd-related-thumb">
+							<?php if ( has_post_thumbnail( $vd_related_post ) ) : ?>
+								<?php echo get_the_post_thumbnail( $vd_related_post, 'vindecoder-card', array( 'loading' => 'lazy' ) ); ?>
+							<?php else : ?>
+								<div class="vd-related-thumb-fallback">
+									<?php echo vindecoder_get_category_icon_svg( $vd_brand['category'] ); ?>
+								</div>
+							<?php endif; ?>
+						</div>
+						<div class="vd-related-body">
+							<div class="vd-related-title"><?php echo esc_html( get_the_title( $vd_related_post ) ); ?></div>
+							<p class="vd-related-excerpt"><?php echo esc_html( wp_trim_words( get_the_excerpt( $vd_related_post ), 20 ) ); ?></p>
+							<span class="vd-related-link"><?php esc_html_e( 'Read the full guide', 'vindecodertheme' ); ?> →</span>
+						</div>
+					</a>
+				<?php endif; ?>
+			<?php endforeach; ?>
 		</div>
 	</div>
 </section>
