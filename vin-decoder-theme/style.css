@@ -406,23 +406,27 @@ ol.vd-vin-locator-legend li { display: flex; gap: var(--vd-space-3); align-items
 /* ==========================================================================
    Related Reading cards (brand decoder page, below the tool)
    ========================================================================== */
-.vd-related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--vd-space-5); }
+/* auto-fill (not auto-fit) + a capped width, so 1-2 related posts stay
+   compact instead of stretching to fill the whole row; up to 4 fit per row
+   on a wide screen. */
+.vd-related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 220px)); gap: var(--vd-space-4); }
 .vd-related-card {
   display: flex; flex-direction: column; background: var(--vd-color-surface); border: 1px solid var(--vd-color-border);
-  border-radius: var(--vd-radius-lg); overflow: hidden; box-shadow: var(--vd-shadow-sm); text-decoration: none;
+  border-radius: var(--vd-radius-md); overflow: hidden; box-shadow: var(--vd-shadow-sm); text-decoration: none;
   transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
 }
-.vd-related-card:hover { transform: translateY(-4px); box-shadow: var(--vd-shadow-lg); border-color: var(--vd-color-primary); text-decoration: none; }
-.vd-related-thumb { aspect-ratio: 3 / 2; background: var(--vd-color-surface-alt); overflow: hidden; }
+.vd-related-card:hover { transform: translateY(-3px); box-shadow: var(--vd-shadow-md); border-color: var(--vd-color-primary); text-decoration: none; }
+.vd-related-thumb { aspect-ratio: 16 / 10; background: var(--vd-color-surface-alt); overflow: hidden; }
 .vd-related-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .vd-related-thumb-fallback {
   width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
   background: linear-gradient(135deg, var(--vd-color-primary) 0%, var(--vd-color-primary-dark) 100%); color: #fff;
 }
-.vd-related-body { padding: var(--vd-space-5); flex: 1; display: flex; flex-direction: column; }
-.vd-related-title { font-family: var(--vd-font-heading); font-weight: 800; font-size: 1.1rem; color: var(--vd-color-text); margin-bottom: var(--vd-space-2); line-height: 1.3; }
-.vd-related-excerpt { font-size: 0.9rem; color: var(--vd-color-text-muted); line-height: 1.5; margin: 0 0 var(--vd-space-3); flex: 1; }
-.vd-related-link { font-size: 0.85rem; color: var(--vd-color-primary); font-weight: 700; }
+.vd-related-thumb-fallback svg { width: 22px; height: 22px; }
+.vd-related-body { padding: var(--vd-space-3); flex: 1; display: flex; flex-direction: column; }
+.vd-related-title { font-family: var(--vd-font-heading); font-weight: 800; font-size: 0.92rem; color: var(--vd-color-text); margin-bottom: var(--vd-space-1); line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.vd-related-excerpt { font-size: 0.78rem; color: var(--vd-color-text-muted); line-height: 1.45; margin: 0 0 var(--vd-space-2); flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.vd-related-link { font-size: 0.75rem; color: var(--vd-color-primary); font-weight: 700; }
 
 /* ==========================================================================
    9. BLOG / ARCHIVE + PAGE TEMPLATE
