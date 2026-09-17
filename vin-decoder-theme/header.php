@@ -141,6 +141,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 				}
 				?>
 			</nav>
+
+			<?php echo vindecoder_social_icons_html( 'vd-header-social' ); ?>
 		</div>
 	</div>
 </header>

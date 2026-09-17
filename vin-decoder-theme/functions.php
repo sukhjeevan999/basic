@@ -19,7 +19,7 @@ require_once get_template_directory() . '/inc/default-posts.php';
  * same URL. Forgetting to bump this is why a real, correct code change
  * can still show up broken/unstyled on the live site.
  */
-define( 'VINDECODER_VERSION', '1.11.1' );
+define( 'VINDECODER_VERSION', '1.12.0' );
 
 /**
  * Bump this whenever vindecoder_get_default_pages()/get_default_posts()
@@ -1296,7 +1296,75 @@ function vindecoder_customizer_defaults() {
 		'author_name'         => '',
 		'author_photo'        => '',
 		'author_bio'          => __( 'Founder', 'vindecodertheme' ),
+		'social_x'            => '',
+		'social_facebook'     => '',
+		'social_instagram'    => '',
+		'social_linkedin'     => '',
+		'social_pinterest'    => '',
 	);
+}
+
+/**
+ * ==========================================================================
+ * SOCIAL LINKS
+ * ==========================================================================
+ * URLs come from the Customizer (Social Links section) — nothing hardcoded,
+ * and a platform with no URL set just doesn't render an icon anywhere.
+ */
+function vindecoder_get_social_platforms() {
+	return array(
+		'x'         => __( 'X (Twitter)', 'vindecodertheme' ),
+		'facebook'  => __( 'Facebook', 'vindecodertheme' ),
+		'instagram' => __( 'Instagram', 'vindecodertheme' ),
+		'linkedin'  => __( 'LinkedIn', 'vindecodertheme' ),
+		'pinterest' => __( 'Pinterest', 'vindecodertheme' ),
+	);
+}
+
+function vindecoder_get_social_links() {
+	$links = array();
+	foreach ( array_keys( vindecoder_get_social_platforms() ) as $platform ) {
+		$url = get_theme_mod( 'vindecoder_social_' . $platform, '' );
+		if ( $url ) {
+			$links[ $platform ] = $url;
+		}
+	}
+	return $links;
+}
+
+/**
+ * Simple single-color line icons, not pixel-exact brand marks — same
+ * approach as the generic car/bike icons used elsewhere, kept minimal on
+ * purpose. currentColor so they pick up whatever color the surrounding
+ * CSS sets (header vs. footer vs. hover).
+ */
+function vindecoder_get_social_icon_svg( $platform ) {
+	$icons = array(
+		'x'         => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4l16 16M20 4 4 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+		'facebook'  => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 8.5h2.5V5H14c-2.2 0-4 1.8-4 4v2H8v3.5h2V21h3.5v-6.5H16l.5-3.5h-3V9c0-.6.4-1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>',
+		'instagram' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4.5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.6" stroke="currentColor" stroke-width="1.6"/><circle cx="16.6" cy="7.4" r="1" fill="currentColor"/></svg>',
+		'linkedin'  => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.6"/><circle cx="8.2" cy="8.5" r="1.1" fill="currentColor"/><path d="M8.2 11v6M12 11v6M12 13.6c0-1.4 1-2.6 2.4-2.6s2.4 1 2.4 2.6V17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+		'pinterest' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/><path d="M9.5 18c.6-2.4 1.4-5.6 1.9-7.7a2.6 2.6 0 0 1 5-.4c.5 1.6-.4 4-2.2 4-1.1 0-1.8-.8-1.6-1.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+	);
+	return $icons[ $platform ] ?? '';
+}
+
+/**
+ * Shared markup for header and footer — nothing renders at all if no
+ * social URLs are set yet in the Customizer.
+ */
+function vindecoder_social_icons_html( $extra_class = '' ) {
+	$links = vindecoder_get_social_links();
+	if ( empty( $links ) ) {
+		return '';
+	}
+	$platforms = vindecoder_get_social_platforms();
+	$html      = '<div class="vd-social-icons' . ( $extra_class ? ' ' . esc_attr( $extra_class ) : '' ) . '">';
+	foreach ( $links as $platform => $url ) {
+		$html .= '<a href="' . esc_url( $url ) . '" class="vd-social-icon" target="_blank" rel="noopener noreferrer" aria-label="' . esc_attr( $platforms[ $platform ] ) . '">' . vindecoder_get_social_icon_svg( $platform ) . '</a>';
+	}
+	$html .= '</div>';
+	return $html;
 }
 
 function vindecoder_sanitize_checkbox( $checked ) {
@@ -1433,6 +1501,29 @@ function vindecoder_customize_register_theme_options( $wp_customize ) {
 
 	$wp_customize->add_setting( 'vindecoder_author_bio', array( 'default' => $d['author_bio'], 'sanitize_callback' => 'sanitize_text_field' ) );
 	$wp_customize->add_control( 'vindecoder_author_bio', array( 'label' => __( 'Role (e.g. "Founder")', 'vindecodertheme' ), 'section' => 'vindecoder_author', 'type' => 'text' ) );
+
+	// ---- Social Links ----
+	$wp_customize->add_section(
+		'vindecoder_social',
+		array(
+			'title'       => __( 'Social Links', 'vindecodertheme' ),
+			'description' => __( 'Shows as small icons in the header and footer. Leave a field blank to hide that icon everywhere.', 'vindecodertheme' ),
+			'priority'    => 46,
+		)
+	);
+	foreach ( vindecoder_get_social_platforms() as $vindecoder_social_key => $vindecoder_social_label ) {
+		$vindecoder_social_id = 'vindecoder_social_' . $vindecoder_social_key;
+		$wp_customize->add_setting( $vindecoder_social_id, array( 'default' => $d[ 'social_' . $vindecoder_social_key ], 'sanitize_callback' => 'esc_url_raw' ) );
+		$wp_customize->add_control(
+			$vindecoder_social_id,
+			array(
+				/* translators: %s: social platform name, e.g. Instagram. */
+				'label'   => sprintf( __( '%s URL', 'vindecodertheme' ), $vindecoder_social_label ),
+				'section' => 'vindecoder_social',
+				'type'    => 'url',
+			)
+		);
+	}
 }
 add_action( 'customize_register', 'vindecoder_customize_register_theme_options' );
 
