@@ -142,7 +142,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 				?>
 			</nav>
 
-			<?php echo vindecoder_social_icons_html( 'vd-header-social' ); ?>
+			<?php if ( ! empty( vindecoder_get_social_links() ) ) : ?>
+			<details class="vd-social-follow">
+				<summary class="vd-social-follow-toggle">
+					<?php esc_html_e( 'Follow', 'vindecodertheme' ); ?>
+					<svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				</summary>
+				<div class="vd-social-follow-menu">
+					<?php echo vindecoder_social_icons_html(); ?>
+				</div>
+			</details>
+			<?php endif; ?>
 		</div>
 	</div>
 </header>

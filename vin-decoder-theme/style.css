@@ -454,23 +454,51 @@ ol.vd-vin-locator-legend li { display: flex; gap: var(--vd-space-3); align-items
 .vd-footer-tagline { color: #5b8cff; font-family: var(--vd-font-heading); font-weight: 700; font-size: 0.92rem; letter-spacing: .01em; }
 
 /* ==========================================================================
-   Social icons (header + footer) — vindecoder_social_icons_html() in
-   functions.php; hidden entirely when no URLs are set in the Customizer.
+   Social icons — base row used inside the header "Follow" dropdown, the
+   footer, and the post share bar. vindecoder_social_icons_html() /
+   vindecoder_post_share_html() in functions.php.
    ========================================================================== */
 .vd-social-icons { display: flex; gap: 10px; }
 .vd-social-icon {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 34px; height: 34px; border-radius: 999px; flex: none;
+  width: 34px; height: 34px; border-radius: 999px; flex: none; border: none; cursor: pointer;
+  color: var(--vd-color-text-muted); background: var(--vd-color-surface-alt);
   transition: background .15s ease, color .15s ease, transform .15s ease;
 }
-.vd-social-icon:hover { transform: translateY(-2px); text-decoration: none; }
-.vd-header-social { margin-left: var(--vd-space-2); }
-.vd-header-social .vd-social-icon { color: var(--vd-color-text-muted); background: transparent; }
-.vd-header-social .vd-social-icon:hover { color: var(--vd-color-primary); background: var(--vd-color-primary-light); }
+.vd-social-icon:hover { transform: translateY(-2px); text-decoration: none; color: var(--vd-color-primary); background: var(--vd-color-primary-light); }
+
+/* Header "Follow" dropdown — a single entry point instead of a row of
+   icons crowding the nav; click to reveal all configured platforms. */
+.vd-social-follow { position: relative; }
+.vd-social-follow-toggle {
+  display: flex; align-items: center; gap: 6px; cursor: pointer; list-style: none;
+  padding: 8px 14px; border: 1px solid var(--vd-color-border); border-radius: var(--vd-radius-sm);
+  font-size: 0.85rem; font-weight: 700; color: var(--vd-color-text);
+}
+.vd-social-follow-toggle::-webkit-details-marker { display: none; }
+.vd-social-follow-toggle svg { transition: transform .15s ease; }
+.vd-social-follow[open] .vd-social-follow-toggle svg { transform: rotate(180deg); }
+.vd-social-follow-menu {
+  position: absolute; top: calc(100% + 8px); right: 0; z-index: 30;
+  background: var(--vd-color-surface); border: 1px solid var(--vd-color-border); border-radius: var(--vd-radius-md);
+  box-shadow: var(--vd-shadow-md); padding: var(--vd-space-3);
+}
+.vd-social-follow-menu .vd-social-icons { gap: 8px; }
+@media (max-width: 860px) { .vd-social-follow { display: none; } }
+
 .vd-footer-social { margin-top: var(--vd-space-4); }
 .vd-footer-social .vd-social-icon { color: #9aa9c9; background: rgba(255,255,255,0.06); }
 .vd-footer-social .vd-social-icon:hover { color: #fff; background: var(--vd-color-primary); }
-@media (max-width: 860px) { .vd-header-social { display: none; } }
+
+/* Share-this-article bar (single.php, below the post content) */
+.vd-share-bar {
+  display: flex; align-items: center; flex-wrap: wrap; gap: var(--vd-space-3);
+  margin: var(--vd-space-8) 0; padding: var(--vd-space-5);
+  background: var(--vd-color-surface-alt); border-radius: var(--vd-radius-md);
+}
+.vd-share-label { font-weight: 700; font-size: 0.9rem; color: var(--vd-color-text); margin-right: auto; }
+.vd-share-icons { display: flex; gap: 8px; }
+.vd-share-icons .vd-social-icon { background: var(--vd-color-surface); border: 1px solid var(--vd-color-border); }
 .vd-footer-heading { color: #fff; font-size: 0.85rem; text-transform: uppercase; letter-spacing: .04em; margin-bottom: var(--vd-space-3); }
 .vd-footer-links { list-style: none; margin: 0; padding: 0; }
 .vd-footer-links li { margin-bottom: var(--vd-space-2); }

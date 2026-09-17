@@ -52,6 +52,8 @@ while ( have_posts() ) :
 			);
 			?>
 
+			<?php echo vindecoder_post_share_html(); ?>
+
 			<p><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">&larr; <?php esc_html_e( 'Back to all articles', 'vindecodertheme' ); ?></a></p>
 
 			<?php if ( comments_open() || get_comments_number() ) : ?>

@@ -19,7 +19,7 @@ require_once get_template_directory() . '/inc/default-posts.php';
  * same URL. Forgetting to bump this is why a real, correct code change
  * can still show up broken/unstyled on the live site.
  */
-define( 'VINDECODER_VERSION', '1.12.0' );
+define( 'VINDECODER_VERSION', '1.13.0' );
 
 /**
  * Bump this whenever vindecoder_get_default_pages()/get_default_posts()
@@ -429,6 +429,11 @@ function vindecoder_scripts() {
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
+	}
+
+	// Share-bar "copy link" button — only needed on single posts.
+	if ( is_singular( 'post' ) ) {
+		wp_enqueue_script( 'vindecoder-share', get_template_directory_uri() . '/assets/js/share.js', array(), VINDECODER_VERSION, true );
 	}
 
 	// Decoder + PDF export only load on an actual brand decoder page.
@@ -1364,6 +1369,63 @@ function vindecoder_social_icons_html( $extra_class = '' ) {
 		$html .= '<a href="' . esc_url( $url ) . '" class="vd-social-icon" target="_blank" rel="noopener noreferrer" aria-label="' . esc_attr( $platforms[ $platform ] ) . '">' . vindecoder_get_social_icon_svg( $platform ) . '</a>';
 	}
 	$html .= '</div>';
+	return $html;
+}
+
+/**
+ * ==========================================================================
+ * SHARE THIS POST
+ * ==========================================================================
+ * A separate concept from the "Follow" links above: this shares the
+ * CURRENT post's URL, not our own social profiles. Shown below the post
+ * content on single.php. Plain share-intent URLs, no SDKs or API keys.
+ */
+function vindecoder_get_share_icon_svg( $platform ) {
+	if ( in_array( $platform, array( 'x', 'facebook', 'linkedin' ), true ) ) {
+		return vindecoder_get_social_icon_svg( $platform );
+	}
+	$icons = array(
+		'whatsapp' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4a8 8 0 0 0-6.9 12l-1 3.6 3.7-1A8 8 0 1 0 12 4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 9.6c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .6.4.2.5.6 1.5.6 1.6.1.1.1.3 0 .4-.1.2-.2.3-.3.4l-.4.4c-.1.1-.3.3-.1.6.2.4.8 1.2 1.6 1.9 1.1 1 2 1.3 2.3 1.4.3.1.4.1.6-.1l.6-.7c.2-.2.4-.2.6-.1l1.4.7c.2.1.4.2.4.4.1.5-.1 1.3-.4 1.6-.4.4-1.2.7-2.3.4-1.6-.4-3.2-1.3-4.4-2.5-1-1-1.9-2.3-2.3-3.5-.3-.9-.1-1.7.3-2.2Z" fill="currentColor"/></svg>',
+		'copy'     => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 15H5.5A2.5 2.5 0 0 1 3 12.5v-7A2.5 2.5 0 0 1 5.5 3h7A2.5 2.5 0 0 1 15 5.5v1" stroke="currentColor" stroke-width="1.6"/></svg>',
+	);
+	return $icons[ $platform ] ?? '';
+}
+
+function vindecoder_post_share_html() {
+	$permalink = get_permalink();
+	if ( ! $permalink ) {
+		return '';
+	}
+	$url   = rawurlencode( $permalink );
+	$title = rawurlencode( get_the_title() );
+
+	$targets = array(
+		'x'        => array(
+			'label' => __( 'Share on X', 'vindecodertheme' ),
+			'href'  => 'https://twitter.com/intent/tweet?url=' . $url . '&text=' . $title,
+		),
+		'facebook' => array(
+			'label' => __( 'Share on Facebook', 'vindecodertheme' ),
+			'href'  => 'https://www.facebook.com/sharer/sharer.php?u=' . $url,
+		),
+		'whatsapp' => array(
+			'label' => __( 'Share on WhatsApp', 'vindecodertheme' ),
+			'href'  => 'https://api.whatsapp.com/send?text=' . $title . '%20' . $url,
+		),
+		'linkedin' => array(
+			'label' => __( 'Share on LinkedIn', 'vindecodertheme' ),
+			'href'  => 'https://www.linkedin.com/sharing/share-offsite/?url=' . $url,
+		),
+	);
+
+	$html  = '<div class="vd-share-bar">';
+	$html .= '<span class="vd-share-label">' . esc_html__( 'Share this article', 'vindecodertheme' ) . '</span>';
+	$html .= '<div class="vd-share-icons">';
+	foreach ( $targets as $platform => $target ) {
+		$html .= '<a href="' . esc_url( $target['href'] ) . '" class="vd-social-icon" target="_blank" rel="noopener noreferrer" aria-label="' . esc_attr( $target['label'] ) . '">' . vindecoder_get_share_icon_svg( $platform ) . '</a>';
+	}
+	$html .= '<button type="button" class="vd-social-icon vd-share-copy" aria-label="' . esc_attr__( 'Copy link', 'vindecodertheme' ) . '" data-copy-url="' . esc_url( $permalink ) . '">' . vindecoder_get_share_icon_svg( 'copy' ) . '</button>';
+	$html .= '</div></div>';
 	return $html;
 }
 
